@@ -1,0 +1,299 @@
+\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
+
+
+
+
+\title{PLSC 40601: Advanced Topics in Causal Inference.}
+\subtitle{University of Chicago, Spring 2023.}
+%\affil[1]{University of Chicago; \href{mailto:mollyow@uchicago.edu}{mollyow@uchicago.edu} }
+
+
+\RequirePackage{template_MOW}
+
+
+\date{}
+\author{}
+
+\newcommand*{\myfont}{\usekomafont{disposition}}
+\newcommand*{\myfontnormal}{\normalfont}
+\pagenumbering{gobble}
+
+
+\usepackage{bibentry}
+
+ \makeatletter 
+ \renewcommand\BR@b@bibitem[2][]{\BR@bibitem[#1]{#2}\BR@c@bibitem{#2}}           
+ \makeatother
+\nobibliography*
+
+\begin{document}
+\maketitle
+
+\vskip -10 ex
+
+\textbf{Location:} Harper Memorial Library 104\\
+\textbf{Course time:} Tue Thu 14.00--15:50
+
+
+\textbf{Instructor:} Molly Offer-Westort; \href{mailto:mollyow@uchicago.edu}{mollyow@uchicago.edu}\\
+\textbf{Office hours:} Book at \href{https://calendly.com/mollyow}{calendly.com/mollyow}\\
+\textbf{Office:} Pick Hall 526 
+
+\textbf{TA:} Oscar Cuadros; \href{mailto:oscarcuadros@uchicago.edu }{oscarcuadros@uchicago.ed}\\
+\textbf{Office hours:} TBA
+
+
+\paragraph{Course overview.} This is a graduate-level course considering modern advances in causal inference and experimental design. In particular, we will consider how machine learning methods can be leveraged to address causal questions. We will read a selection of papers introducing and implementing techniques and research designs, with applications to the social and health sciences and public policy. We will discuss what these new methods are able to offer, and where they may have limitations. The course will be oriented around class discussion and student presentations on the readings. An introductory course in probability and statistics is required; this prerequisite can be met by courses in statistics, biostatistics, economics, political science, sociology, or related fields. Coursework in causal inference is recommended but not required; additional reading references will be provided for students who have not had prior exposure to causal inference methodology. Instructor consent required.
+
+
+\paragraph{Reference readings.}
+This class will not follow a textbook, but some of the methods and approaches may be new to students. For reference for machine learning methods, I recommend:
+\begin{itemize}
+\item \bibentry{hastie2009elements} \vskip 2 ex
+
+A free pdf version of the book is available at the publisher's website: \url{https://link.springer.com/book/10.1007/978-0-387-84858-7}
+\end{itemize}
+
+
+Other machine learning references are :
+\begin{itemize}
+\item \bibentry{murphy2012machine}
+\item \bibentry{bishop2006pattern}
+\end{itemize}
+
+Many of the papers we read in this course will use potential outcomes notation. Students who have not had recent coursework on causal inference should read the first few chapters of either:
+\begin{itemize}
+\item
+\bibentry{hernan2010causal}
+
+A free pdf version of the book is available at the author's website: \url{https://www.hsph.harvard.edu/miguel-hernan/
+causal-inference-book/}
+\item 
+Or\\
+\bibentry{imbens2015causal}
+\end{itemize}
+
+The materials for PLSC 30600: Causal Inference are available at \url{https://github.com/UChicago-pol-methods/plsc-30600-causal-inference}. 
+
+Also useful:
+\begin{itemize}
+\item \bibentry{angrist2009}
+\end{itemize}
+
+
+
+\paragraph{Presentations.}
+Each student will be responsible for presenting and leading discussion on one of the required papers, beginning the second week of the quarter. Discussion leaders will provide a 15-20 minute total high-level overview of the paper, and will develop a list of discussion questions. For classes with multiple leaders, co-discussion leaders may divide papers among themselves or may collaborate. Discussion questions should be submitted to the instructor by email the evening before class. 
+
+\paragraph{Two pages referee report.}
+Select one of the papers on the syllabus, including from the additional references. Write a referee report as if you were requested to review the paper for publication at a top journal, summarizing the paper's main contributions, areas that could be strengthened, and additional extensions or analyses that you would like to see. Submit the referee report the night before the paper is discussed in class. The paper selected for the referee report cannot be from the same class as the class presentation. 
+References on how to write a referee report:
+\begin{itemize}
+\item \bibentry{berk2016preparing}
+ \item \url{https://chrisblattman.com/blog/2012/01/18/how-to-referee-an-academic-paper/}
+ \end{itemize}
+
+\paragraph{Five pages single spaced summary paper.} (Seven pages hard cap, longer is not always better.)
+The paper may be summarizing work on one of the themes we have discussed, or on another topic related to developments in machine learning for causal inference. Discuss the foundations for this work in statistics or related fields, how this work has developed, competing methodologies or debates with associated benefits and drawbacks, and directions for future research. This should be something like an annotated bibliography, referencing each paper's contributions, accompanied by narrative. A reader of your report should come away with a good understanding of the current state of research on your topic of choice. 
+
+Alternatively, students may submit original work, such as a research proposal for a project they are working on. 
+Paper topics and proposals for original work must be approved by the instructor by the end of week 7 of the course. 
+
+
+\paragraph{Grade composition is:}
+
+\begin{itemize}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+\item Leading class discussions: 25\% 
+\item Referee report: 25\%
+\item Final project: 40\%
+\item Participation: 10\%
+\end{itemize}
+
+\paragraph{Accommodations:} Please reach out to me directly if you would like to request accommodations for the course to better facilitate your learning. Student Disability Services (\url{https://disabilities.uchicago.edu/}) is also available to provide you resources and support, and may provide approval for specific academic accommodations. If you or your household is affected by the ongoing pandemic in a way that affects your ability to participate in or attend class, please reach out to me as well. Informing me in a timely manner will help me to ensure accommodations are met and I am able to implement an appropriate assessment of your learning. 
+
+
+\section*{Course outline.}
+
+\subsection*{Week 1. Causal inference, identification, course orientation.}
+
+
+\subsubsection*{Tuesday. Lecture.}
+\begin{itemize}
+\item \bibentry{murphy1997read}
+\end{itemize}
+
+\subsubsection*{Thursday. Lecture.}
+
+\begin{itemize}
+\item \bibentry{breiman2001statistical}
+
+(comments and rejoinder optional)
+\item \bibentry{athey2019machine}
+\end{itemize}
+
+\subsection*{Week 2. Covariate adjustment and balancing.}
+
+
+
+\subsubsection*{Tuesday.}
+
+\begin{itemize}
+\item \bibentry{bloniarz2016lasso}\vskip 2 ex
+\item \textit{Optional/reference:} \bibentry{urminsky2016using}
+\item \textit{Optional/reference:} \bibentry{belloni2014inference}
+\item \textit{Optional/reference:} \bibentry{athey2018approximate}
+\end{itemize}
+
+
+\subsubsection*{Thursday. Lecture: sample-splitting, bagging, honesty.}
+
+\begin{itemize}
+\item  \textit{Optional/reference:}  \bibentry{stone1974cross}
+\item  \textit{Optional/reference:}  \bibentry{breiman1996bagging}
+\item \textit{Optional/reference:}  \bibentry{efron1979bootstrap}
+\end{itemize}
+
+
+\subsection*{Week 3. Heterogeneous treatment effects.}
+
+\subsubsection*{Tuesday. Lecture: Trees and forests.}%https://www.stat.cmu.edu/~larry/=sml/forests.pdf
+
+\begin{itemize}
+\item \bibentry{breiman2001random}
+\end{itemize}
+
+
+
+
+\subsubsection*{Thursday.}
+
+\begin{itemize}
+\item \bibentry{wager2018estimation}\vskip 2 ex
+\item  \textit{Optional/reference:} \bibentry{athey2016recursive}
+\end{itemize}
+
+\subsection*{Week 4. More heterogeneous treatment effects, policy learning.}
+
+\subsubsection*{Tuesday.}
+
+
+\begin{itemize}
+\item \bibentry{kunzel2019metalearners}
+\end{itemize}
+
+
+\subsubsection*{Thursday.}
+
+\begin{itemize}
+\item EITHER\\ \bibentry{athey2021policy}
+\item OR\\ \bibentry{kitagawa2018should}
+
+(you don't need to read both)
+\end{itemize}
+
+
+\subsection*{Week 5. Double machine learning.}
+\subsubsection*{Tuesday.}
+
+\begin{itemize}
+\item \bibentry{kennedy2022semiparametric}
+\end{itemize}
+
+\subsubsection*{Thursday.}
+\begin{itemize}
+\item \cite{kennedy2022semiparametric} continued. 
+\end{itemize}
+
+\subsection*{Week 6. Double Machine learning continued.}
+
+\subsubsection*{Tuesday.}
+\begin{itemize}
+\item \bibentry{chernozhukov2018double}\vskip 2 ex
+\item  \textit{Optional/reference:} \bibentry{chernozhukov2017double}
+\item  \textit{Optional/reference:} \bibentry{10.1111/ectj.12097}
+\end{itemize}
+
+
+\subsubsection*{Tuesday.}
+\begin{itemize}
+\item \cite{chernozhukov2018double} continued. 
+\end{itemize}
+
+
+
+\subsection*{Week 7. Targeted maximum likelihood estimation.}
+\subsubsection*{Tuesday.}
+
+\begin{itemize}
+\item \bibentry{schuler2017targeted} \vskip 2 ex
+\item  \textit{Optional/reference:}  \bibentry{gruber2009targeted}
+\item  \textit{Optional/reference:}  \bibentry{van2006targeted}
+\end{itemize}
+
+\subsubsection*{Thursday.}
+
+\begin{itemize}
+\item \cite{schuler2017targeted} continued. 
+\end{itemize}
+
+\subsection*{Week 8. Reinforcement learning and adaptive experiments.}
+
+\subsubsection*{Tuesday.}
+\begin{itemize}
+\item \bibentry{bubeck2011pure} \vskip 2 ex
+\item  \textit{Optional/reference:}  \bibentry{russo2018tutorial}
+\item  \textit{Optional/reference:}  \bibentry{lai1985asymptotically}
+\end{itemize}
+
+\subsubsection*{Thursday.}
+
+\begin{itemize}
+\item \bibentry{hadad2021confidence} \vskip 2 ex
+\item  \textit{Optional/reference:}  \bibentry{zhan2021off}
+\end{itemize}
+
+\subsection*{Week 9. Conformal inference}
+
+
+
+
+
+\subsubsection*{Tuesday.}
+\begin{itemize}
+\item \bibentry{lei2021conformal} 
+\item Cyrus Samii's conformal tutorial: \url{https://cdsamii.github.io/cds-demos/conformal/conformal-tutorial.html} \vskip 2 ex
+\item  \textit{Optional/reference:}  \bibentry{vovk2005algorithmic}
+\item  \textit{Optional/reference:}  \bibentry{lei2018distribution}
+\item  \textit{Optional/reference:}  \bibentry{chernozhukov2021exact}
+\end{itemize}
+
+
+\subsubsection*{Thursday.}
+
+\begin{itemize}
+\item Open/discussion.
+\end{itemize}
+
+%\subsection*{Week X. Neural nets and deep IV. }
+%
+%\subsubsection*{Tuesday. Lecture: Neural nets. }
+%
+%\begin{itemize}
+%\item  \textit{Optional/reference:}  \bibentry{lippmann1987introduction}
+%\end{itemize}
+%
+%\subsubsection*{Thursday.}
+%
+%\begin{itemize}
+%\item \bibentry{hartford2017deep}
+%\item \bibentry{farrell2021deep}
+%\end{itemize}
+
+
+
+\nocite{harshaw2019balancing, xu2022hierarchically}
+
+\bibliography{PLSC40601}
+
+
+\end{document}  

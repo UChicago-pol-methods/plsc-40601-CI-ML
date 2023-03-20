@@ -1,0 +1,167 @@
+%\documentclass[letterpaper, 12pt, parskip=full, headsepline]{scrartcl}
+
+\RequirePackage{etex}
+
+% Graphics
+\RequirePackage{graphicx}
+\RequirePackage{epsfig}
+\RequirePackage{psfrag}
+\RequirePackage{wrapfig}
+\RequirePackage[all]{xy}
+\RequirePackage{listings}  % for inserting code
+\RequirePackage{verbatim}  % useful for program listings
+\RequirePackage{color} 
+% Bold the 'Figure #' in the caption and separate it from the title/caption with a period
+% Captions will be left justified
+\RequirePackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
+
+
+% Tables
+\RequirePackage{float}
+\RequirePackage{rotating}
+\RequirePackage{array}
+%\RequirePackage{minipage}
+\RequirePackage{booktabs,threeparttable}
+
+% Author
+\RequirePackage[blocks]{authblk}
+\renewcommand\Affilfont{\small}
+\setlength{\affilsep}{0em}
+
+\lstset{breaklines=true,basicstyle=\footnotesize\ttfamily}
+
+% Document formatting
+%\RequirePackage{fullpage}
+%\RequirePackage[margin=1in]{geometry}
+%\RequirePackage[left = 1in, top = 1.5in, right=1in, bottom=1.5in, marginparwidth=1.2in]{geometry}
+\RequirePackage{setspace}
+\RequirePackage{mathptmx}
+\RequirePackage[hyphens]{url}
+\RequirePackage{microtype} 
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=0pt}
+\RequirePackage[colorinlistoftodos, textsize=footnotesize, color=blue!20!white]{todonotes} % adding to-do notes in working file
+%\addtokomafont{disposition}{\normalfont\bfseries} % article fonts
+%\setkomafont{descriptionlabel}{\normalfont\bfseries} % article fonts
+
+% Bibliography and citation formatting
+\RequirePackage[colorlinks=true, citecolor=blue]{hyperref}
+
+\RequirePackage{nameref}
+\RequirePackage[round]{natbib} 
+\bibliographystyle{chicago}
+
+% Title and Subtitle added in .tex file
+\author{Molly Offer-Westort}
+\date{\today}
+
+\makeatletter %Set \Title reference
+\let\Title\@title
+\makeatother
+
+\makeatletter %Set \Subtitle reference
+\let\Subtitle\@subtitle
+\makeatother
+
+\makeatletter %Set \Author reference
+\let\Author\@author
+\makeatother
+
+% Header and Footer
+\RequirePackage{scrlayer-scrpage}
+%\ihead{\textbf{\Title} }
+%\ohead{\Author}
+
+\RequirePackage{lastpage}
+\cfoot[]{}
+\ofoot[]{\thepage\ }%of \pageref{LastPage}}
+\pagestyle{scrheadings}
+\pagestyle{scrheadings}
+%\setkomafont{pageheadfoot}{\small}
+\deffootnote[1.5em]{.5em}{1em}{\textsuperscript{\thefootnotemark}}
+
+% Equation formatting
+\RequirePackage{amsmath,amssymb,amsfonts} 
+\RequirePackage{amsthm}
+\RequirePackage{bbm}
+\RequirePackage{array}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+
+% Shortcuts
+\newcommand{\nn}{\nonumber}
+
+% Define new characters
+\def\Var{{\textrm{Var}}\,}
+\def\V{{\textrm V}\,}
+\def\E{{\textrm E}\,}
+\def\arg{{\textrm {arg} }\,}
+\def\Cov{{\textrm{Cov} }\,}
+\def\Cor{{\textrm{Cor} }\,}
+\def\N{{\textrm N}\,}
+\def\Supp{{\textrm {Supp} }\,}
+
+%--------------------------------------------------------------------------
+% Math boldface shortcuts, etc. ----------------------------------
+%--------------------------------------------------------------------------
+\newcommand{\A}{\mathbf{A}}\newcommand{\B}{\mathbf{B}}\newcommand{\C}{\mathbf{C}}
+\newcommand{\D}{\mathbf{D}}\newcommand{\F}{\mathbf{F}}\newcommand{\G}{\mathbf{G}}
+\newcommand{\HB}{\mathbf{H}}\newcommand{\I}{\mathbf{I}}\newcommand{\J}{\mathbf{J}}
+\newcommand{\K}{\mathbf{K}}\newcommand{\Lb}{\mathbf{L}}\newcommand{\M}{\mathbf{M}}
+\newcommand{\NB}{\mathbf{N}}\newcommand{\OB}{\mathbf{O}}\newcommand{\PB}{\mathbf{P}}
+\newcommand{\Q}{\mathbf{Q}}\newcommand{\R}{\mathbf{R}}\newcommand{\SB}{\mathbf{S}}
+\newcommand{\T}{\mathbf{T}}\newcommand{\U}{\mathbf{U}}%\newcommand{\V}{\mathbf{V}}
+\newcommand{\W}{\mathbf{W}}\newcommand{\X}{\mathbf{X}}\newcommand{\Y}{\mathbf{Y}}
+\newcommand{\Z}{\mathbf{Z}}
+
+\newcommand{\aB}{\mathbf{a}}\newcommand{\bB}{\mathbf{b}}\newcommand{\cB}{\mathbf{c}}
+\newcommand{\dB}{\mathbf{d}}\newcommand{\e}{\mathbf{e}}\newcommand{\f}{\mathbf{f}}
+\newcommand{\g}{\mathbf{g}}\newcommand{\h}{\mathbf{h}}\newcommand{\iB}{\mathbf{i}}
+\newcommand{\jB}{\mathbf{j}}\newcommand{\kB}{\mathbf{k}}\newcommand{\lB}{\mathbf{l}}
+\newcommand{\m}{\mathbf{m}}\newcommand{\n}{\mathbf{n}}\newcommand{\oB}{\mathbf{o}}
+\newcommand{\p}{\mathbf{p}}\newcommand{\q}{\mathbf{q}}\newcommand{\rB}{\mathbf{r}}
+\newcommand{\s}{\mathbf{s}}\newcommand{\tB}{\mathbf{t}}\newcommand{\uB}{\mathbf{u}}
+\newcommand{\vB}{\mathbf{v}}\newcommand{\w}{\mathbf{w}}\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}\newcommand{\z}{\mathbf{z}}
+
+\def\AA{{\mathbb A}}\def\BB{{\mathbb B}}\def\CC{{\mathbb C}}
+\def\DD{{\mathbb D}}\def\EE{{\mathbb E}}\def\FF{{\mathbb F}}
+\def\GG{{\mathbb G}}\def\HH{{\mathbb H}}\def\II{{\mathbb I}}
+\def\JJ{{\mathbb J}}\def\KK{{\mathbb K}}\def\LL{{\mathbb L}}
+\def\MM{{\mathbb M}}\def\NN{{\mathbb N}}\def\OO{{\mathbb O}}
+\def\PP{{\mathbb P}}\def\QQ{{\mathbb Q}}\def\RR{{\mathbb R}}
+\def\SS{{\mathbb S}}\def\TT{{\mathbb T}}\def\UU{{\mathbb U}}
+\def\VV{{\mathbb V}}\def\WW{{\mathbb W}}\def\XX{{\mathbb X}}
+\def\YY{{\mathbb Y}}\def\ZZ{{\mathbb Z}}
+
+\RequirePackage{euscript}
+\let\muchmore= \gg
+\let\muchless= \ll
+\let\typewriter=\tt  % for turning on the typewriter font
+\def\aa{{\EuScript A}}\def\bb{{\EuScript B}}\def\cc{{\EuScript C}}\def\dd{{\EuScript D}}
+\def\ee{{\EuScript E}}\def\ff{{\EuScript F}}\def\gg{{\EuScript G}}\def\hh{{\EuScript H}}
+\def\ii{{\EuScript I}}\def\jj{{\EuScript J}}\def\kk{{\EuScript K}}\def\ll{{\EuScript L}}
+\def\mm{{\EuScript M}}\def\nn{{\EuScript N}}\def\oo{{\EuScript O}}\def\pp{{\EuScript P}}
+\def\qq{{\EuScript Q}}\def\rr{{\EuScript R}}\def\ss{{\EuScript S}}\def\tt{{\EuScript T}}
+\def\uu{{\EuScript U}}\def\vv{{\EuScript V}}\def\ww{{\EuScript W}}\def\xx{{\EuScript X}}
+\def\yy{{\EuScript Y}}\def\zz{{\EuScript Z}}
+
+\newcommand{\Beta}{\boldsymbol{\beta}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bgamma}{\boldsymbol{\gamma}}
+\newcommand{\bpi}{\boldsymbol{\pi}}
+\newcommand{\arrowp}{\stackrel{p}{\rightarrow}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\bP}{\mathbf{P}}
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\indep}{\perp\!\!\!\!\perp}
+
+\thispagestyle{plain}
