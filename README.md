@@ -7,4 +7,4 @@ This repository is used to distribute course materials.
 To download a file: Locate the file in the repository. Then "right-click" on the "Raw" button and save to your computer.
 
 # Readings and assignment submissions
-Readings will be posted on the course's Canvas site: [https://canvas.uchicago.edu/courses/49770](https://canvas.uchicago.edu/courses/49770)ÐYou should also submit your assignments there.
+Readings will be posted on the course's Canvas site: [https://canvas.uchicago.edu/courses/49770](https://canvas.uchicago.edu/courses/49770)—You should also submit your assignments there.
