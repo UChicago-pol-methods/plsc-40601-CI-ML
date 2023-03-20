@@ -1,0 +1,391 @@
+%\documentclass[pdf, xcolor={dvipsnames}]{beamer}
+%\documentclass[notes=only, xcolor={dvipsnames}]{beamer}
+%\documentclass[notes, xcolor={dvipsnames}]{beamer}
+
+%--------------------------------------------------------------------------
+% Beamer settings  --------------------------------------------------
+%--------------------------------------------------------------------------
+
+\mode<presentation>{\usetheme{default}}
+\definecolor{Maroon}{RGB}{128,0,0}
+\usecolortheme[named=Maroon]{structure}
+%\setbeamertemplate{note page}[infolines]
+
+%empty footline
+%\setbeamertemplate{footline}[frame number] %adds frame numbers at bottom of page
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}\inserttitle,\ \insertdate\hfill\insertshortauthor\hfill\insertframenumber}}
+\setbeamertemplate{navigation symbols}{} %no navigation symbols
+%\setbeamertemplate{footline}{}% empties footline
+
+\RequirePackage{pdfpages}
+
+%boxes around results
+\RequirePackage{tikz}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+
+\tikzset{   
+        every picture/.style={remember picture,baseline},
+        every node/.style={anchor=base,align=center,outer sep=1.5pt},
+        every path/.style={thick},
+        }
+
+\newcommand\marktopleft[1]{%
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-a) at (-.3em,.2em) {};%
+}
+\newcommand\markbottomright[1]{%
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-b) at (.1em,.3em) {};%
+    \tikz[overlay,remember picture,inner sep=1pt]
+        \node[draw=red,fit=(marker-#1-a.north west) (marker-#1-b.south east)] {};%
+}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=PineGreen,
+    citecolor = RoyalBlue,
+    filecolor=Periwinkle,      
+    urlcolor=Bittersweet,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\urlstyle{same}
+
+
+
+
+\makeatletter
+\def\beamer@startmycovered{%
+  \def\opaqueness<##1>##2{%
+    \only<##1>{%
+      \beamer@actions{%
+        \expandafter\xdef\csname beamer@oldcolorhook%
+        \the\beamer@coveringdepth\endcsname{\beamer@colorhook}%
+        \expandafter\xdef\csname beamer@oldpgfextension%
+        \the\beamer@coveringdepth\endcsname{\beamer@pgfextension}%
+        {\globalcolorstrue\colorlet{beamer@freeze\the\beamer@coveringdepth}{bg}}%
+        \xdef\beamer@colorhook{!##2!beamer@freeze%
+          \the\beamer@coveringdepth\beamer@colorhook}%
+        \gdef\beamer@pgfextension{!##2opaque}%
+        \color{.}%
+      }%
+      {%
+        \xdef\beamer@colorhook{\csname beamer@oldcolorhook%
+          \the\beamer@coveringdepth\endcsname}%
+        \xdef\beamer@pgfextension{\csname beamer@oldpgfextension%
+          \the\beamer@coveringdepth\endcsname}%
+        \color{.}%
+      }}}%
+  \ifnum\beamer@slideinframe<\beamer@minimum%ok, at beginning
+  {%
+    \beamer@saveanother%
+    \advance\beamer@minimum by-\beamer@slideinframe%
+    \beamer@slideinframe=\beamer@minimum%
+    \beamer@uncoverbeforeactions%
+    \beamer@restoreanother%
+  }%
+  \else%
+  {%
+    \beamer@saveanother%
+    \advance\beamer@slideinframe by-\beamer@minimum%
+    \beamer@uncoverafteractions%
+    \beamer@restoreanother%
+  }%
+  \fi%
+  \beamer@do%
+%  }%
+}
+
+\long\def\beamer@makemycovered#1{\beamer@startmycovered#1\beamer@endcovered}
+\def\mycover{%
+\alt{\beamer@makemycovered}{\beamer@fakeinvisible}}
+\def\c@slideinframe{\beamer@slideinframe}
+\makeatother
+
+
+%--------------------------------------------------------------------------
+% General  -------------------------------------------------------------
+%--------------------------------------------------------------------------
+\RequirePackage[utf8]{inputenc}
+% Equation formatting
+\RequirePackage{amsmath,amssymb,amsfonts} 
+\RequirePackage{amsthm}
+\RequirePackage{bbm}
+\RequirePackage{array}
+\RequirePackage{calc}
+\RequirePackage{dcolumn}
+\RequirePackage{graphicx}
+\RequirePackage[round]{natbib}
+
+\RequirePackage{ulem}
+
+
+\RequirePackage{graphicx}
+\RequirePackage{epsfig}
+\RequirePackage{psfrag}
+\RequirePackage{wrapfig}
+\RequirePackage[all]{xy}
+\RequirePackage{multirow} \RequirePackage{rotating}
+
+
+\RequirePackage{framed}% allow frames for instructions
+\RequirePackage{adjustbox}% allow centering of images
+\RequirePackage{subcaption}
+
+\RequirePackage{multicol}% multiple columns
+\setlength{\columnsep}{0.25cm}
+
+
+%--------------------------------------------------------------------------
+% Math boldface shortcuts, etc. ----------------------------------
+%--------------------------------------------------------------------------
+% Define new characters
+\def\Var{{\textrm{Var}}\,}
+\def\V{{\textrm V}\,}
+\def\E{{\textrm E}\,}
+\def\arg{{\textrm {arg} }\,}
+\def\Cov{{\textrm{Cov} }\,}
+\def\Cor{{\textrm{Cor} }\,}
+\def\N{{\textrm N}\,}
+\def\Supp{{\textrm {Supp} }\,}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+
+\newcommand{\A}{\mathbf{A}}\newcommand{\B}{\mathbf{B}}\newcommand{\C}{\mathbf{C}}
+\newcommand{\D}{\mathbf{D}}\newcommand{\F}{\mathbf{F}}\newcommand{\G}{\mathbf{G}}
+\newcommand{\HB}{\mathbf{H}}\newcommand{\I}{\mathbf{I}}\newcommand{\J}{\mathbf{J}}
+\newcommand{\K}{\mathbf{K}}\newcommand{\Lb}{\mathbf{L}}\newcommand{\M}{\mathbf{M}}
+\newcommand{\NB}{\mathbf{N}}\newcommand{\OB}{\mathbf{O}}\newcommand{\PB}{\mathbf{P}}
+\newcommand{\Q}{\mathbf{Q}}\newcommand{\R}{\mathbf{R}}\newcommand{\SB}{\mathbf{S}}
+\newcommand{\T}{\mathbf{T}}\newcommand{\U}{\mathbf{U}}\newcommand{\VB}{\mathbf{V}}
+\newcommand{\W}{\mathbf{W}}\newcommand{\X}{\mathbf{X}}\newcommand{\Y}{\mathbf{Y}}
+\newcommand{\Z}{\mathbf{Z}}
+
+\newcommand{\aB}{\mathbf{a}}\newcommand{\bB}{\mathbf{b}}\newcommand{\cB}{\mathbf{c}}
+\newcommand{\dB}{\mathbf{d}}\newcommand{\e}{\mathbf{e}}\newcommand{\f}{\mathbf{f}}
+\newcommand{\g}{\mathbf{g}}\newcommand{\h}{\mathbf{h}}\newcommand{\iB}{\mathbf{i}}
+\newcommand{\jB}{\mathbf{j}}\newcommand{\kB}{\mathbf{k}}\newcommand{\lB}{\mathbf{l}}
+\newcommand{\m}{\mathbf{m}}\newcommand{\n}{\mathbf{n}}\newcommand{\oB}{\mathbf{o}}
+\newcommand{\p}{\mathbf{p}}\newcommand{\q}{\mathbf{q}}\newcommand{\rB}{\mathbf{r}}
+\newcommand{\s}{\mathbf{s}}\newcommand{\tB}{\mathbf{t}}\newcommand{\uB}{\mathbf{u}}
+\newcommand{\vB}{\mathbf{v}}\newcommand{\w}{\mathbf{w}}\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}\newcommand{\z}{\mathbf{z}}
+
+\def\AA{{\mathbb A}}\def\BB{{\mathbb B}}\def\CC{{\mathbb C}}
+\def\DD{{\mathbb D}}\def\EE{{\mathbb E}}\def\FF{{\mathbb F}}
+\def\GG{{\mathbb G}}\def\HH{{\mathbb H}}\def\II{{\mathbb I}}
+\def\JJ{{\mathbb J}}\def\KK{{\mathbb K}}\def\LL{{\mathbb L}}
+\def\MM{{\mathbb M}}\def\NN{{\mathbb N}}\def\OO{{\mathbb O}}
+\def\PP{{\mathbb P}}\def\QQ{{\mathbb Q}}\def\RR{{\mathbb R}}
+\def\SS{{\mathbb S}}\def\TT{{\mathbb T}}\def\UU{{\mathbb U}}
+\def\VV{{\mathbb V}}\def\WW{{\mathbb W}}\def\XX{{\mathbb X}}
+\def\YY{{\mathbb Y}}\def\ZZ{{\mathbb Z}}
+
+\RequirePackage{euscript}
+\let\muchmore= \gg
+\let\muchless= \ll
+\let\typewriter=\tt  % for turning on the typewriter font
+\def\aa{{\EuScript A}}\def\bb{{\EuScript B}}\def\cc{{\EuScript C}}\def\dd{{\EuScript D}}
+\def\ee{{\EuScript E}}\def\ff{{\EuScript F}}\def\gg{{\EuScript G}}\def\hh{{\EuScript H}}
+\def\ii{{\EuScript I}}\def\jj{{\EuScript J}}\def\kk{{\EuScript K}}\def\ll{{\EuScript L}}
+\def\mm{{\EuScript M}}\def\nn{{\EuScript N}}\def\oo{{\EuScript O}}\def\pp{{\EuScript P}}
+\def\qq{{\EuScript Q}}\def\rr{{\EuScript R}}\def\ss{{\EuScript S}}\def\tt{{\EuScript T}}
+\def\uu{{\EuScript U}}\def\vv{{\EuScript V}}\def\ww{{\EuScript W}}\def\xx{{\EuScript X}}
+\def\yy{{\EuScript Y}}\def\zz{{\EuScript Z}}
+
+\newcommand{\Beta}{\boldsymbol{\beta}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bgamma}{\boldsymbol{\gamma}}
+\newcommand{\bpi}{\boldsymbol{\pi}}
+\newcommand{\arrowp}{\stackrel{p}{\rightarrow}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\bP}{\mathbf{P}}
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\indep}{\perp\!\!\!\!\perp}
+
+%--------------------------------------------------------------------------
+% allow new counter for back-up slides ------------------------
+%--------------------------------------------------------------------------
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+%--------------------------------------------------------------------------
+% enumerate lists in notes -----------------------------------------
+%--------------------------------------------------------------------------
+\makeatletter
+\def\beamer@setupnote{%
+  \gdef\beamer@notesactions{%
+    \beamer@outsideframenote{%
+      \beamer@atbeginnote%
+      \beamer@notes%
+      \ifx\beamer@noteitems\@empty\else
+      \begin{itemize}\itemsep=0pt\parskip=0pt%
+        \beamer@noteitems%
+      \end{itemize}%
+      \fi%
+      \beamer@atendnote%
+    }%
+    \gdef\beamer@notesactions{}%
+  }
+}
+
+
+
+%--------------------------------------------------------------------------
+% show previous slide on notes page --------------------------
+%--------------------------------------------------------------------------
+
+\RequirePackage{pgfpages}
+
+\makeatletter
+\defbeamertemplate{note page}{infolines}
+{%
+    {%
+        \scriptsize
+        \insertvrule{.25\paperheight}{white!90!black}
+        \vskip-.25\paperheight
+        \nointerlineskip
+        \vbox{
+            \hfill\insertslideintonotes{0.25}\hskip-\Gm@rmargin\hskip0pt%
+            \vskip-0.25\paperheight%
+            \nointerlineskip
+            \begin{pgfpicture}{0cm}{0cm}{0cm}{0cm}
+                \begin{pgflowlevelscope}{\pgftransformrotate{90}}
+                    {\pgftransformshift{\pgfpoint{-2cm}{0.2cm}}%
+                        \pgftext[base,left]{\footnotesize\the\year-\ifnum\month<10\relax0\fi\the\month-\ifnum\day<10\relax0\fi\the\day}}
+                \end{pgflowlevelscope}
+            \end{pgfpicture}}
+            \nointerlineskip
+            \vbox to .25\paperheight{\vskip0.5em
+                \hbox{\insertshorttitle[width=8cm]}%
+                \setbox\beamer@tempbox=\hbox{\insertsection}%
+                \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip4pt\raise3pt\hbox{\vrule
+                            width0.4pt height7pt\vrule width 9pt
+                            height0.4pt}}\hskip1pt\hbox{\begin{minipage}[t]{7.5cm}\def\breakhere{}\insertsection\end{minipage}}\fi%
+                }%
+                \setbox\beamer@tempbox=\hbox{\insertsubsection}%
+                \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip17.4pt\raise3pt\hbox{\vrule
+                            width0.4pt height7pt\vrule width 9pt
+                            height0.4pt}}\hskip1pt\hbox{\begin{minipage}[t]{7.5cm}\def\breakhere{}\insertsubsection\end{minipage}}\fi%
+                }%
+                \setbox\beamer@tempbox=\hbox{\insertshortframetitle}%
+                \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip30.8pt\raise3pt\hbox{\vrule
+                            width0.4pt height7pt\vrule width 9pt
+                            height0.4pt}}\hskip1pt\hbox{\insertshortframetitle[width=7cm]}\fi%
+                }%
+                \vfil}%
+        }%
+        \vskip.25em
+        \nointerlineskip
+        \begin{minipage}{\textwidth} % this is an addition
+            \insertnote
+        \end{minipage}               % this is an addition
+    }
+    \makeatother
+
+    \setbeamertemplate{note page}[infolines]
+ \setbeamersize{text margin left=5mm,text margin right=5mm} 
+ 
+
+
+%--------------------------------------------------------------------------
+% create custom underline ----------------------------------------
+%--------------------------------------------------------------------------
+\RequirePackage{contour}
+\RequirePackage{ulem}
+
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+
+\newcommand{\myuline}[1]{%
+  \uline{\phantom{#1}}%
+  \llap{\contour{white}{#1}}%
+}
+
+
+
+
+\RequirePackage{stackengine}
+%\RequirePackage{showframe}
+\usetikzlibrary{positioning}
+
+\definecolor{links}{HTML}{2A1B81}
+
+\RequirePackage{array}
+\RequirePackage{booktabs}
+\RequirePackage{multirow}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\interfootnotelinepenalty=10000
+
+\makeatletter
+%\newcommand{\vast}{\bBigg@{4}}
+\newcommand{\Vast}{\bBigg@{3}}
+\makeatother
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}} %asterisk for footnote
+\RequirePackage{bm}
+\RequirePackage{setspace}
+
+\usetikzlibrary{arrows.meta}
+
+\def\diag{{\textrm {diag} }\,}
+
+\makeatletter
+\newlength\pvec@height
+\newlength\pvec@depth
+\newlength\pvec@width
+\newcommand{\pvec}[2][]{%
+    \settoheight{\pvec@height}{$#2$}
+    \settodepth{\pvec@depth}{$#2$}
+    \settowidth{\pvec@width}{$#2$}
+  \def\pvec@arg{#1}
+  \raisebox{.2ex}{\raisebox{\pvec@height}{\rlap{%
+    \kern.05em
+    \begin{tikzpicture}[scale=1,shorten >=-3pt,shorten <=-3pt]
+    \pgfsetroundcap
+    \coordinate (Stx) at (.05em,0) ;
+    \coordinate (Arx) at (\pvec@width-.05em,0) ;
+    \draw[->](Stx) to[bend right] (Arx);
+    \end{tikzpicture}
+  }}}
+  #2
+}
+
+\newcommand{\pvecl}[2][]{%                   % for downward arrow
+    \settoheight{\pvec@height}{$#2$}
+    \settodepth{\pvec@depth}{$#2$}
+    \settowidth{\pvec@width}{$#2$}
+  \def\pvec@arg{#1}
+  \raisebox{.2ex}{\raisebox{\pvec@height}{\rlap{%
+    \kern.05em
+    \begin{tikzpicture}[scale=1,shorten >=-3pt,shorten <=-3pt]
+    \pgfsetroundcap
+    \coordinate (Stx) at (.05em,0) ;
+    \coordinate (Arx) at (\pvec@width-.05em,0) ;
+    \draw[->](Stx) to[bend left] (Arx);
+    \end{tikzpicture}
+  }}}
+  #2
+}
+\makeatother
+
+
+
+\AtBeginNote{\hspace*{-10pt}\addtolength\leftmargini{-10pt}}
+\AtEndNote{\addtolength\leftmargini{10pt}}
+\RequirePackage{algorithmicx}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
