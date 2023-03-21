@@ -7,18 +7,62 @@
 %--------------------------------------------------------------------------
 
 \mode<presentation>{\usetheme{default}}
-\definecolor{Maroon}{RGB}{128,0,0}
-\usecolortheme[named=Maroon]{structure}
 %\setbeamertemplate{note page}[infolines]
 
-%empty footline
-%\setbeamertemplate{footline}[frame number] %adds frame numbers at bottom of page
-\setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}\inserttitle,\ \insertdate\hfill\insertshortauthor\hfill\insertframenumber}}
-\setbeamertemplate{navigation symbols}{} %no navigation symbols
-%\setbeamertemplate{footline}{}% empties footline
+% Environments
+
+%--------------------------------------------------------------------------
+% Color schemes  ----------------------------------------------------
+%--------------------------------------------------------------------------
+\RequirePackage{xcolor,hyperref,url}
+
+\definecolor{Maroon}{RGB}{128, 0, 0}
+\usecolortheme[named=Maroon]{structure}
+\definecolor{Contrast1}{RGB}{248,164,41} %Yellow
+\definecolor{Contrast2}{RGB}{145,171,90} %Green
+\definecolor{Contrast3}{RGB}{21,95,131} %Blue
+
+\hypersetup{
+colorlinks=true,
+urlcolor=Contrast1,
+citecolor = Contrast1,
+linkcolor = Contrast1
+}
+
+\newenvironment{transitionframe}{
+  \setbeamercolor{background canvas}{bg=Maroon}
+  \begin{frame}[c]}{
+    \end{frame}
+}
 
 \RequirePackage{pdfpages}
+
+\newenvironment{wideitemize}{\itemize\addtolength{\itemsep}{10pt}}{\enditemize}
+
+\usepackage[default]{lato}
+
+%%enumeration
+%\RequirePackage{enumitem}
+%\setitemize{label=\usebeamerfont*{itemize item}%
+%  \usebeamercolor[fg]{itemize item}
+%  \usebeamertemplate{itemize item}}
+%\setbeamertemplate{itemize item}[triangle]
+
+%footline
+
+%\setbeamercolor{frametitle}{fg=Maroon}
+%\setbeamercolor{title}{fg=Maroon}
+%\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}{%
+\hfill\usebeamertemplate***{navigation symbols}
+\hspace{1cm}\insertframenumber{}}
+\setbeamertemplate{itemize items}{-}
+%\setbeamercolor{itemize item}{fg=Maroon}
+%\setbeamercolor{itemize subitem}{fg=Maroon}
+%\setbeamercolor{enumerate item}{fg=Maroon}
+%\setbeamercolor{enumerate subitem}{fg=Maroon}
+%\setbeamercolor{button}{bg=MyBackground,fg=Maroon,}
 
 %boxes around results
 \RequirePackage{tikz}
@@ -41,70 +85,6 @@
         \node[draw=red,fit=(marker-#1-a.north west) (marker-#1-b.south east)] {};%
 }
 
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=PineGreen,
-    citecolor = RoyalBlue,
-    filecolor=Periwinkle,      
-    urlcolor=Bittersweet,
-    pdftitle={Overleaf Example},
-    pdfpagemode=FullScreen,
-    }
-
-\urlstyle{same}
-
-
-
-
-\makeatletter
-\def\beamer@startmycovered{%
-  \def\opaqueness<##1>##2{%
-    \only<##1>{%
-      \beamer@actions{%
-        \expandafter\xdef\csname beamer@oldcolorhook%
-        \the\beamer@coveringdepth\endcsname{\beamer@colorhook}%
-        \expandafter\xdef\csname beamer@oldpgfextension%
-        \the\beamer@coveringdepth\endcsname{\beamer@pgfextension}%
-        {\globalcolorstrue\colorlet{beamer@freeze\the\beamer@coveringdepth}{bg}}%
-        \xdef\beamer@colorhook{!##2!beamer@freeze%
-          \the\beamer@coveringdepth\beamer@colorhook}%
-        \gdef\beamer@pgfextension{!##2opaque}%
-        \color{.}%
-      }%
-      {%
-        \xdef\beamer@colorhook{\csname beamer@oldcolorhook%
-          \the\beamer@coveringdepth\endcsname}%
-        \xdef\beamer@pgfextension{\csname beamer@oldpgfextension%
-          \the\beamer@coveringdepth\endcsname}%
-        \color{.}%
-      }}}%
-  \ifnum\beamer@slideinframe<\beamer@minimum%ok, at beginning
-  {%
-    \beamer@saveanother%
-    \advance\beamer@minimum by-\beamer@slideinframe%
-    \beamer@slideinframe=\beamer@minimum%
-    \beamer@uncoverbeforeactions%
-    \beamer@restoreanother%
-  }%
-  \else%
-  {%
-    \beamer@saveanother%
-    \advance\beamer@slideinframe by-\beamer@minimum%
-    \beamer@uncoverafteractions%
-    \beamer@restoreanother%
-  }%
-  \fi%
-  \beamer@do%
-%  }%
-}
-
-\long\def\beamer@makemycovered#1{\beamer@startmycovered#1\beamer@endcovered}
-\def\mycover{%
-\alt{\beamer@makemycovered}{\beamer@fakeinvisible}}
-\def\c@slideinframe{\beamer@slideinframe}
-\makeatother
-
 
 %--------------------------------------------------------------------------
 % General  -------------------------------------------------------------
@@ -120,8 +100,8 @@
 \RequirePackage{graphicx}
 \RequirePackage[round]{natbib}
 
-\RequirePackage{ulem}
-
+\RequirePackage[normalem]{ulem}
+\RequirePackage{siunitx}
 
 \RequirePackage{graphicx}
 \RequirePackage{epsfig}
@@ -152,7 +132,7 @@
 \def\N{{\textrm N}\,}
 \def\Supp{{\textrm {Supp} }\,}
 \DeclareMathOperator*{\argmin}{\arg\!\min}
-\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclareMathOperator*{\argmax}{\textrm{arg}\,\textrm{max}}
 
 \newcommand{\A}{\mathbf{A}}\newcommand{\B}{\mathbf{B}}\newcommand{\C}{\mathbf{C}}
 \newcommand{\D}{\mathbf{D}}\newcommand{\F}{\mathbf{F}}\newcommand{\G}{\mathbf{G}}
@@ -221,7 +201,7 @@
 }
 
 %--------------------------------------------------------------------------
-% enumerate lists in notes -----------------------------------------
+% enumerate lists in notes ---------------- ------------------------
 %--------------------------------------------------------------------------
 \makeatletter
 \def\beamer@setupnote{%
@@ -242,9 +222,6 @@
 
 
 
-%--------------------------------------------------------------------------
-% show previous slide on notes page --------------------------
-%--------------------------------------------------------------------------
 
 \RequirePackage{pgfpages}
 
@@ -297,11 +274,31 @@
     \setbeamertemplate{note page}[infolines]
  \setbeamersize{text margin left=5mm,text margin right=5mm} 
  
+ %% don't work? It also requires to add manually every cite variant.
+\let\beameroldcite=\cite
+\renewcommand\cite[1]{\hyperlink{#1}{\beameroldcite{#1}}}
+\let\beameroldcitet=\citet
+\renewcommand\citet[1]{\hyperlink{#1}{\beameroldcitet{#1}}}
+\newcommand\citetfull[1]{\hyperlink{#1}{\beameroldcitet*{#1}}}
+\let\beameroldcitep=\citep
+\renewcommand\citep[1]{\hyperlink{#1}{\beameroldcitep{#1}}}
+\newcommand\citepfull[1]{\hyperlink{#1}{\beameroldcitep*{#1}}}
+\let\beameroldciteyear=\citeyear
+\renewcommand\citeyear[1]{\hyperlink{#1}{\beameroldciteyear{#1}}}
+\let\beameroldciteauthor=\citeauthor
+\renewcommand\citeauthor[1]{\hyperlink{#1}{\beameroldciteauthor{#1}}}
+\let\beameroldcitepalias=\citepalias
+\renewcommand\citepalias[1]{\hyperlink{#1}{\beameroldcitepalias{#1}}}
+\newcommand{\citepsmall}[1]{{\smaller\citep{#1}}}
+\newcommand{\citepsmallfull}[1]{{\smaller\citepfull{#1}}}
+\newcommand{\citeptitle}[1]{\hfill{\smaller[2]\citep{#1}}}
+
+\let\beameroldbibitem=\bibitem
+\renewcommand{\bibitem}[2][]{\label{#2}\beameroldbibitem[#1]{#2}}
+\providecommand{\newblock}{}
 
 
-%--------------------------------------------------------------------------
-% create custom underline ----------------------------------------
-%--------------------------------------------------------------------------
+% Create custom underline
 \RequirePackage{contour}
 \RequirePackage{ulem}
 
@@ -320,7 +317,6 @@
 %\RequirePackage{showframe}
 \usetikzlibrary{positioning}
 
-\definecolor{links}{HTML}{2A1B81}
 
 \RequirePackage{array}
 \RequirePackage{booktabs}
@@ -386,6 +382,6 @@
 
 \AtBeginNote{\hspace*{-10pt}\addtolength\leftmargini{-10pt}}
 \AtEndNote{\addtolength\leftmargini{10pt}}
-\RequirePackage{algorithmicx}
 \RequirePackage{algorithm}
+\RequirePackage{algorithmicx}
 \RequirePackage{algpseudocode}
