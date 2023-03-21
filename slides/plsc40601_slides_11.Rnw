@@ -15,8 +15,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
-\subtitle{Week 1: Course orientation.}
-\date{Winter 2023}
+\subtitle{Week 1: Course orientation, potential outcomes framework.}
+\date{Spring 2023}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
 
@@ -281,7 +281,7 @@ References for notation:\pause
 \begin{frame}{Statistical setup.}
 
 \begin{wideitemize}
-\item Potential outcomes framework: $Y_i(w)$ represents the potential outcome for respondent $i$ under treatment $w$. \pause $\Y_i = (Y_i(1), \dots, Y_i(K))$.\pause
+\item Potential outcomes framework: $Y_i(w)$ represents the potential outcome for respondent $i$ under treatment $w$. \pause $\Y_i = (Y_i(0), \dots, Y_i(K))$.\pause
 \item $Y_i(1)$ is the outcome we would see only when individual $i$ receives treatment $1$. \pause
 \item Alternatively, (for binary treatment, $W_i \in\{0,1\}$) 
 \begin{itemize}
@@ -359,133 +359,6 @@ Many others!
 \begin{wideitemize}
 \item xxxx
 \end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{Identification}
-
-\begin{wideitemize}
-\item $Y_i(0), \dots, Y_i(K)$ are \textit{potential} outcomes\pause; typically, we only get to see an individual outcome under one version of treatment. \pause
-\item \textbf{Fundamental problem of causal inference}: we can't see counterfactual potential outcomes for a given unit \textit{at the same time}.\pause
-\item How do we move from what we observe to what we would like, ideally, to measure? 
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{Identification}
-
-\begin{wideitemize}
-\item Identification: We call a parameter \textbf{identifiable} if in the case that we had infinite data, we could approximate the true parameter value to arbitrary precision. \pause
-\begin{itemize}
-\item e.g., if you have \textbf{infinite data} randomly sampled from a distribution, by taking the empirical mean, you get the mean of that distribution with arbitrary precision.\pause
-\item If we're dealing with a \textbf{finite population}, we can think about identifying a target quantity about that population, as if we were to repeat the procedure through we observed data about that population, averaging \textit{across repetitions}, we could approximate the true quantity to arbitrary precision.\pause
-\item We can consider parameters to be \textbf{point identified} or \textbf{interval identified}. 
-\end{itemize}
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{Identification}
-
-\begin{wideitemize}
-\item \textbf{Consistency/ Stable Unit Treatment Value Assumption (SUTVA)}: what we observe is interpretable in terms of potential outcomes. \pause
-\begin{itemize}
-\item no unobserved multiple versions of the treatment
-\item no ``interference between units''
-\end{itemize}
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{Identification: randomization}
-
-\begin{wideitemize}
-\item When we aren't in control of assigning treatment, we say the data is \textbf{observational.}
-\item SUTVA is not enough to get us to identification with observational data. \pause
-\item \textbf{Random assignment} gives us:  \pause
-\begin{itemize}
-\item $(Y_i(1), Y_i(0)) \independent W_i$ (independence of potential outcomes and treatment)
-\item $0< \Pr[W_i = 1] <0$ (positivity)\pause
-\end{itemize}
-\item In this class, we will not spend a lot of time on identification, but it may be worth considering how various methods fare when these assumptions are violated. \pause
-\item In particular, if you don't have identification, fancy estimating procedures will not save you. 
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{Causal inference as a missing data problem}
-
-\begin{table}[]
-\begin{tabular}{cccccc}
-\multicolumn{1}{c}{\ \ Units\ \ } &\multicolumn{1}{c}{\ \ Covariates $X_i$\ \ } & \multicolumn{1}{c}{\ \ Treatment $W_i$\ \ } & \multicolumn{1}{c}{\ \ $Y_i(1)$\ \ } & \multicolumn{1}{c}{\ \ $Y_i(0)$\ \ } & \multicolumn{1}{c}{\ \ Observed  $Y_i$\ \ } \\
-\hline
-$1$       & $1$     &$1$         & $1$      & ?        & $1$            \\
-$2$       & $0$     &$0$     & ?        & $0$     & $0$           \\
-$3$       & $1$     &$1$     & $0$      & ?        & $0$            \\
-$\vdots$  & $\vdots$  & $\vdots$       & $\vdots$ & $\vdots$ & $\vdots$       \\
-$N$       & $0$     & $0$         & ?        & $0$      & $0$           
-\end{tabular}
-\end{table}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{itemize}
-\item xxxx
-\end{itemize}
 
 }
 
