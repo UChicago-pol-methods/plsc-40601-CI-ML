@@ -222,8 +222,9 @@ Consider:\pause
 
 References for notation:\pause
 \begin{wideitemize}
-\item \cite{hastie2009elements}
-\item Glossary of \cite{aronow2019foundations} Foundations of Agnostic Statistics
+\item For definitions and terminology, \cite{hastie2009elements}
+\item For some very machine-learning specific technology, glossary at the end of \cite{breiman2001statistical}
+\item For mathematical notation, lossary of \cite{aronow2019foundations} Foundations of Agnostic Statistics
 \item Other suggestions?
 \end{wideitemize}
 
