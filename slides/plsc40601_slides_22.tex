@@ -15,7 +15,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
-\subtitle{Week 2: Sample-splitting, bagging, honesty.}
+\subtitle{Week 2: Sample-splitting, bagging, (honesty).}
 \date{Spring 2023}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
@@ -101,7 +101,7 @@ Training set $\mathcal{T}$ is fixed. \pause
 
 \item Expected test error:
 \[
-\textrm{Err} = \E \left[ L(Y, \hat{f}(X))\right] =\ E \left[  \E \left[ L(Y, \hat{f}(X)) \rvert \mathcal{T}\right] \right]
+\textrm{Err} = \E \left[ L(Y, \hat{f}(X))\right] =\E \left[  \E \left[ L(Y, \hat{f}(X)) \rvert \mathcal{T}\right] \right]
 \]
 \end{wideitemize}\pause
 \item We may be interested in $\textrm{Err}_{\mathcal{T}}$, in practice most estimating methods will give us estimates of $\textrm{Err}$. 
@@ -151,7 +151,7 @@ Training set $\mathcal{T}$ is fixed. \pause
 \begin{frame}{What is our goal in fitting a model?}
 
 \begin{wideitemize}
-\item We may want to use expected test error to \textbf{select among models}, or versions of models\pause
+\item We may want to use expected test error to \textbf{select among models}, or versions of models.\pause
 \item And, once we have selected a version of a model, we may want to \textbf{assess} how a selected model performs. 
 \end{wideitemize}
 
@@ -370,7 +370,7 @@ $\hat{f}^{-k(i)}$ are the fits from the folds $k$ that do not contain $i$.
 \item Another approach, typically used to estimate the variability of an estimate over random samples, is bootstrapping.
 \pause
 
-\item If we knew the CDF of our population, we would know exactly how to sample from the distribution to determine the sampling variation of our estimate.
+\item If we knew the CDF of our population, we would be able to exactly determine the sampling variation of our estimate.
 \pause
 
 \item While we do not, we can  \textit{suppose} that the empirical CDF produced by the data that we observe is identical to the population CDF.
@@ -403,13 +403,13 @@ The bootstrapping procedure is:
 \item For $b$ in $1\dots B$:
 \begin{enumerate}
 
-    \item Take a sample of size $N$  \textit{with replacement} from the observed data\pause
+    \item Take a sample of size $N$  \textit{with replacement} from the observed data.\pause
 
     \item Apply the estimating procedure on the bootstrap sample.% to produce $\hat f^b$.
     \end{enumerate}
 \pause
 
-\item Calculate the standard deviation of the estimate over these many bootstrap estimates.
+\item To get an estimate of the standard error of the estimate, calculate the standard deviation over these many bootstrap estimates.
 \end{wideitemize}
 
 \end{frame}
@@ -456,12 +456,12 @@ The bootstrapping procedure is:
 \item For $b$ in $1\dots B$:\pause
 \begin{enumerate}
 
-    \item Take a sample of size $N$  \textit{with replacement} from the observed data\pause
+    \item Take a sample of size $N$  \textit{with replacement} from the observed data.\pause
 
     \item Apply the fitting procedure on the bootstrap sample to produce $\hat f^b$.
     \end{enumerate}
 \pause
-\item For each unit $i$, find the error from all of the bootstrap samples that do \textit{not} contain $i$\pause
+\item For each unit $i$, find the error from all of the bootstrap samples that do \textit{not} contain $i$.\pause
 \[
 \widehat{\textrm{Err}}_{Boot} = \frac{1}{N}\sum_{i = 1}^N \frac{1}{\lvert C^{-i} \rvert}\sum_{b \in C^{-i}} L(y_i, \hat f^b (x_i))
 \]
@@ -491,7 +491,7 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 \item This means the bootstrap error \textit{over} estimates the test error. 
 \item Solution: 
 \[
-\widehat{\textrm{Err}}_{Boot} = 0.368 \overline{\textrm{err}} + 0.632 \widehat{\textrm{Err}}_{Boot}  
+\widehat{\textrm{Err}}_{0.632} = 0.368 \overline{\textrm{err}} + 0.632 \widehat{\textrm{Err}}_{Boot}  
 \]
 where $\overline{\textrm{err}}$ is the training error. \pause
 \item This works...OK. \pause
@@ -541,7 +541,7 @@ where $\overline{\textrm{err}}$ is the training error. \pause
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{Bootstrap estimation for test error}
+\begin{frame}{Bootstrap estimation for aggregated fit}
 
 \begin{wideitemize}
 \item For $b$ in $1\dots B$:\pause
@@ -627,7 +627,7 @@ where $\overline{\textrm{err}}$ is the training error. \pause
 \begin{frame}{Honesty}
 
 \begin{wideitemize}
-\item Returning to (causal) inference\dots \pause we might like to use these methods to get valid inference, potentially on causal targets. 
+\item Returning to (causal) inference\dots \pause we might like to use these methods to get valid inference, potentially on causal targets.
 \end{wideitemize}
 
 \end{frame}
@@ -654,7 +654,7 @@ where $\overline{\textrm{err}}$ is the training error. \pause
 
 \begin{wideitemize}
 \item This can result in some leaves being empty. \pause Prune them? \pause
-\item This procedure reduces bias relative to those proposed by \cite{breiman2001random}. 
+\item This procedure reduces bias relative to those proposed by \cite{breiman2001random}.
 \end{wideitemize}
 
 \end{frame}
@@ -681,7 +681,7 @@ where $\overline{\textrm{err}}$ is the training error. \pause
 > p <- 10
 > X <- matrix(rnorm(n * p), n, p)
 > W <- rbinom(n, 1, 0.5)
-> Y <- pmax(X[, 1], 0) * W + X[, 2] + 
+> Y <- pmax(X[, 1], 0) * W + X[, 2] +
 +   pmin(X[, 3], 0) + rnorm(n)
 > c.forest <- causal_forest(X, Y, W)
 \end{Sinput}
