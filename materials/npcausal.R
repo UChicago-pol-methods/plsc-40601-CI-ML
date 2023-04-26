@@ -1,7 +1,7 @@
 # install.packages("devtools")
 # install.packages(c('earth', 'SuperLearner', 'gam', 'ranger', 'rpart'))
 
-library(devtools)
+# library(devtools)
 # install_github("ehkennedy/npcausal")
 library(earth)
 library(SuperLearner)
@@ -11,7 +11,7 @@ library(rpart)
 library(npcausal)
 
 
-n <- 1000; x <- matrix(rnorm(n*5),nrow=n)
-a <- sample(3,n,replace=TRUE); y <- rnorm(n)
+n <- 1000; x <- matrix(rnorm(n*5), nrow=n)
+a <- sample(3, n, replace=TRUE); y <- rnorm(n)
 
 ate.res <- ate(y,a,x)
