@@ -90,7 +90,8 @@ set.seed(60637)
 \begin{wideitemize}
 \item ML methods relax reliance on assumptions about functional form; \pause particularly useful with high dimensional data based on e.g., interactions, where we might not have strong substantive motivations for specific form. \pause
 \item ML methods good at using regularization to reduce variance \pause $\rightarrow$ good performance on prediction. \pause
-\item Good prediction does not imply good performance for estimation and inference, particularly for causal parameters.
+\item Good prediction does not imply good performance for estimation and inference, particularly for causal parameters.\pause
+\item ML allows us to trade-off bias for variance, but we are not doing so optimally for the causal parameter we care about. 
 \end{wideitemize}
 
 \end{frame}
@@ -264,7 +265,7 @@ Technically you can do TMLE without machine learning OR crossfitting.
 }
 %-------------------------------------------------------------------------------%
 \begin{frame}{Relative benefits of TMLE vs. DML}
-Response: \url{https://vanderlaan-lab.org/2019/12/24/cv-tmle-and-double-machine-learning/}\pause
+Response: \url{https://vanderlaan-lab.org/2019/12/24/cv-tmle-and-double-machine-learning}\pause
 
 Some arguments: \pause
 \begin{wideitemize}
