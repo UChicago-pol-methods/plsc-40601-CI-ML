@@ -94,7 +94,7 @@ L\left(Y_{N+1}, \hat{f}(X_{N+1})\right) = \left(Y_{N+1} - \hat{f}(X_{N+1})\right
 \begin{wideitemize}
 \item Conditional test error:
 \[
-\textrm{Err}_{\mathcal{T}} = \E \left[ L(Y, \hat{f}(X))\right \rvert \mathcal{T}]
+\textrm{Err}_{\mathcal{T}} = \E \left[ L(Y, \hat{f}(X)) \rvert \mathcal{T}\right]
 \]
 Training set $\mathcal{T}$ is fixed. \pause
 
