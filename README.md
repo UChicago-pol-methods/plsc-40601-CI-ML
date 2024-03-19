@@ -1,5 +1,6 @@
 # Advanced Topics in Causal Inference PLSC 40601
 This is the github repository for Advanced Topics in Causal Inference (PLSC 40601) at the University of Chicago, taught by [Molly Offer-Westort](https://mollyow.github.io). 
+The course TA is [Ari Anisfeld](http://www.arianisfeld.com/). 
 
 # Getting course materials
 This repository is used to distribute course materials.
