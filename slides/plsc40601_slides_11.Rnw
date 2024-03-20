@@ -16,7 +16,7 @@
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
 \subtitle{Week 1: Course orientation, potential outcomes framework.}
-\date{Spring 2023}
+\date{Spring 2024}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
 
@@ -42,7 +42,7 @@ This course:\pause
 
 
 
-Link to \href{https://github.com/UChicago-pol-methods/plsc-40601-CI-ML/blob/main/syllabus_PLSC40601.pdf}{syllabus}.
+Link to \href{https://github.com/UChicago-pol-methods/plsc-40601-CI-ML/blob/main/syllabus_PLSC40601-2024.pdf}{syllabus}.
 
 \end{frame}
 
