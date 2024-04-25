@@ -76,7 +76,7 @@
 library(glmnet) # for lasso
 
 # Set seed for reproducibility
-set.seed(60637)
+# set.seed(60637)
 
 # Functions 
 fit_g <- function(X, resid) cv.glmnet(X, resid, alpha = 1)
@@ -84,7 +84,7 @@ fit_m <- function(X, D) glm(paste0('Y ~ ', paste0('X', 1:p, collapse = ' + ')),
                             family = "binomial", data.frame(Y = D, X))
 
 ## Simulate data ----
-n <- 1e4 # Number of observations
+n <- 1e5 # Number of observations
 p <- 10 # Number of covariates
 nfolds <- 5 # Folds for cross fitting
 folds <- sample(rep(1:nfolds, each = n / nfolds))
@@ -92,11 +92,10 @@ folds <- sample(rep(1:nfolds, each = n / nfolds))
 X <- matrix(rnorm(n * p), ncol = p)
 beta_X <- runif(p, -1, 1)
 gamma_X <- runif(p, -1, 1)
-V <- rnorm(n, sd = 0)
-U <- rnorm(n, sd = 0)
+U <- rnorm(n, sd = 1)
 
 g0 <- X %*% beta_X  # True g(X)
-m0 <- 1/(1 + exp(-X %*% gamma_X + U))  # True m(X)
+m0 <- 1/(1 + exp(-X %*% gamma_X))  # True m(X)
 theta0 <- 0.5 # True theta
 D <- rbinom(n, 1, m0)
 Y <- D * theta0 + g0 + U
@@ -166,6 +165,9 @@ mean(score_naive) # should be zero by design
 # Estimate + standard error
 mean(theta_naive_est)
 sd(score_naive) / sqrt(n)
+# Alternate variance estimation
+sqrt(mean((Y - g_hat_est - theta_neyman_est*D)^2*D^2)/(mean(D^2)*mean(D^2)))/sqrt(n)
+
 
 
 #* Neyman orthogonal estimation ----
@@ -199,8 +201,14 @@ mean(score_neyman) # should be zero by design
 
 # Score evaluated at truth
 # (Y - g0 - theta0 * D)*(D - m0)
+sum((Y - g0) * (D-m0)) / sum(D*(D-m0))
 
 
 # Estimate + standard error
 mean(theta_neyman_est)
 sd(score_neyman)/sqrt(n)
+
+# Linear estimate
+summary(lm(Y - g_hat_est ~V_hat_est-1))
+# Alternate variance estimation
+sqrt(mean((Y - g_hat_est - theta_neyman_est*D)^2*V_hat_est^2)/(mean(V_hat_est^2)*mean(V_hat_est^2)))/sqrt(n)
