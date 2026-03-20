@@ -1,5 +1,5 @@
 % !Rnw weave = Sweave
-\documentclass[xcolor={dvipsnames}]{beamer}
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
 
 
 \RequirePackage{../assets/pres-template_MOW}
@@ -118,7 +118,7 @@
 \item If unit $i$ is assigned $W_i = 1$, $Y_i = Y_i(1)$. \pause
 \item In econometrics, this is often expressed in terms of the ``switching'' equation.
 \[
-Y_i = \mathbbm{1}\{W_i = 1 \}Y_i(1) + \left(1- \mathbbm{1}\{W_i = 1 \}\right) Y_i(0) + 
+Y_i = \mathbbm{1}\{W_i = 1 \}Y_i(1) +  \mathbbm{1}\{W_i = 0 \} Y_i(0) 
 \]\pause
 \item But once we impose that $Y_i(W_i)$ is well defined, this is largely already implied. 
 \end{wideitemize}
@@ -147,7 +147,7 @@ Y_i = \mathbbm{1}\{W_i = 1 \}Y_i(1) + \left(1- \mathbbm{1}\{W_i = 1 \}\right) Y_
 \item \textbf{Random assignment} gives us:  \pause
 \begin{itemize}
 \item $(Y_i(1), Y_i(0)) \independent W_i$ (independence of potential outcomes and treatment)
-\item $0< \Pr[W_i = 1] <0$ (positivity)\pause
+\item $0< \Pr[W_i = 1] <1$ (positivity)\pause
 \end{itemize}
 \item This does get us identification:
 \[

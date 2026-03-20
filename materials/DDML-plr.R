@@ -35,14 +35,14 @@
 #' So we want to find the value of \( \theta \) that minimizes the score function. 
 #' We do this by choosing a \( \check \theta \) that minimizes the empirical expectation of the score function, i.e., the average score across all observations.
 #' 
-#' Here, we estimate the nuisance functions \( \hat g(X) \) and \( \hat m(X) \) and then plug them into the estimating equation for \( \theta \):
+#' Here, we estimate the nuisance functions \( \hat g(X) \) and \( \hat m(X) \) and then plug them into the estimating equation for \( \theta \) (1.5):
 #' $$
 #' \check \theta = \frac{\sum_{i=1}^{n} (Y_i - \hat g(X_i)) (D_i - \hat m(X_i))}{\sum_{i=1}^{n} D_i (D_i - \hat m(X_i))}
 #' $$
 #' 
 #' We can check that the empirical expectation of the score function is zero (or approximately zero) by calculating the average score across all observations at the selected value of \( \check \theta \).
 #' $$
-#' \text{E}_n[\psi(W; \theta, g)] = \frac{1}{n} \sum_{i=1}^{n} (Y_i - \hat g(X_i) - \check \theta D_i) (D_i - \hat m(X_i)) \approx 0
+#' \text{E}_n[\psi(W; \theta, g)] = \frac{1}{n} \sum_{i=1}^{n} (Y_i - \hat g(X_i) - \check \theta D_i)\times (D_i - \hat m(X_i)) \approx 0
 #' $$
 #' 
 #' The Neyman orthogonality condition is given by:
@@ -85,7 +85,7 @@ fit_m <- function(X, D) glm(paste0('Y ~ ', paste0('X', 1:p, collapse = ' + ')),
 
 ## Simulate data ----
 n <- 1e5 # Number of observations
-p <- 10 # Number of covariates
+p <- 50 # Number of covariates
 nfolds <- 5 # Folds for cross fitting
 folds <- sample(rep(1:nfolds, each = n / nfolds))
 
@@ -107,7 +107,7 @@ g_hat_model <- m_hat_model <- vector("list", nfolds)
 theta_naive_est <- theta_neyman_est <- g_hat_est <- m_hat_est <- V_hat_est <- numeric(n)
 
 #* Naive estimation ----
-# Fit g_hat using iterative methods where we alternate between estimating g_hat and theta 
+# Fit g_hat using iterative methods where we alternate between estimating g_hat and theta_hat 
 # (we won't use this theta for estimation)
 for (k in 1:nfolds) {
   train_indices <- (folds != k)
@@ -162,10 +162,13 @@ coef(lm(Y - g_hat_est ~D-1))
 score_naive <- (Y - g_hat_est - theta_naive_est * D) * D
 mean(score_naive) # should be zero by design
 
-# Estimate + standard error
+# Score evaluated at truth
+# (Y - g0 - theta0 * D)*(D)
+sum((Y - g0) * D) / sum(D^2)
+
+# Estimate
 mean(theta_naive_est)
-sd(score_naive) / sqrt(n)
-# Alternate variance estimation
+# SE estimation
 sqrt(mean((Y - g_hat_est - theta_neyman_est*D)^2*D^2)/(mean(D^2)*mean(D^2)))/sqrt(n)
 
 
@@ -190,6 +193,7 @@ for(k in 1:nfolds){
   V_hat_est[test_indices] <- D[test_indices] - m_hat_est[test_indices]
   
   # Get theta estimate for each fold from (1.5)
+  # (This is DML1, how would I do things differently for DML1?)
   theta_neyman_est[test_indices] <- {
     sum((Y[test_indices] - g_hat_est[test_indices]) * 
           V_hat_est[test_indices]) / sum(D[test_indices]*V_hat_est[test_indices])}
@@ -206,9 +210,8 @@ sum((Y - g0) * (D-m0)) / sum(D*(D-m0))
 
 # Estimate + standard error
 mean(theta_neyman_est)
-sd(score_neyman)/sqrt(n)
 
 # Linear estimate
 summary(lm(Y - g_hat_est ~V_hat_est-1))
-# Alternate variance estimation
+# SE estimation (p. C32, w/ reference to Theorem 3.2)
 sqrt(mean((Y - g_hat_est - theta_neyman_est*D)^2*V_hat_est^2)/(mean(V_hat_est^2)*mean(V_hat_est^2)))/sqrt(n)

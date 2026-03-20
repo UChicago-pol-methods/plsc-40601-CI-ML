@@ -1,5 +1,5 @@
 % !Rnw weave = Sweave
-\documentclass[xcolor={table}, handout]{beamer}
+\documentclass[xcolor={table}]{beamer}
 
 
 \RequirePackage{../assets/pres-template_MOW}
@@ -307,7 +307,7 @@ $\hat{f}^{-k(i)}$ are the fits from the folds $k$ that do not contain $i$.
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{Cross-validion.}
+\begin{frame}{Cross-validation.}
 
 \begin{wideitemize}
 \item How do we pick $K$?\pause
