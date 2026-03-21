@@ -1,11 +1,17 @@
-# Advanced Topics in Causal Inference PLSC 40601
-This is the github repository for Advanced Topics in Causal Inference (PLSC 40601) at the University of Chicago, taught by [Molly Offer-Westort](https://mollyow.github.io). 
-The course TA is [Ari Anisfeld](http://www.arianisfeld.com/). 
+# PLSC 40601 — Advanced Topics in Causal Inference (Spring 2026)
 
-# Getting course materials
-This repository is used to distribute course materials.
+Repository for the Spring 2026 syllabus and public course materials for `PLSC 40601` at the University of Chicago.
 
-To download a file: Locate the file in the repository. Then "right-click" on the "Raw" button and save to your computer.
+Readings are distributed privately and are intentionally not stored in this public repository.
 
-# Readings and assignment submissions
-Readings will be posted on the course's Canvas site: [https://canvas.uchicago.edu/courses/55665](https://canvas.uchicago.edu/courses/55665)—You should also submit your assignments there.
+## Repository structure
+
+- `assets/`: shared bibliography, LaTeX style files, and figure assets
+- `slides/`: lecture deck source files and slide-authoring guidance
+- `materials/`: standalone worked examples and method notes
+- `assignments/`: assignment and project prompts
+- `code/`: in-class and section code
+- `reference/`: supplemental reference notes and handouts
+- `syllabus_PLSC40601-2026.tex`: current syllabus source
+
+Historical 2024 materials remain in the repository while the 2026 refresh is underway.

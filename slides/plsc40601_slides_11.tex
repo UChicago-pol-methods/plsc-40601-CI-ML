@@ -1,18 +1,8 @@
 % !Rnw weave = Sweave
 \documentclass[xcolor={dvipsnames}, handout]{beamer}
 
-% Allow compilation from repo root or from /slides.
-\newcommand{\plscassetpath}{../assets}
-\IfFileExists{../assets/pres-template_MOW.sty}{}{%
-  \renewcommand{\plscassetpath}{assets}%
-}
-\newcommand{\plscbibpath}{../assets/PLSC40601}
-\IfFileExists{../assets/PLSC40601.bib}{}{%
-  \renewcommand{\plscbibpath}{assets/PLSC40601}%
-}
 
-\RequirePackage{\plscassetpath/pres-template_MOW}
-\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\RequirePackage{../assets/pres-template_MOW}
 
 
 %--------------------------------------------------------------------------
@@ -31,8 +21,9 @@
 \institute{Department of Political Science, \\University of Chicago}
 
 
+\usepackage{Sweave}
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+\input{plsc40601_slides_11-concordance}
 
 %-------------------------------------------------------------------------------%
 \frame{\titlepage
@@ -380,7 +371,7 @@ Many others!
 
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{apalike}
-    \bibliography{\plscbibpath}
+    \bibliography{../assets/PLSC40601}
 \end{frame}
 %-------------------------------------------------------------------------------%
 \backupend

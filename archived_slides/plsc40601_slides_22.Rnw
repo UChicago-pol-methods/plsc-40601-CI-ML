@@ -1,18 +1,8 @@
 % !Rnw weave = Sweave
-\documentclass[xcolor={table}]{beamer}
+\documentclass[xcolor={table}, handout]{beamer}
 
-% Allow compilation from repo root or from /slides.
-\newcommand{\plscassetpath}{../assets}
-\IfFileExists{../assets/pres-template_MOW.sty}{}{%
-  \renewcommand{\plscassetpath}{assets}%
-}
-\newcommand{\plscbibpath}{../assets/PLSC40601}
-\IfFileExists{../assets/PLSC40601.bib}{}{%
-  \renewcommand{\plscbibpath}{assets/PLSC40601}%
-}
 
-\RequirePackage{\plscassetpath/pres-template_MOW}
-\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\RequirePackage{../assets/pres-template_MOW}
 \usepackage{colortbl}
 
 %--------------------------------------------------------------------------
@@ -26,17 +16,13 @@
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
 \subtitle{Week 2: Sample-splitting, bagging, (honesty).}
-\date{Spring 2024}
+\date{Spring 2023}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
 
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
-
-<<echo = FALSE>>=
-asset_dir <- if (dir.exists("assets")) "assets" else "../assets"
-@
 
 %-------------------------------------------------------------------------------%
 \frame{\titlepage
@@ -139,7 +125,7 @@ Training set $\mathcal{T}$ is fixed. \pause
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tibshirani7-1.png}
+\includegraphics[width = 0.8\textwidth]{../assets/tibshirani7-1.png}
 \end{figure}
 \hfill \cite{hastie2009elements}
 
@@ -221,7 +207,7 @@ Training set $\mathcal{T}$ is fixed. \pause
 \item Select model with minimum error in validation set.\pause
 \item Then get generalization error of just that model on test set. \pause
 \end{itemize}
-\item Why do we need to estimate the prediction error of the selected model \textit{again}? \pause Still a version of winner's curse. 
+\item Why do we need to estimate the prediction error of the selected model \textit{again}? \pause Winner's curse. 
 \end{wideitemize}
 
 \end{frame}
@@ -321,7 +307,7 @@ $\hat{f}^{-k(i)}$ are the fits from the folds $k$ that do not contain $i$.
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{Cross-validation.}
+\begin{frame}{Cross-validion.}
 
 \begin{wideitemize}
 \item How do we pick $K$?\pause
@@ -329,7 +315,7 @@ $\hat{f}^{-k(i)}$ are the fits from the folds $k$ that do not contain $i$.
 \item $K = 5$? \pause Lower variance, possibly higher bias. \pause How much does the prediction change as we change the size of the data set?\pause
 \begin{figure}
 \centering
-\includegraphics[width = 0.6\textwidth]{tibshirani7-8.png}
+\includegraphics[width = 0.6\textwidth]{../assets/tibshirani7-8.png}
 \end{figure}
 \hfill \cite{hastie2009elements}
 \end{wideitemize}
@@ -702,7 +688,7 @@ c.forest <- causal_forest(X, Y, W)
 <<echo=FALSE, eval = FALSE>>=
 # Saving a plot in .svg can be done with the `DiagrammeRsvg` package.
 tree.plot = plot(tree)
-cat(DiagrammeRsvg::export_svg(tree.plot), file = file.path(asset_dir, 'tree_plot.svg'))
+cat(DiagrammeRsvg::export_svg(tree.plot), file = '../assets/tree_plot.svg')
 @
 
 
@@ -725,7 +711,7 @@ cat(DiagrammeRsvg::export_svg(tree.plot), file = file.path(asset_dir, 'tree_plot
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
+\includegraphics[width = 0.8\textwidth]{../assets/tree-plot.png}
 \end{figure}
 \hfill
 \end{frame}
@@ -749,7 +735,7 @@ cat(DiagrammeRsvg::export_svg(tree.plot), file = file.path(asset_dir, 'tree_plot
 
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{apalike}
-    \bibliography{\plscbibpath}
+    \bibliography{../assets/PLSC40601}
 \end{frame}
 %-------------------------------------------------------------------------------%
 \backupend

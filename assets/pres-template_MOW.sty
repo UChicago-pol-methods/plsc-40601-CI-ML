@@ -2,58 +2,50 @@
 %\documentclass[notes=only, xcolor={dvipsnames}]{beamer}
 %\documentclass[notes, xcolor={dvipsnames}]{beamer}
 
-%--------------------------------------------------------------------------
-% Beamer settings  --------------------------------------------------
-%--------------------------------------------------------------------------
-
+% --- Beamer settings --------------------------------------------------------
 \mode<presentation>{\usetheme{default}}
 %\setbeamertemplate{note page}[infolines]
 
-% Environments
-
-%--------------------------------------------------------------------------
-% Color schemes  ----------------------------------------------------
-%--------------------------------------------------------------------------
+% --- Color scheme -----------------------------------------------------------
 \RequirePackage{xcolor,hyperref,url}
 
 \definecolor{Maroon}{RGB}{128, 0, 0}
 \usecolortheme[named=Maroon]{structure}
-\definecolor{Contrast1}{RGB}{248,164,41} %Yellow
-\definecolor{Contrast1l}{RGB}{249,182,78} %Yellowlight
-\definecolor{Contrast1d}{RGB}{198,130,32} %Yellowdark
+\definecolor{Contrast1}{RGB}{248,164,41} % Yellow
+\definecolor{Contrast1l}{RGB}{249,182,78} % Yellow light
+\definecolor{Contrast1d}{RGB}{198,130,32} % Yellow dark
 
-\definecolor{Contrast2}{RGB}{193,102,34} %Orange
-\definecolor{Contrast2l}{RGB}{211,147,99} %Orangelight
-\definecolor{Contrast2d}{RGB}{154, 83,36} %Orangedark
+\definecolor{Contrast2}{RGB}{193,102,34} % Orange
+\definecolor{Contrast2l}{RGB}{211,147,99} % Orange light
+\definecolor{Contrast2d}{RGB}{154, 83,36} % Orange dark
 
-\definecolor{Contrast3}{RGB}{153,57,49} %Red
-\definecolor{Contrast3l}{RGB}{186,123,118} %Redlight
-\definecolor{Contrast3d}{RGB}{109,50,39} %Reddark
+\definecolor{Contrast3}{RGB}{153,57,49} % Red
+\definecolor{Contrast3l}{RGB}{186,123,118} % Red light
+\definecolor{Contrast3d}{RGB}{109,50,39} % Red dark
 
-\definecolor{Contrast4}{RGB}{145,171,90} %Green
-\definecolor{Contrast4l}{RGB}{174,177,126} %Greenlight
-\definecolor{Contrast4d}{RGB}{101,109,51} %Greendark
+\definecolor{Contrast4}{RGB}{145,171,90} % Green
+\definecolor{Contrast4l}{RGB}{174,177,126} % Green light
+\definecolor{Contrast4d}{RGB}{101,109,51} % Green dark
 
-\definecolor{Contrast5}{RGB}{88,89,63} %Dark Green
-\definecolor{Contrast5l}{RGB}{140,144,127} %Dark Greenlight
-\definecolor{Contrast5d}{RGB}{70,72,51} %Dark Greendark
+\definecolor{Contrast5}{RGB}{88,89,63} % Dark green
+\definecolor{Contrast5l}{RGB}{140,144,127} % Dark green light
+\definecolor{Contrast5d}{RGB}{70,72,51} % Dark green dark
 
-\definecolor{Contrast6}{RGB}{21,95,131} %Blue
-\definecolor{Contrast6l}{RGB}{91,150,173} %Bluelight
-\definecolor{Contrast6d}{RGB}{21,67,95} %Bluedark
+\definecolor{Contrast6}{RGB}{21,95,131} % Blue
+\definecolor{Contrast6l}{RGB}{91,150,173} % Blue light
+\definecolor{Contrast6d}{RGB}{21,67,95} % Blue dark
 
-\definecolor{Contrast7}{RGB}{53,14,32} %Violet
-\definecolor{Contrast7l}{RGB}{114,86,99} %Violetlight
+\definecolor{Contrast7}{RGB}{53,14,32} % Violet
+\definecolor{Contrast7l}{RGB}{114,86,99} % Violet light
 
-
-\definecolor{Violator1}{RGB}{44,170,226} %Cyan
-\definecolor{Violator2}{RGB}{236,0,140} %Magenta
+\definecolor{Violator1}{RGB}{44,170,226} % Cyan
+\definecolor{Violator2}{RGB}{236,0,140} % Magenta
 
 \hypersetup{
 colorlinks=true,
 urlcolor=Contrast1,
-citecolor = Contrast1,
-linkcolor = Contrast1
+citecolor=Contrast1,
+linkcolor=Contrast1
 }
 
 \newenvironment{transitionframe}{
@@ -62,8 +54,7 @@ linkcolor = Contrast1
     \end{frame}
 }
 
-\RequirePackage{pdfpages}
-
+% --- Typography -------------------------------------------------------------
 \newenvironment{wideitemize}{\itemize\addtolength{\itemsep}{10pt}}{\enditemize}
 
 \usepackage[default]{lato}
@@ -75,27 +66,25 @@ linkcolor = Contrast1
 %  \usebeamertemplate{itemize item}}
 %\setbeamertemplate{itemize item}[triangle]
 
-%footline
-
-%\setbeamercolor{frametitle}{fg=Maroon}
-%\setbeamercolor{title}{fg=Maroon}
-%\setbeamertemplate{footline}[frame number]
-\setbeamertemplate{navigation symbols}{} 
+% --- Beamer templates -------------------------------------------------------
+\setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{footline}{%
 \hfill\usebeamertemplate***{navigation symbols}
 \hspace{1cm}\insertframenumber{}}
 \setbeamertemplate{itemize items}{-}
+%\setbeamercolor{frametitle}{fg=Maroon}
+%\setbeamercolor{title}{fg=Maroon}
 %\setbeamercolor{itemize item}{fg=Maroon}
 %\setbeamercolor{itemize subitem}{fg=Maroon}
 %\setbeamercolor{enumerate item}{fg=Maroon}
 %\setbeamercolor{enumerate subitem}{fg=Maroon}
 %\setbeamercolor{button}{bg=MyBackground,fg=Maroon,}
 
-%boxes around results
+% --- Boxes around results (TikZ) -------------------------------------------
 \RequirePackage{tikz}
 \usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
 
-\tikzset{   
+\tikzset{
         every picture/.style={remember picture,baseline},
         every node/.style={anchor=base,align=center,outer sep=1.5pt},
         every path/.style={thick},
@@ -116,40 +105,35 @@ linkcolor = Contrast1
 %--------------------------------------------------------------------------
 % General  -------------------------------------------------------------
 %--------------------------------------------------------------------------
+% --- General packages -------------------------------------------------------
+\RequirePackage{pdfpages}
 \RequirePackage[utf8]{inputenc}
-% Equation formatting
-\RequirePackage{amsmath,amssymb,amsfonts} 
+\RequirePackage{amsmath,amssymb,amsfonts}
+\RequirePackage{bm}
 \RequirePackage{amsthm}
 \RequirePackage{bbm}
+\RequirePackage{dsfont}
 \RequirePackage{array}
 \RequirePackage{calc}
 \RequirePackage{dcolumn}
 \RequirePackage{graphicx}
-\RequirePackage[round]{natbib}
-
 \RequirePackage[normalem]{ulem}
 \RequirePackage{siunitx}
-
 \RequirePackage{graphicx}
 \RequirePackage{epsfig}
 \RequirePackage{psfrag}
 \RequirePackage{wrapfig}
 \RequirePackage[all]{xy}
-\RequirePackage{multirow} \RequirePackage{rotating}
-
-
-\RequirePackage{framed}% allow frames for instructions
-\RequirePackage{adjustbox}% allow centering of images
+\RequirePackage[round]{natbib}
+\RequirePackage{multirow}
+\RequirePackage{rotating}
+\RequirePackage{framed} % allow frames for instructions
+\RequirePackage{adjustbox} % allow centering of images
 \RequirePackage{subcaption}
-
-\RequirePackage{multicol}% multiple columns
+\RequirePackage{multicol} % multiple columns
 \setlength{\columnsep}{0.25cm}
 
-
-%--------------------------------------------------------------------------
-% Math boldface shortcuts, etc. ----------------------------------
-%--------------------------------------------------------------------------
-% Define new characters
+% --- Math boldface shortcuts ------------------------------------------------
 \def\Var{{\textrm{Var}}\,}
 \def\V{{\textrm V}\,}
 \def\E{{\textrm E}\,}
@@ -161,25 +145,25 @@ linkcolor = Contrast1
 \DeclareMathOperator*{\argmin}{\arg\!\min}
 \DeclareMathOperator*{\argmax}{\textrm{arg}\,\textrm{max}}
 
-\newcommand{\A}{\mathbf{A}}\newcommand{\B}{\mathbf{B}}\newcommand{\C}{\mathbf{C}}
-\newcommand{\D}{\mathbf{D}}\newcommand{\F}{\mathbf{F}}\newcommand{\G}{\mathbf{G}}
-\newcommand{\HB}{\mathbf{H}}\newcommand{\I}{\mathbf{I}}\newcommand{\J}{\mathbf{J}}
-\newcommand{\K}{\mathbf{K}}\newcommand{\Lb}{\mathbf{L}}\newcommand{\M}{\mathbf{M}}
-\newcommand{\NB}{\mathbf{N}}\newcommand{\OB}{\mathbf{O}}\newcommand{\PB}{\mathbf{P}}
-\newcommand{\Q}{\mathbf{Q}}\newcommand{\R}{\mathbf{R}}\newcommand{\SB}{\mathbf{S}}
-\newcommand{\T}{\mathbf{T}}\newcommand{\U}{\mathbf{U}}\newcommand{\VB}{\mathbf{V}}
-\newcommand{\W}{\mathbf{W}}\newcommand{\X}{\mathbf{X}}\newcommand{\Y}{\mathbf{Y}}
-\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\A}{\bm{A}}\newcommand{\B}{\bm{B}}\newcommand{\C}{\bm{C}}
+\newcommand{\D}{\bm{D}}\newcommand{\F}{\bm{F}}\newcommand{\G}{\bm{G}}
+\newcommand{\HB}{\bm{H}}\newcommand{\I}{\bm{I}}\newcommand{\J}{\bm{J}}
+\newcommand{\K}{\bm{K}}\newcommand{\Lb}{\bm{L}}\newcommand{\M}{\bm{M}}
+\newcommand{\NB}{\bm{N}}\newcommand{\OB}{\bm{O}}\newcommand{\PB}{\bm{P}}
+\newcommand{\Q}{\bm{Q}}\newcommand{\R}{\bm{R}}\newcommand{\SB}{\bm{S}}
+\newcommand{\T}{\bm{T}}\newcommand{\U}{\bm{U}}\newcommand{\VB}{\bm{V}}
+\newcommand{\W}{\bm{W}}\newcommand{\X}{\bm{X}}\newcommand{\Y}{\bm{Y}}
+\newcommand{\Z}{\bm{Z}}
 
-\newcommand{\aB}{\mathbf{a}}\newcommand{\bB}{\mathbf{b}}\newcommand{\cB}{\mathbf{c}}
-\newcommand{\dB}{\mathbf{d}}\newcommand{\e}{\mathbf{e}}\newcommand{\f}{\mathbf{f}}
-\newcommand{\g}{\mathbf{g}}\newcommand{\h}{\mathbf{h}}\newcommand{\iB}{\mathbf{i}}
-\newcommand{\jB}{\mathbf{j}}\newcommand{\kB}{\mathbf{k}}\newcommand{\lB}{\mathbf{l}}
-\newcommand{\m}{\mathbf{m}}\newcommand{\n}{\mathbf{n}}\newcommand{\oB}{\mathbf{o}}
-\newcommand{\p}{\mathbf{p}}\newcommand{\q}{\mathbf{q}}\newcommand{\rB}{\mathbf{r}}
-\newcommand{\s}{\mathbf{s}}\newcommand{\tB}{\mathbf{t}}\newcommand{\uB}{\mathbf{u}}
-\newcommand{\vB}{\mathbf{v}}\newcommand{\w}{\mathbf{w}}\newcommand{\x}{\mathbf{x}}
-\newcommand{\y}{\mathbf{y}}\newcommand{\z}{\mathbf{z}}
+\newcommand{\aB}{\bm{a}}\newcommand{\bB}{\bm{b}}\newcommand{\cB}{\bm{c}}
+\newcommand{\dB}{\bm{d}}\newcommand{\e}{\bm{e}}\newcommand{\f}{\bm{f}}
+\newcommand{\g}{\bm{g}}\newcommand{\h}{\bm{h}}\newcommand{\iB}{\bm{i}}
+\newcommand{\jB}{\bm{j}}\newcommand{\kB}{\bm{k}}\newcommand{\lB}{\bm{l}}
+\newcommand{\m}{\bm{m}}\newcommand{\n}{\bm{n}}\newcommand{\oB}{\bm{o}}
+\newcommand{\p}{\bm{p}}\newcommand{\q}{\bm{q}}\newcommand{\rB}{\bm{r}}
+\newcommand{\s}{\bm{s}}\newcommand{\tB}{\bm{t}}\newcommand{\uB}{\bm{u}}
+\newcommand{\vB}{\bm{v}}\newcommand{\w}{\bm{w}}\newcommand{\x}{\bm{x}}
+\newcommand{\y}{\bm{y}}\newcommand{\z}{\bm{z}}
 
 \def\AA{{\mathbb A}}\def\BB{{\mathbb B}}\def\CC{{\mathbb C}}
 \def\DD{{\mathbb D}}\def\EE{{\mathbb E}}\def\FF{{\mathbb F}}
@@ -208,13 +192,18 @@ linkcolor = Contrast1
 \newcommand{\bgamma}{\boldsymbol{\gamma}}
 \newcommand{\bpi}{\boldsymbol{\pi}}
 \newcommand{\arrowp}{\stackrel{p}{\rightarrow}}
-\newcommand{\0}{\mathbf{0}}
-\newcommand{\bP}{\mathbf{P}}
+\newcommand{\0}{\bm{0}}
+\newcommand{\bP}{\bm{P}}
+
+\newcommand{\one}{\textrm{{\textbf{1}}}}
 
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 
 \newcommand{\indep}{\perp\!\!\!\!\perp}
+
+% --- Theorem-like environments ---------------------------------------------
+\newtheorem{proposition}{Proposition}
 
 %--------------------------------------------------------------------------
 % allow new counter for back-up slides ------------------------

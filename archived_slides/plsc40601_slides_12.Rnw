@@ -1,18 +1,8 @@
 % !Rnw weave = Sweave
 \documentclass[xcolor={dvipsnames}, handout]{beamer}
 
-% Allow compilation from repo root or from /slides.
-\newcommand{\plscassetpath}{../assets}
-\IfFileExists{../assets/pres-template_MOW.sty}{}{%
-  \renewcommand{\plscassetpath}{assets}%
-}
-\newcommand{\plscbibpath}{../assets/PLSC40601}
-\IfFileExists{../assets/PLSC40601.bib}{}{%
-  \renewcommand{\plscbibpath}{assets/PLSC40601}%
-}
 
-\RequirePackage{\plscassetpath/pres-template_MOW}
-\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\RequirePackage{../assets/pres-template_MOW}
 
 
 %--------------------------------------------------------------------------
@@ -26,7 +16,7 @@
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
 \subtitle{Week 1: Course orientation, potential outcomes framework.}
-\date{Spring 2024}
+\date{Spring 2023}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
 
@@ -45,7 +35,7 @@
 \begin{wideitemize}
 \item Sign up for papers/discussion\pause
 \item Fork and create a PR for the repo\pause
-% \item \url{https://economics.uchicago.edu/content/econometrics-workshop} \pause
+\item \url{https://economics.uchicago.edu/content/econometrics-workshop} \pause
 \item \url{https://bookdown.org/halflearned/ml-ci-tutorial/}
 \end{wideitemize}
 
@@ -128,7 +118,7 @@
 \item If unit $i$ is assigned $W_i = 1$, $Y_i = Y_i(1)$. \pause
 \item In econometrics, this is often expressed in terms of the ``switching'' equation.
 \[
-Y_i = \mathbbm{1}\{W_i = 1 \}Y_i(1) +  \mathbbm{1}\{W_i = 0 \} Y_i(0) 
+Y_i = \mathbbm{1}\{W_i = 1 \}Y_i(1) + \left(1- \mathbbm{1}\{W_i = 1 \}\right) Y_i(0) + 
 \]\pause
 \item But once we impose that $Y_i(W_i)$ is well defined, this is largely already implied. 
 \end{wideitemize}
@@ -157,7 +147,7 @@ Y_i = \mathbbm{1}\{W_i = 1 \}Y_i(1) +  \mathbbm{1}\{W_i = 0 \} Y_i(0)
 \item \textbf{Random assignment} gives us:  \pause
 \begin{itemize}
 \item $(Y_i(1), Y_i(0)) \independent W_i$ (independence of potential outcomes and treatment)
-\item $0< \Pr[W_i = 1] <1$ (positivity)\pause
+\item $0< \Pr[W_i = 1] <0$ (positivity)\pause
 \end{itemize}
 \item This does get us identification:
 \[
@@ -261,7 +251,7 @@ $N$       & $0$     & $0$         & ?        & $0$      & $0$
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.6\textwidth]{arthur-samuel-according-to-bing.png}
+\includegraphics[width = 0.6\textwidth]{../assets/arthur-samuel-according-to-bing.png}
 \end{figure}
 
 \end{frame}
@@ -284,30 +274,7 @@ $N$       & $0$     & $0$         & ?        & $0$      & $0$
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.6\textwidth]{arthur-samuel-according-to-chatgpt.png}
-\end{figure}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{What is machine learning?}
-
-\begin{figure}
-\centering
-\includegraphics[width = 0.8\textwidth]{samuel-refute-stackexchange.png}
+\includegraphics[width = 0.8\textwidth]{../assets/samuel-refute-stackexchange.png}
 \end{figure}
 
 \url{https://datascience.stackexchange.com/questions/37078/source-of-arthur-samuels-definition-of-machine-learning}
@@ -333,7 +300,7 @@ $N$       & $0$     & $0$         & ?        & $0$      & $0$
 
 \begin{figure}
 \centering
-\includegraphics{breiman_2001AM-culture.png}
+\includegraphics{../assets/breiman_2001AM-culture.png}
 \end{figure}
 
 
@@ -606,7 +573,7 @@ e(x) & = \E[W_i | \X_i = x]
 
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{apalike}
-    \bibliography{\plscbibpath}
+    \bibliography{../assets/PLSC40601}
 \end{frame}
 %-------------------------------------------------------------------------------%
 \backupend

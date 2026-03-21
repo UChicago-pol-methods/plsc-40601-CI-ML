@@ -1,18 +1,8 @@
 % !Rnw weave = Sweave
-\documentclass[xcolor={table}]{beamer}
+\documentclass[xcolor={table},handout]{beamer}
 
-% Allow compilation from repo root or from /slides.
-\newcommand{\plscassetpath}{../assets}
-\IfFileExists{../assets/pres-template_MOW.sty}{}{%
-  \renewcommand{\plscassetpath}{assets}%
-}
-\newcommand{\plscbibpath}{../assets/PLSC40601}
-\IfFileExists{../assets/PLSC40601.bib}{}{%
-  \renewcommand{\plscbibpath}{assets/PLSC40601}%
-}
 
-\RequirePackage{\plscassetpath/pres-template_MOW}
-\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\RequirePackage{../assets/pres-template_MOW}
 \usepackage{colortbl}
 
 %--------------------------------------------------------------------------
@@ -26,7 +16,7 @@
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
 \subtitle{Week 3: Trees and forests.}
-\date{Spring 2024}
+\date{Spring 2023}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
 
@@ -35,7 +25,6 @@
 \SweaveOpts{concordance=TRUE}
 
 <<echo = FALSE>>=
-asset_dir <- if (dir.exists("assets")) "assets" else "../assets"
 library(ggplot2)
 library(grf)
 set.seed(60637)
@@ -83,7 +72,7 @@ set.seed(60637)
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.6\textwidth]{tibshirani9-1.png}
+\includegraphics[width = 0.6\textwidth]{../assets/tibshirani9-1.png}
 \end{figure}
 \hfill \cite{hastie2009elements}
 
@@ -102,7 +91,6 @@ set.seed(60637)
 }
 
 %-------------------------------------------------------------------------------%
-
 \begin{frame}{Regression Trees}
 
 \begin{wideitemize}
@@ -196,6 +184,7 @@ R_1(j,s) = \{ X|X_j \le s\} \textrm{ and } R_1(j,s) = \{ X|X_j > s\}
 }
 
 %-------------------------------------------------------------------------------%
+
 \begin{frame}[fragile]
 
 \begin{figure}
@@ -204,11 +193,10 @@ R_1(j,s) = \{ X|X_j \le s\} \textrm{ and } R_1(j,s) = \{ X|X_j > s\}
 <<fig = TRUE, width = 7, height=5, echo=FALSE>>=
 x <- runif(15, 1, 10)
 y <- 3*x + rnorm(15, sd = 2)
-
 ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
     geom_point() +
-    theme_bw() + 
-  coord_cartesian(ylim = c(0, 30), xlim = c(0,10))
+    theme_bw() +
+  coord_cartesian(xlim = c(-3, 10), ylim = c(0,30))
 
 @
 }
@@ -221,9 +209,9 @@ ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
 \note{
 \scriptsize \singlespacing
 
-\begin{itemize}
+\begin{wideitemize}
 \item xxxx
-\end{itemize}
+\end{wideitemize}
 \\~\
 }
 
@@ -240,31 +228,17 @@ minc <- function(c){
 }
 
 newmin <- x[which.min(sapply(x, minc))]+.1
-df <- data.frame(x = x, y = y)
-df$y_distance <- ifelse(df$x <= newmin, df$y - mean(df$y[which(df$x <= newmin)]), 
-                        df$y - mean(df$y[which(df$x > newmin)]))
 
-ggplot(, aes(x = x, y = y)) +
+ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
     geom_point() +
     theme_bw() +
     geom_vline(xintercept = newmin, color = 'orange') +
-    annotate('text', y = 30, x = newmin-.4, label = 'c', color = 'orange') +
-    annotate('text', y = c(10, 15), x = c(1.25, 7.5),
+    annotate('text', y = 30, x = newmin-.2, label = 'c', color = 'orange') +
+    annotate('text', y = c(20, 20), x = c(2.5, 7.5),
              label = paste0(expression(bar(Y)),'==',
                             round(c(mean(y[which(x <=newmin)]), mean(y[which(x >newmin)])), 3) ),
-             color = 'blue', parse = TRUE) + 
-  geom_segment(aes(x = c(0, newmin), 
-                   y = c(mean(df$y[which(df$x <= newmin)]),
-                                               mean(df$y[which(df$x > newmin)]))), 
-                   xend = c(newmin, 10),
-               yend = c(mean(df$y[which(df$x <= newmin)]),
-                                               mean(df$y[which(df$x > newmin)])),
-               color = "blue") + 
-  geom_segment(aes(x = x, y = y, xend = x, 
-                   yend = ifelse(df$x <= newmin, mean(df$y[which(df$x <= newmin)]), 
-                                 mean(df$y[which(df$x > newmin)]))),
-               color = 'blue', arrow = arrow(length = unit(0.2, "cm"))) +
-  coord_cartesian(ylim = c(0, 30), xlim = c(0,10))
+             color = 'orange', parse = TRUE) +
+  coord_cartesian(xlim = c(-3, 10), ylim = c(0,30))
 
 @
 }
@@ -277,34 +251,12 @@ ggplot(, aes(x = x, y = y)) +
 \note{
 \scriptsize \singlespacing
 
-\begin{itemize}
+\begin{wideitemize}
 \item xxxx
-\end{itemize}
+\end{wideitemize}
 \\~\
 }
 
-%-------------------------------------------------------------------------------%
-\begin{frame}{Regression Trees}
-
-\begin{itemize}
-\item Now suppose we have joint data, $(Y,X_1, \dots, X_k)$.\pause
-\item We will do the same approach to finding thresholds to minimize prediction error, but we'll want to pick which $X_k$ we use for threshholding, as well. \pause
-\item Generally, we'll define the depth of the tree as 2 or three variables; first we'll split on $X_k$, then we'll split on $X_j$\dots
-\end{itemize}
-
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{itemize}
-\item xxxx
-\end{itemize}
-\\~\
-}
 %-------------------------------------------------------------------------------%
 \begin{frame}[fragile]{Elements of trees}
 
@@ -322,7 +274,7 @@ leaf.nodes <- get_leaf_node(tree, X[1:5, ])
 <<echo=FALSE, eval = FALSE>>=
 # Saving a plot in .svg can be done with the `DiagrammeRsvg` package.
 tree.plot = plot(tree)
-cat(DiagrammeRsvg::export_svg(tree.plot), file = file.path(asset_dir, 'tree_plot.svg'))
+cat(DiagrammeRsvg::export_svg(tree.plot), file = '../assets/tree_plot.svg')
 @
 
 
@@ -366,7 +318,7 @@ tree
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
+\includegraphics[width = 0.8\textwidth]{../assets/tree-plot.png}
 \end{figure}
 \hfill
 \end{frame}
@@ -413,11 +365,10 @@ tree
 \item What about when $Y$ is a category? \pause
 \item For binary classification, minimize surrogate for classification error with split point $s$, $I(s) = \sum_{t = 1}^2 \gamma_t$
 \[
-\gamma_t = 1 - \left[\bar Y^2_t + (1-\bar Y_t)^2  \right]
-\]\pause
+\gamma_t = 1 - \left[\bar Y^2_t(1-\bar Y^2_t)^2  \right]
+\]
 \item $I(s)$ measures the impurity of a partition. \pause What happens if $R_m$ has only 1's, or only 0s?
 \pause
-\item For multi-class classification, use Gini impurity, which generalizes using $\hat p_t(k)$, the proportion of class $k$ in partition $t$.\pause
 \item Why impurity instead of classification error? \pause Smooth function, easier to minimize. \pause But there are other metrics we could use. \pause
 \item We can extend these methods to more complex classification tasks. 
 \end{wideitemize}
@@ -453,36 +404,6 @@ tree
      & \qquad \qquad \frac{1}{N} \sum_{i=1}^N  \underbrace{\frac{ \mathbbm{1} \{W_i = w \} \left( Y_i - \textcolor{Contrast1}{\hat{\E}[Y_i | W_i = w, X_i]} \right) }{ \textcolor{Contrast4}{ e_i(w;s)} }}_\text{residual bias correction}
 \end{align*}
 
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{[Recall]}
-
-\begin{wideitemize}
-\item Estimating average treatment effects. \\ 
-\begin{align*}
-\mu(w,x) & = \E[Y_i |W_i = w, \X_i = x]\\
-e(x) & = \E[W_i | \X_i = x]
-\end{align*}
-\begin{align*}
-    \onslide<1->{\tau &= \E\left[\mu(1,\X_i) - \mu(0,\X_i) \right] \\}
-    \onslide<1->{ & = \E\left[\frac{Y_i W_i}{e(\X_i)} - \frac{Y_i (1-W_i) }{1 - e(\X_i)}\right] \\}
-    \onslide<1>{ & = \E\left[ \frac{\left(Y_i - \mu(1,\X_i)\right)  W_i}{e(\X_i)} - \frac{\left(Y_i - \mu(0,\X_i)\right) (1-W_i) }{1 - e(\X_i)}\right] \\}
-   \onslide<1>{ & \qquad \qquad  + \E\left[\mu(1,\X_i) - \mu(0,\X_i) \right]}
-\end{align*}
-\end{wideitemize}
 
 \end{frame}
 
@@ -668,9 +589,9 @@ Implication: for good generalization error of a forest, we need low correlation 
 In addition to low correlation across prediction error, and strength of trees, we might want methods that are\pause
 \begin{wideitemize}
 \item Robust to outliers\pause
-\item Have good computational speed\pause
-\item Have good internal metrics of error, strength, correlation, variable importance \pause
-\item Possible to parallelize?
+\item Computational speed\pause
+\item Internal metrics of error, strength, correlation, variable importance \pause
+\item Possibility to parallelize?
 \end{wideitemize}
 
 \end{frame}
@@ -767,7 +688,7 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
+\includegraphics[width = 0.8\textwidth]{../assets/tree-plot.png}
 \end{figure}
 \hfill
 \end{frame}
@@ -790,7 +711,7 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{apalike}
-    \bibliography{\plscbibpath}
+    \bibliography{../assets/PLSC40601}
 \end{frame}
 %-------------------------------------------------------------------------------%
 \backupend

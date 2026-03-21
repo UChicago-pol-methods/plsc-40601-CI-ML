@@ -1,18 +1,8 @@
 % !Rnw weave = Sweave
 \documentclass[xcolor={dvipsnames}, handout]{beamer}
 
-% Allow compilation from repo root or from /slides.
-\newcommand{\plscassetpath}{../assets}
-\IfFileExists{../assets/pres-template_MOW.sty}{}{%
-  \renewcommand{\plscassetpath}{assets}%
-}
-\newcommand{\plscbibpath}{../assets/PLSC40601}
-\IfFileExists{../assets/PLSC40601.bib}{}{%
-  \renewcommand{\plscbibpath}{assets/PLSC40601}%
-}
 
-\RequirePackage{\plscassetpath/pres-template_MOW}
-\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\RequirePackage{../assets/pres-template_MOW}
 
 
 %--------------------------------------------------------------------------
@@ -31,8 +21,9 @@
 \institute{Department of Political Science, \\University of Chicago}
 
 
+\usepackage{Sweave}
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+\input{plsc40601_slides_12-concordance}
 
 %-------------------------------------------------------------------------------%
 \frame{\titlepage
@@ -261,7 +252,7 @@ $N$       & $0$     & $0$         & ?        & $0$      & $0$
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.6\textwidth]{arthur-samuel-according-to-bing.png}
+\includegraphics[width = 0.6\textwidth]{../assets/arthur-samuel-according-to-bing.png}
 \end{figure}
 
 \end{frame}
@@ -284,30 +275,7 @@ $N$       & $0$     & $0$         & ?        & $0$      & $0$
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.6\textwidth]{arthur-samuel-according-to-chatgpt.png}
-\end{figure}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{What is machine learning?}
-
-\begin{figure}
-\centering
-\includegraphics[width = 0.8\textwidth]{samuel-refute-stackexchange.png}
+\includegraphics[width = 0.8\textwidth]{../assets/samuel-refute-stackexchange.png}
 \end{figure}
 
 \url{https://datascience.stackexchange.com/questions/37078/source-of-arthur-samuels-definition-of-machine-learning}
@@ -333,7 +301,7 @@ $N$       & $0$     & $0$         & ?        & $0$      & $0$
 
 \begin{figure}
 \centering
-\includegraphics{breiman_2001AM-culture.png}
+\includegraphics{../assets/breiman_2001AM-culture.png}
 \end{figure}
 
 
@@ -606,7 +574,7 @@ e(x) & = \E[W_i | \X_i = x]
 
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{apalike}
-    \bibliography{\plscbibpath}
+    \bibliography{../assets/PLSC40601}
 \end{frame}
 %-------------------------------------------------------------------------------%
 \backupend

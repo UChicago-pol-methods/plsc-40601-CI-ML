@@ -1,18 +1,8 @@
 % !Rnw weave = Sweave
 \documentclass[xcolor={table}]{beamer}
 
-% Allow compilation from repo root or from /slides.
-\newcommand{\plscassetpath}{../assets}
-\IfFileExists{../assets/pres-template_MOW.sty}{}{%
-  \renewcommand{\plscassetpath}{assets}%
-}
-\newcommand{\plscbibpath}{../assets/PLSC40601}
-\IfFileExists{../assets/PLSC40601.bib}{}{%
-  \renewcommand{\plscbibpath}{assets/PLSC40601}%
-}
 
-\RequirePackage{\plscassetpath/pres-template_MOW}
-\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\RequirePackage{../assets/pres-template_MOW}
 \usepackage{colortbl}
 
 %--------------------------------------------------------------------------
@@ -31,15 +21,10 @@
 \institute{Department of Political Science, \\University of Chicago}
 
 
+\usepackage{Sweave}
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+\input{plsc40601_slides_31-concordance}
 
-<<echo = FALSE>>=
-asset_dir <- if (dir.exists("assets")) "assets" else "../assets"
-library(ggplot2)
-library(grf)
-set.seed(60637)
-@
 
 
 %-------------------------------------------------------------------------------%
@@ -83,7 +68,7 @@ set.seed(60637)
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.6\textwidth]{tibshirani9-1.png}
+\includegraphics[width = 0.6\textwidth]{../assets/tibshirani9-1.png}
 \end{figure}
 \hfill \cite{hastie2009elements}
 
@@ -201,16 +186,7 @@ R_1(j,s) = \{ X|X_j \le s\} \textrm{ and } R_1(j,s) = \{ X|X_j > s\}
 \begin{figure}
 \centering
 {
-<<fig = TRUE, width = 7, height=5, echo=FALSE>>=
-x <- runif(15, 1, 10)
-y <- 3*x + rnorm(15, sd = 2)
-
-ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
-    geom_point() +
-    theme_bw() + 
-  coord_cartesian(ylim = c(0, 30), xlim = c(0,10))
-
-@
+\includegraphics{plsc40601_slides_31-002}
 }
 \end{figure}
 
@@ -233,40 +209,7 @@ ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
 \begin{figure}
 \centering
 {
-<<fig = TRUE, width = 7, height=5, echo=FALSE>>=
-minc <- function(c){
-    sum((y[which(x <=c)] - mean(y[which(x <=c)]))^2) + 
-        sum((y[which(x >c)] - mean(y[which(x >c)]))^2)
-}
-
-newmin <- x[which.min(sapply(x, minc))]+.1
-df <- data.frame(x = x, y = y)
-df$y_distance <- ifelse(df$x <= newmin, df$y - mean(df$y[which(df$x <= newmin)]), 
-                        df$y - mean(df$y[which(df$x > newmin)]))
-
-ggplot(, aes(x = x, y = y)) +
-    geom_point() +
-    theme_bw() +
-    geom_vline(xintercept = newmin, color = 'orange') +
-    annotate('text', y = 30, x = newmin-.4, label = 'c', color = 'orange') +
-    annotate('text', y = c(10, 15), x = c(1.25, 7.5),
-             label = paste0(expression(bar(Y)),'==',
-                            round(c(mean(y[which(x <=newmin)]), mean(y[which(x >newmin)])), 3) ),
-             color = 'blue', parse = TRUE) + 
-  geom_segment(aes(x = c(0, newmin), 
-                   y = c(mean(df$y[which(df$x <= newmin)]),
-                                               mean(df$y[which(df$x > newmin)]))), 
-                   xend = c(newmin, 10),
-               yend = c(mean(df$y[which(df$x <= newmin)]),
-                                               mean(df$y[which(df$x > newmin)])),
-               color = "blue") + 
-  geom_segment(aes(x = x, y = y, xend = x, 
-                   yend = ifelse(df$x <= newmin, mean(df$y[which(df$x <= newmin)]), 
-                                 mean(df$y[which(df$x > newmin)]))),
-               color = 'blue', arrow = arrow(length = unit(0.2, "cm"))) +
-  coord_cartesian(ylim = c(0, 30), xlim = c(0,10))
-
-@
+\includegraphics{plsc40601_slides_31-003}
 }
 \end{figure}
 
@@ -308,22 +251,19 @@ ggplot(, aes(x = x, y = y)) +
 %-------------------------------------------------------------------------------%
 \begin{frame}[fragile]{Elements of trees}
 
-<<eval = TRUE>>=
-n <- 500
-p <- 10
-X <- matrix(rnorm(n * p), n, p)
-W <- rbinom(n, 1, 0.5)
-Y <- pmax(X[, 1], 0) * W + X[, 2] +
-  pmin(X[, 3], 0) + rnorm(n)
-c.forest <- causal_forest(X, Y, W)
-tree <- get_tree(c.forest, 1)
-leaf.nodes <- get_leaf_node(tree, X[1:5, ])
-@
-<<echo=FALSE, eval = FALSE>>=
-# Saving a plot in .svg can be done with the `DiagrammeRsvg` package.
-tree.plot = plot(tree)
-cat(DiagrammeRsvg::export_svg(tree.plot), file = file.path(asset_dir, 'tree_plot.svg'))
-@
+\begin{Schunk}
+\begin{Sinput}
+> n <- 500
+> p <- 10
+> X <- matrix(rnorm(n * p), n, p)
+> W <- rbinom(n, 1, 0.5)
+> Y <- pmax(X[, 1], 0) * W + X[, 2] +
++   pmin(X[, 3], 0) + rnorm(n)
+> c.forest <- causal_forest(X, Y, W)
+> tree <- get_tree(c.forest, 1)
+> leaf.nodes <- get_leaf_node(tree, X[1:5, ])
+\end{Sinput}
+\end{Schunk}
 
 
 
@@ -343,9 +283,31 @@ cat(DiagrammeRsvg::export_svg(tree.plot), file = file.path(asset_dir, 'tree_plot
 %-------------------------------------------------------------------------------%
 \begin{frame}[fragile]{Elements of trees}
 \small
-<<eval = TRUE>>=
-tree
-@
+\begin{Schunk}
+\begin{Sinput}
+> tree
+\end{Sinput}
+\begin{Soutput}
+GRF tree object 
+Number of training samples: 250 
+Variable splits: 
+(1) split_variable: X.5  split_value: -0.520294 
+  (2) split_variable: X.4  split_value: 0.426613 
+    (4) split_variable: X.9  split_value: -0.314623 
+      (8) * num_samples: 7  avg_Y: 0.09 avg_W: 1 
+      (9) * num_samples: 14  avg_Y: 0.11 avg_W: 0.43 
+    (5) * num_samples: 8  avg_Y: -0.49 avg_W: 0.38 
+  (3) split_variable: X.2  split_value: -0.344787 
+    (6) split_variable: X.6  split_value: 0.163222 
+      (10) * num_samples: 23  avg_Y: -0.9 avg_W: 0.48 
+      (11) * num_samples: 11  avg_Y: -1.87 avg_W: 0.82 
+    (7) split_variable: X.3  split_value: 0.428785 
+      (12) split_variable: X.3  split_value: -0.322743 
+        (14) * num_samples: 18  avg_Y: -0.29 avg_W: 0.61 
+        (15) * num_samples: 14  avg_Y: 0.64 avg_W: 0.5 
+      (13) * num_samples: 30  avg_Y: 0.72 avg_W: 0.47 
+\end{Soutput}
+\end{Schunk}
 
 
 \end{frame}
@@ -366,7 +328,7 @@ tree
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
+\includegraphics[width = 0.8\textwidth]{../assets/tree-plot.png}
 \end{figure}
 \hfill
 \end{frame}
@@ -767,7 +729,7 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
+\includegraphics[width = 0.8\textwidth]{../assets/tree-plot.png}
 \end{figure}
 \hfill
 \end{frame}
@@ -790,7 +752,7 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{apalike}
-    \bibliography{\plscbibpath}
+    \bibliography{../assets/PLSC40601}
 \end{frame}
 %-------------------------------------------------------------------------------%
 \backupend

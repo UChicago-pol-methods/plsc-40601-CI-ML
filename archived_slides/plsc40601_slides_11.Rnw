@@ -1,18 +1,8 @@
 % !Rnw weave = Sweave
 \documentclass[xcolor={dvipsnames}, handout]{beamer}
 
-% Allow compilation from repo root or from /slides.
-\newcommand{\plscassetpath}{../assets}
-\IfFileExists{../assets/pres-template_MOW.sty}{}{%
-  \renewcommand{\plscassetpath}{assets}%
-}
-\newcommand{\plscbibpath}{../assets/PLSC40601}
-\IfFileExists{../assets/PLSC40601.bib}{}{%
-  \renewcommand{\plscbibpath}{assets/PLSC40601}%
-}
 
-\RequirePackage{\plscassetpath/pres-template_MOW}
-\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\RequirePackage{../assets/pres-template_MOW}
 
 
 %--------------------------------------------------------------------------
@@ -26,7 +16,7 @@
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
 \subtitle{Week 1: Course orientation, potential outcomes framework.}
-\date{Spring 2024}
+\date{Spring 2023}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
 
@@ -52,7 +42,7 @@ This course:\pause
 
 
 
-Link to \href{https://github.com/UChicago-pol-methods/plsc-40601-CI-ML/blob/main/syllabus_PLSC40601-2024.pdf}{syllabus}.
+Link to \href{https://github.com/UChicago-pol-methods/plsc-40601-CI-ML/blob/main/syllabus_PLSC40601.pdf}{syllabus}.
 
 \end{frame}
 
@@ -71,12 +61,12 @@ Link to \href{https://github.com/UChicago-pol-methods/plsc-40601-CI-ML/blob/main
 \begin{frame}{Final assignment}
 
 \begin{wideitemize}
-\item Tutorial. \pause
+\item Possibility of tutorial. \pause
 \begin{wideitemize}
 \item Illustrate what problem the tool is addressing, what an example use case is. \pause
 \item Still needs some amount of narrative contextualizing the problem. \pause
 \item Posted on class github.\pause
-\item Python, R, or Stata; \textbf{replicable, compiled report}. \pause
+\item Python, R, or Stata; \textbf{compiled report}. \pause
 \item Limited support with debugging. 
 \end{wideitemize}
 \end{wideitemize}
@@ -234,7 +224,7 @@ References for notation:\pause
 \begin{wideitemize}
 \item For definitions and terminology, \cite{hastie2009elements}
 \item For some very machine-learning specific technology, glossary at the end of \cite{breiman2001statistical}
-\item For mathematical notation, glossary of \cite{aronow2019foundations} Foundations of Agnostic Statistics
+\item For mathematical notation, lossary of \cite{aronow2019foundations} Foundations of Agnostic Statistics
 \item Other suggestions?
 \end{wideitemize}
 
@@ -328,7 +318,7 @@ What is an estimand? \pause What makes an estimand \textit{causal}? \pause Count
 \item Average treatment effect (ATE): \[\tau = \E[\tau_i]\] \pause 
 \begin{itemize}
 \item Expectation over what?\pause
-\item[$\rightarrow$] The population (or sample!) we previously defined.
+\item[$\rightarrow$] The population we previously defined.
 \end{itemize}
 \end{wideitemize}
 
@@ -380,7 +370,7 @@ Many others!
 
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{apalike}
-    \bibliography{\plscbibpath}
+    \bibliography{../assets/PLSC40601}
 \end{frame}
 %-------------------------------------------------------------------------------%
 \backupend
