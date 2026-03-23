@@ -1,0 +1,524 @@
+[
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "This class will not follow a textbook, but some of the methods and approaches may be new to students. For reference for machine learning methods, I recommend:",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#other-machine-learning-references",
+    "href": "resources.html#other-machine-learning-references",
+    "title": "Resources",
+    "section": "Other Machine Learning References",
+    "text": "Other Machine Learning References\n\nMurphy, Kevin P. 2012. Machine Learning: A Probabilistic Perspective. Cambridge, MA: MIT Press.\nBishop, Christopher M. 2006. Pattern Recognition and Machine Learning. New York: Springer.",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#older-machine-learning-references",
+    "href": "resources.html#older-machine-learning-references",
+    "title": "Resources",
+    "section": "Older Machine Learning References",
+    "text": "Older Machine Learning References\nSome older reference readings on core techniques in machine learning that are still relevant today. These are useful for students interested in the history and development of machine learning methods.\n\nBreiman, Leo. 1996. “Bagging Predictors.” Machine Learning 24: 123–140.\nEfron, Bradley. 1979. “Bootstrap Methods: Another Look at the Jackknife.” The Annals of Statistics 7(1): 1–26.\nBreiman, Leo. 2001. “Random Forests.” Machine Learning 45: 5–32.",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#a-causalml-textbook",
+    "href": "resources.html#a-causalml-textbook",
+    "title": "Resources",
+    "section": "A Causal/ML Textbook",
+    "text": "A Causal/ML Textbook\n\nChernozhukov, Victor, Christian Hansen, Nathan Kallus, Martin Spindler, and Vasilis Syrgkanis. 2024. Applied Causal Inference Powered by ML and AI. arXiv.",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#causal-inference-background",
+    "href": "resources.html#causal-inference-background",
+    "title": "Resources",
+    "section": "Causal Inference Background",
+    "text": "Causal Inference Background\nMany of the papers we read in this course will use potential outcomes notation. Students who have not had recent coursework on causal inference should read the first few chapters of either:\n\nHernán, Miguel A., and James M. Robins. 2020. Causal Inference: What If. Boca Raton, FL: Chapman & Hall/CRC. A free pdf version of the book is available at the author’s website: link.\nImbens, Guido W., and Donald B. Rubin. 2015. Causal Inference in Statistics, Social, and Biomedical Sciences. Cambridge: Cambridge University Press.\n\nAlso relevant:\n\nDing, Peng. 2023. A First Course in Causal Inference. arXiv.\n\nAs well, the materials for PLSC 30600: Causal Inference are available at this GitHub repository.",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#statistical-theory",
+    "href": "resources.html#statistical-theory",
+    "title": "Resources",
+    "section": "Statistical Theory",
+    "text": "Statistical Theory\n\nLehmann, E. L. 1999. Elements of Large-Sample Theory. New York: Springer.",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#econometrics",
+    "href": "resources.html#econometrics",
+    "title": "Resources",
+    "section": "Econometrics",
+    "text": "Econometrics\n\nAngrist, Joshua D., and Jörn-Steffen Pischke. 2009. Mostly Harmless Econometrics: An Empiricist’s Companion. Princeton, NJ: Princeton University Press.",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Coming soon. This page will become a browsable gallery of final tutorials once student projects are ready for publication.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#project-gallery",
+    "href": "projects.html#project-gallery",
+    "title": "Projects",
+    "section": "",
+    "text": "Coming soon. This page will become a browsable gallery of final tutorials once student projects are ready for publication.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#what-the-final-project-is",
+    "href": "projects.html#what-the-final-project-is",
+    "title": "Projects",
+    "section": "What The Final Project Is",
+    "text": "What The Final Project Is\nThe final project is an original tutorial in which you explore a topic related to developments in machine learning for causal inference both analytically and computationally.\nBriefly discuss the foundations for this work in statistics or related fields.\nDemonstrate the method with a computational example by writing reproducible code.\nThe deliverable is a script or notebook and related data that can be run all the way through after setting the working directory.\nThe reader of your tutorial should come away with a good understanding of the strengths and drawbacks of the method or theme as well as some ideas about how to implement it.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#publication-policy",
+    "href": "projects.html#publication-policy",
+    "title": "Projects",
+    "section": "Publication Policy",
+    "text": "Publication Policy\nStudent work will only be posted publicly with the author’s explicit permission.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "weeks/03-heterogeneity.html",
+    "href": "weeks/03-heterogeneity.html",
+    "title": "Heterogeneous treatment effects",
+    "section": "",
+    "text": "Methods: trees and forests\n\n\n\nWager and Athey (2018), Estimation and inference of heterogeneous treatment effects using random forests.\n\n\n\n\n\nAthey and Imbens (2016), Recursive partitioning for heterogeneous causal effects.\nAthey, Tibshirani, and Wager (2019), Generalized random forests.",
+    "crumbs": [
+      "Weeks",
+      "Week 3. Heterogeneous treatment effects"
+    ]
+  },
+  {
+    "objectID": "weeks/03-heterogeneity.html#monday",
+    "href": "weeks/03-heterogeneity.html#monday",
+    "title": "Heterogeneous treatment effects",
+    "section": "",
+    "text": "Methods: trees and forests\n\n\n\nWager and Athey (2018), Estimation and inference of heterogeneous treatment effects using random forests.\n\n\n\n\n\nAthey and Imbens (2016), Recursive partitioning for heterogeneous causal effects.\nAthey, Tibshirani, and Wager (2019), Generalized random forests.",
+    "crumbs": [
+      "Weeks",
+      "Week 3. Heterogeneous treatment effects"
+    ]
+  },
+  {
+    "objectID": "weeks/03-heterogeneity.html#wednesday",
+    "href": "weeks/03-heterogeneity.html#wednesday",
+    "title": "Heterogeneous treatment effects",
+    "section": "Wednesday",
+    "text": "Wednesday\n\nRequired reading\n\nKünzel et al. (2019), Metalearners for estimating heterogeneous treatment effects using machine learning.",
+    "crumbs": [
+      "Weeks",
+      "Week 3. Heterogeneous treatment effects"
+    ]
+  },
+  {
+    "objectID": "weeks/03-heterogeneity.html#public-materials",
+    "href": "weeks/03-heterogeneity.html#public-materials",
+    "title": "Heterogeneous treatment effects",
+    "section": "Public materials",
+    "text": "Public materials\n\nWeek 3 slides",
+    "crumbs": [
+      "Weeks",
+      "Week 3. Heterogeneous treatment effects"
+    ]
+  },
+  {
+    "objectID": "weeks/02-adjustment.html",
+    "href": "weeks/02-adjustment.html",
+    "title": "Adjustment under selection on observables",
+    "section": "",
+    "text": "Bloniarz et al. (2016), Lasso adjustments of treatment effect estimates in randomized experiments.\n\n\n\n\n\nBelloni, Chernozhukov, and Hansen (2014), Inference on treatment effects after selection among high-dimensional controls.\nUrminsky, Hansen, and Chernozhukov (2016), Using double-lasso regression for principled variable selection.\nStone (1974), Cross-validatory choice and assessment of statistical predictions.",
+    "crumbs": [
+      "Weeks",
+      "Week 2. Adjustment under selection on observables"
+    ]
+  },
+  {
+    "objectID": "weeks/02-adjustment.html#monday",
+    "href": "weeks/02-adjustment.html#monday",
+    "title": "Adjustment under selection on observables",
+    "section": "",
+    "text": "Bloniarz et al. (2016), Lasso adjustments of treatment effect estimates in randomized experiments.\n\n\n\n\n\nBelloni, Chernozhukov, and Hansen (2014), Inference on treatment effects after selection among high-dimensional controls.\nUrminsky, Hansen, and Chernozhukov (2016), Using double-lasso regression for principled variable selection.\nStone (1974), Cross-validatory choice and assessment of statistical predictions.",
+    "crumbs": [
+      "Weeks",
+      "Week 2. Adjustment under selection on observables"
+    ]
+  },
+  {
+    "objectID": "weeks/02-adjustment.html#wednesday",
+    "href": "weeks/02-adjustment.html#wednesday",
+    "title": "Adjustment under selection on observables",
+    "section": "Wednesday",
+    "text": "Wednesday\n\nRequired reading\n\nAthey, Imbens, and Wager (2018), Approximate residual balancing: debiased inference of average treatment effects in high dimensions.",
+    "crumbs": [
+      "Weeks",
+      "Week 2. Adjustment under selection on observables"
+    ]
+  },
+  {
+    "objectID": "weeks/05-proxies-instruments.html",
+    "href": "weeks/05-proxies-instruments.html",
+    "title": "When ignorability fails: proxies and instruments",
+    "section": "",
+    "text": "Tchetgen Tchetgen et al. (2024), An introduction to proximal causal inference.\n\n\n\n\n\nMiao, Geng, and Tchetgen Tchetgen (2018), Identifying causal effects with proxy variables of an unmeasured confounder.",
+    "crumbs": [
+      "Weeks",
+      "Week 5. When ignorability fails: proxies and instruments"
+    ]
+  },
+  {
+    "objectID": "weeks/05-proxies-instruments.html#monday",
+    "href": "weeks/05-proxies-instruments.html#monday",
+    "title": "When ignorability fails: proxies and instruments",
+    "section": "",
+    "text": "Tchetgen Tchetgen et al. (2024), An introduction to proximal causal inference.\n\n\n\n\n\nMiao, Geng, and Tchetgen Tchetgen (2018), Identifying causal effects with proxy variables of an unmeasured confounder.",
+    "crumbs": [
+      "Weeks",
+      "Week 5. When ignorability fails: proxies and instruments"
+    ]
+  },
+  {
+    "objectID": "weeks/05-proxies-instruments.html#wednesday",
+    "href": "weeks/05-proxies-instruments.html#wednesday",
+    "title": "When ignorability fails: proxies and instruments",
+    "section": "Wednesday",
+    "text": "Wednesday\n\nRequired reading\n\nHartford, Lewis, Leyton-Brown, and Taddy (2017), Deep IV: A flexible approach for counterfactual prediction.",
+    "crumbs": [
+      "Weeks",
+      "Week 5. When ignorability fails: proxies and instruments"
+    ]
+  },
+  {
+    "objectID": "weeks/06-policy-learning.html",
+    "href": "weeks/06-policy-learning.html",
+    "title": "Policy learning and evaluation",
+    "section": "",
+    "text": "Athey and Wager (2021), Policy learning with observational data.\n\n\n\n\n\nKitagawa and Tetenov (2018), Who should be treated? Empirical welfare maximization methods for treatment choice.",
+    "crumbs": [
+      "Weeks",
+      "Week 6. Policy learning and evaluation"
+    ]
+  },
+  {
+    "objectID": "weeks/06-policy-learning.html#monday",
+    "href": "weeks/06-policy-learning.html#monday",
+    "title": "Policy learning and evaluation",
+    "section": "",
+    "text": "Athey and Wager (2021), Policy learning with observational data.\n\n\n\n\n\nKitagawa and Tetenov (2018), Who should be treated? Empirical welfare maximization methods for treatment choice.",
+    "crumbs": [
+      "Weeks",
+      "Week 6. Policy learning and evaluation"
+    ]
+  },
+  {
+    "objectID": "weeks/06-policy-learning.html#wednesday",
+    "href": "weeks/06-policy-learning.html#wednesday",
+    "title": "Policy learning and evaluation",
+    "section": "Wednesday",
+    "text": "Wednesday\n\nRequired reading\n\nDudík, Erhan, Langford, and Li (2014), Doubly robust policy evaluation and optimization.",
+    "crumbs": [
+      "Weeks",
+      "Week 6. Policy learning and evaluation"
+    ]
+  },
+  {
+    "objectID": "weeks/07-efficient-estimation.html",
+    "href": "weeks/07-efficient-estimation.html",
+    "title": "Efficient estimation: DR, DML, and TMLE",
+    "section": "",
+    "text": "Kennedy (2022), Semiparametric doubly robust targeted double machine learning: a review. Parts 1 to 3.\n\n\n\n\n\nEdward Kennedy’s slides from the ACIC conference in 2022: Machine learning & nonparametric efficiency in causal inference. The slides present the same material as the paper, with some additional narrative and figures, and references throughout to relevant historical work. There are also some videos of Kennedy giving lectures on this topic on YouTube, for example here.\nHampel (1974), The influence curve and its role in robust estimation.\nLehmann and Casella (1999), Elements of Large-Sample Theory, especially Sections 1.1 to 1.4, 6.2 to 6.3, and 7.1 to 7.2.",
+    "crumbs": [
+      "Weeks",
+      "Week 7. Efficient estimation: DR, DML, and TMLE"
+    ]
+  },
+  {
+    "objectID": "weeks/07-efficient-estimation.html#monday",
+    "href": "weeks/07-efficient-estimation.html#monday",
+    "title": "Efficient estimation: DR, DML, and TMLE",
+    "section": "",
+    "text": "Kennedy (2022), Semiparametric doubly robust targeted double machine learning: a review. Parts 1 to 3.\n\n\n\n\n\nEdward Kennedy’s slides from the ACIC conference in 2022: Machine learning & nonparametric efficiency in causal inference. The slides present the same material as the paper, with some additional narrative and figures, and references throughout to relevant historical work. There are also some videos of Kennedy giving lectures on this topic on YouTube, for example here.\nHampel (1974), The influence curve and its role in robust estimation.\nLehmann and Casella (1999), Elements of Large-Sample Theory, especially Sections 1.1 to 1.4, 6.2 to 6.3, and 7.1 to 7.2.",
+    "crumbs": [
+      "Weeks",
+      "Week 7. Efficient estimation: DR, DML, and TMLE"
+    ]
+  },
+  {
+    "objectID": "weeks/07-efficient-estimation.html#wednesday",
+    "href": "weeks/07-efficient-estimation.html#wednesday",
+    "title": "Efficient estimation: DR, DML, and TMLE",
+    "section": "Wednesday",
+    "text": "Wednesday\n\nRequired reading\n\nChernozhukov et al. (2018), Double/debiased machine learning for treatment and structural parameters.\n\n\n\nOptional / reference\n\nCore sections/excerpts to be assigned.",
+    "crumbs": [
+      "Weeks",
+      "Week 7. Efficient estimation: DR, DML, and TMLE"
+    ]
+  },
+  {
+    "objectID": "weeks/07-efficient-estimation.html#notes",
+    "href": "weeks/07-efficient-estimation.html#notes",
+    "title": "Efficient estimation: DR, DML, and TMLE",
+    "section": "Notes",
+    "text": "Notes\nWork-in-progress meetings should be completed by Wednesday, May 6, 2026.",
+    "crumbs": [
+      "Weeks",
+      "Week 7. Efficient estimation: DR, DML, and TMLE"
+    ]
+  },
+  {
+    "objectID": "weeks/07-efficient-estimation.html#public-materials",
+    "href": "weeks/07-efficient-estimation.html#public-materials",
+    "title": "Efficient estimation: DR, DML, and TMLE",
+    "section": "Public materials",
+    "text": "Public materials\n\nDDML worked example\nDDML R script",
+    "crumbs": [
+      "Weeks",
+      "Week 7. Efficient estimation: DR, DML, and TMLE"
+    ]
+  },
+  {
+    "objectID": "weeks/04-representation-learning.html",
+    "href": "weeks/04-representation-learning.html",
+    "title": "Representation learning for causal inference",
+    "section": "",
+    "text": "Johansson, Shalit, and Sontag (2016), Learning Representations for Counterfactual Inference.",
+    "crumbs": [
+      "Weeks",
+      "Week 4. Representation learning for causal inference"
+    ]
+  },
+  {
+    "objectID": "weeks/04-representation-learning.html#monday",
+    "href": "weeks/04-representation-learning.html#monday",
+    "title": "Representation learning for causal inference",
+    "section": "",
+    "text": "Johansson, Shalit, and Sontag (2016), Learning Representations for Counterfactual Inference.",
+    "crumbs": [
+      "Weeks",
+      "Week 4. Representation learning for causal inference"
+    ]
+  },
+  {
+    "objectID": "weeks/04-representation-learning.html#wednesday",
+    "href": "weeks/04-representation-learning.html#wednesday",
+    "title": "Representation learning for causal inference",
+    "section": "Wednesday",
+    "text": "Wednesday\n\nRequired reading\n\nShalit, Johansson, and Sontag (2017), Estimating Individual Treatment Effect: Generalization Bounds and Algorithms.\n\n\n\nOptional / reference\n\nNie and Wager (2021), Quasi-oracle estimation of heterogeneous treatment effects.",
+    "crumbs": [
+      "Weeks",
+      "Week 4. Representation learning for causal inference"
+    ]
+  },
+  {
+    "objectID": "weeks/04-representation-learning.html#notes",
+    "href": "weeks/04-representation-learning.html#notes",
+    "title": "Representation learning for causal inference",
+    "section": "Notes",
+    "text": "Notes\nTutorial topic proposals are due Wednesday, April 15, 2026.",
+    "crumbs": [
+      "Weeks",
+      "Week 4. Representation learning for causal inference"
+    ]
+  },
+  {
+    "objectID": "weeks/09-ai-measurement.html",
+    "href": "weeks/09-ai-measurement.html",
+    "title": "AI-assisted measurement and valid inference",
+    "section": "",
+    "text": "Zrnic and Candès (2024), Cross-prediction-powered inference.\n\n\n\n\n\nAngelopoulos, Bates, Fannjiang, Jordan, and Zrnic (2023), Prediction-powered inference.",
+    "crumbs": [
+      "Weeks",
+      "Week 9. AI-assisted measurement and valid inference"
+    ]
+  },
+  {
+    "objectID": "weeks/09-ai-measurement.html#monday",
+    "href": "weeks/09-ai-measurement.html#monday",
+    "title": "AI-assisted measurement and valid inference",
+    "section": "",
+    "text": "Zrnic and Candès (2024), Cross-prediction-powered inference.\n\n\n\n\n\nAngelopoulos, Bates, Fannjiang, Jordan, and Zrnic (2023), Prediction-powered inference.",
+    "crumbs": [
+      "Weeks",
+      "Week 9. AI-assisted measurement and valid inference"
+    ]
+  },
+  {
+    "objectID": "weeks/09-ai-measurement.html#wednesday",
+    "href": "weeks/09-ai-measurement.html#wednesday",
+    "title": "AI-assisted measurement and valid inference",
+    "section": "Wednesday",
+    "text": "Wednesday\n\nRequired reading\n\nEgami, Hinck, Stewart, and Wei (2023), Using imperfect surrogates for downstream inference: design-based supervised learning for social science applications of large language models.",
+    "crumbs": [
+      "Weeks",
+      "Week 9. AI-assisted measurement and valid inference"
+    ]
+  },
+  {
+    "objectID": "weeks/01-course-orientation.html",
+    "href": "weeks/01-course-orientation.html",
+    "title": "Causal inference, identification, and course orientation",
+    "section": "",
+    "text": "Lecture: discussion and workflow\n\n\n\nMurphy (1997), How to read the statistical methods literature: a guide for students.",
+    "crumbs": [
+      "Weeks",
+      "Week 1. Causal inference, identification, and course orientation"
+    ]
+  },
+  {
+    "objectID": "weeks/01-course-orientation.html#monday",
+    "href": "weeks/01-course-orientation.html#monday",
+    "title": "Causal inference, identification, and course orientation",
+    "section": "",
+    "text": "Lecture: discussion and workflow\n\n\n\nMurphy (1997), How to read the statistical methods literature: a guide for students.",
+    "crumbs": [
+      "Weeks",
+      "Week 1. Causal inference, identification, and course orientation"
+    ]
+  },
+  {
+    "objectID": "weeks/01-course-orientation.html#wednesday",
+    "href": "weeks/01-course-orientation.html#wednesday",
+    "title": "Causal inference, identification, and course orientation",
+    "section": "Wednesday",
+    "text": "Wednesday\nLecture: course scope\n\nRequired reading\n\nAthey and Imbens (2019), Machine learning methods that economists should know about.\nBreiman (2001), Statistical modeling: the two cultures. Comments and rejoinder are included with the same paper.",
+    "crumbs": [
+      "Weeks",
+      "Week 1. Causal inference, identification, and course orientation"
+    ]
+  },
+  {
+    "objectID": "weeks/01-course-orientation.html#public-materials",
+    "href": "weeks/01-course-orientation.html#public-materials",
+    "title": "Causal inference, identification, and course orientation",
+    "section": "Public materials",
+    "text": "Public materials\n\nMonday slides\nWednesday slides",
+    "crumbs": [
+      "Weeks",
+      "Week 1. Causal inference, identification, and course orientation"
+    ]
+  },
+  {
+    "objectID": "weeks/08-transportability.html",
+    "href": "weeks/08-transportability.html",
+    "title": "Generalizability, transportability, and policy shift",
+    "section": "",
+    "text": "Degtiar and Rose (2023), A review of generalizability and transportability.\n\n\n\n\n\nPearl and Bareinboim (2014), External validity: from Do-calculus to transportability across populations.",
+    "crumbs": [
+      "Weeks",
+      "Week 8. Generalizability, transportability, and policy shift"
+    ]
+  },
+  {
+    "objectID": "weeks/08-transportability.html#monday",
+    "href": "weeks/08-transportability.html#monday",
+    "title": "Generalizability, transportability, and policy shift",
+    "section": "",
+    "text": "Degtiar and Rose (2023), A review of generalizability and transportability.\n\n\n\n\n\nPearl and Bareinboim (2014), External validity: from Do-calculus to transportability across populations.",
+    "crumbs": [
+      "Weeks",
+      "Week 8. Generalizability, transportability, and policy shift"
+    ]
+  },
+  {
+    "objectID": "weeks/08-transportability.html#wednesday",
+    "href": "weeks/08-transportability.html#wednesday",
+    "title": "Generalizability, transportability, and policy shift",
+    "section": "Wednesday",
+    "text": "Wednesday\n\nRequired reading\n\nAthey, Bayati, Doudchenko, Imbens, and Khosravi (2021), Matrix completion methods for causal panel data models.",
+    "crumbs": [
+      "Weeks",
+      "Week 8. Generalizability, transportability, and policy shift"
+    ]
+  },
+  {
+    "objectID": "logistics.html",
+    "href": "logistics.html",
+    "title": "Logistics",
+    "section": "",
+    "text": "Class meetings: Monday and Wednesday, 4:30 PM to 5:50 PM\nLocation: Pick Hall 222\nInstructor: Molly Offer-Westort, mollyow@uchicago.edu\nOffice: Pick Hall 328, 5828 S. University Ave.\nOffice hours: Book here",
+    "crumbs": [
+      "Logistics"
+    ]
+  },
+  {
+    "objectID": "logistics.html#course-details",
+    "href": "logistics.html#course-details",
+    "title": "Logistics",
+    "section": "",
+    "text": "Class meetings: Monday and Wednesday, 4:30 PM to 5:50 PM\nLocation: Pick Hall 222\nInstructor: Molly Offer-Westort, mollyow@uchicago.edu\nOffice: Pick Hall 328, 5828 S. University Ave.\nOffice hours: Book here",
+    "crumbs": [
+      "Logistics"
+    ]
+  },
+  {
+    "objectID": "logistics.html#assessment",
+    "href": "logistics.html#assessment",
+    "title": "Logistics",
+    "section": "Assessment",
+    "text": "Assessment\n\nLeading class discussions: 25%\nReferee report: 25%\nFinal project: 40%\nParticipation: 10%",
+    "crumbs": [
+      "Logistics"
+    ]
+  },
+  {
+    "objectID": "logistics.html#project-timeline",
+    "href": "logistics.html#project-timeline",
+    "title": "Logistics",
+    "section": "Project Timeline",
+    "text": "Project Timeline\n\nTutorial topic proposal due Wednesday, April 15, 2026\nWork-in-progress meeting by Wednesday, May 6, 2026\nFinal tutorial due Friday, May 29, 2026 at 11:59 PM",
+    "crumbs": [
+      "Logistics"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PLSC 40601",
+    "section": "",
+    "text": "This is a graduate-level course considering modern advances in causal inference and experimental design. In particular, we will consider how machine learning methods can be leveraged to address causal questions. We will read a selection of papers introducing and implementing techniques and research designs, with applications to the social and health sciences and public policy.\nWe will discuss what these new methods are able to offer, and where they may have limitations. The course will be oriented around class discussion and student presentations on the readings.\nAn introductory course in probability and statistics is required; this prerequisite can be met by courses in statistics, biostatistics, economics, political science, sociology, or related fields. Coursework in causal inference is recommended but not required; additional reading references will be provided for students who have not had prior exposure to causal inference methodology.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "PLSC 40601",
+    "section": "Schedule",
+    "text": "Schedule\n\nWeek 1. Causal inference, identification, and course orientation What changes once the causal question is already defined and machine learning is brought in as part of estimation, inference, and decision-making?\nWeek 2. Adjustment under selection on observables How should machine learning be used when identification rests on unconfoundedness and the core challenge is nuisance estimation under high-dimensional covariates?\nWeek 3. Heterogeneous treatment effects What kind of individualized causal object do you actually want to estimate: a CATE surface, a ranking over units, or an actionable rule?\nWeek 4. Representation learning for causal inference When is it useful to learn a representation of the covariates rather than estimate effects directly in the observed feature space?\nWeek 5. When ignorability fails: proxies and instruments What can you do once selection on observables is no longer plausible and you need either proxies for latent confounding or instruments for treatment variation?\nWeek 6. Policy learning and evaluation Once you can estimate heterogeneity, how do you turn it into treatment decisions and evaluate those decisions with observational or logged data?\nWeek 7. Efficient estimation: DR, DML, and TMLE How do influence functions, orthogonal scores, and cross-fitting organize the modern efficient-estimation toolbox?\nWeek 8. Generalizability, transportability, and policy shift Why does an internally valid causal estimate or learned policy not automatically transport to a new population, site, or deployment regime?\nWeek 9. AI-assisted measurement and valid inference How can model-generated labels improve measurement without being mistaken for ground truth?",
+    "crumbs": [
+      "Home"
+    ]
+  }
+]

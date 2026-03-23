@@ -1,8 +1,18 @@
 % !Rnw weave = Sweave
-\documentclass[xcolor={table}]{beamer}
+\documentclass[xcolor={table}, handout]{beamer}
 
+% Allow compilation from repo root or from /slides.
+\newcommand{\plscassetpath}{../assets}
+\IfFileExists{../assets/pres-template_MOW.sty}{}{%
+  \renewcommand{\plscassetpath}{assets}%
+}
+\newcommand{\plscbibpath}{../assets/PLSC40601}
+\IfFileExists{../assets/PLSC40601.bib}{}{%
+  \renewcommand{\plscbibpath}{assets/PLSC40601}%
+}
 
-\RequirePackage{../assets/pres-template_MOW}
+\RequirePackage{\plscassetpath/pres-template_MOW}
+\graphicspath{{./}{slides/}{assets/}{../assets/}}
 \usepackage{colortbl}
 
 %--------------------------------------------------------------------------
@@ -16,7 +26,7 @@
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
 \subtitle{Week 3: Trees and forests.}
-\date{Spring 2024}
+\date{Spring 2026}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
 
@@ -68,7 +78,7 @@
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.6\textwidth]{../assets/tibshirani9-1.png}
+\includegraphics[width = 0.6\textwidth]{tibshirani9-1.png}
 \end{figure}
 \hfill \cite{hastie2009elements}
 
@@ -291,21 +301,23 @@ R_1(j,s) = \{ X|X_j \le s\} \textrm{ and } R_1(j,s) = \{ X|X_j > s\}
 GRF tree object 
 Number of training samples: 250 
 Variable splits: 
-(1) split_variable: X.5  split_value: -0.520294 
-  (2) split_variable: X.4  split_value: 0.426613 
-    (4) split_variable: X.9  split_value: -0.314623 
-      (8) * num_samples: 7  avg_Y: 0.09 avg_W: 1 
-      (9) * num_samples: 14  avg_Y: 0.11 avg_W: 0.43 
-    (5) * num_samples: 8  avg_Y: -0.49 avg_W: 0.38 
-  (3) split_variable: X.2  split_value: -0.344787 
-    (6) split_variable: X.6  split_value: 0.163222 
-      (10) * num_samples: 23  avg_Y: -0.9 avg_W: 0.48 
-      (11) * num_samples: 11  avg_Y: -1.87 avg_W: 0.82 
-    (7) split_variable: X.3  split_value: 0.428785 
-      (12) split_variable: X.3  split_value: -0.322743 
-        (14) * num_samples: 18  avg_Y: -0.29 avg_W: 0.61 
-        (15) * num_samples: 14  avg_Y: 0.64 avg_W: 0.5 
-      (13) * num_samples: 30  avg_Y: 0.72 avg_W: 0.47 
+(1) split_variable: X.1  split_value: 0.0766393 
+  (2) split_variable: X.1  split_value: -0.132755 
+    (4) split_variable: X.3  split_value: 0.144256 
+      (8) split_variable: X.8  split_value: -0.417199 
+        (14) * num_samples: 7  avg_Y: -0.88 avg_W: 0.29 
+        (15) * num_samples: 25  avg_Y: -1.14 avg_W: 0.44 
+      (9) * num_samples: 23  avg_Y: -0.21 avg_W: 0.39 
+    (5) * num_samples: 16  avg_Y: -0.81 avg_W: 0.44 
+  (3) split_variable: X.4  split_value: -0.3755 
+    (6) split_variable: X.7  split_value: 0.0975646 
+      (10) * num_samples: 10  avg_Y: -0.15 avg_W: 0.6 
+      (11) * num_samples: 6  avg_Y: 0.12 avg_W: 0.5 
+    (7) split_variable: X.1  split_value: 1.16291 
+      (12) split_variable: X.5  split_value: -0.0522993 
+        (16) * num_samples: 12  avg_Y: -0.62 avg_W: 0.33 
+        (17) * num_samples: 20  avg_Y: -0.17 avg_W: 0.45 
+      (13) * num_samples: 6  avg_Y: 0.49 avg_W: 0.5 
 \end{Soutput}
 \end{Schunk}
 
@@ -328,7 +340,7 @@ Variable splits:
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{../assets/tree-plot.png}
+\includegraphics[width = 0.8\textwidth]{tree-plot.png}
 \end{figure}
 \hfill
 \end{frame}
@@ -729,7 +741,7 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{../assets/tree-plot.png}
+\includegraphics[width = 0.8\textwidth]{tree-plot.png}
 \end{figure}
 \hfill
 \end{frame}
@@ -752,7 +764,7 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{apalike}
-    \bibliography{../assets/PLSC40601}
+    \bibliography{\plscbibpath}
 \end{frame}
 %-------------------------------------------------------------------------------%
 \backupend

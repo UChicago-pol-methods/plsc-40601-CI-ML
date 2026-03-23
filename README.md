@@ -7,6 +7,7 @@ Readings are distributed privately and are intentionally not stored in this publ
 ## Repository structure
 
 - `assets/`: shared bibliography, LaTeX style files, and figure assets
+- `docs/`: GitHub Pages site source for the public course website
 - `slides/`: lecture deck source files and slide-authoring guidance
 - `materials/`: standalone worked examples and method notes
 - `assignments/`: assignment and project prompts

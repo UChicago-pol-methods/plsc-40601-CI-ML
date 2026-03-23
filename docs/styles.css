@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --bs-font-sans-serif: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bs-body-font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --plsc-text: #111827;
+  --plsc-muted: #6b7280;
+  --plsc-border: #e5e7eb;
+  --plsc-link: #111827;
+  --plsc-link-hover: #374151;
+}
+
+body {
+  font-family: var(--bs-body-font-family);
+  color: var(--plsc-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+.sidebar-title,
+.sidebar-item-text {
+  font-family: var(--bs-body-font-family);
+}
+
+p,
+li,
+ul,
+ol,
+dl,
+dt,
+dd {
+  font-family: var(--bs-body-font-family);
+}
+
+.quarto-title-block .title {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.quarto-title-block .subtitle,
+.quarto-title-meta {
+  color: var(--plsc-muted);
+}
+
+.sidebar nav[role="doc-toc"],
+#TOC {
+  display: none !important;
+}
+
+.sidebar,
+#quarto-sidebar {
+  border-right: 1px solid var(--plsc-border);
+}
+
+.sidebar-title {
+  font-weight: 600;
+}
+
+.sidebar-item {
+  line-height: 1.35;
+}
+
+.sidebar-item a,
+.sidebar-item a:visited,
+a {
+  color: var(--plsc-link);
+  text-decoration: none;
+}
+
+.sidebar-item a:hover,
+a:hover {
+  color: var(--plsc-link-hover);
+  text-decoration: underline;
+}
+
+.sidebar-item-section .sidebar-item-container .active,
+.sidebar-item-container .active {
+  font-weight: 600;
+}
+
+main.content,
+#quarto-document-content {
+  max-width: 46rem;
+}
+
+p,
+li {
+  line-height: 1.65;
+}
+
+ul,
+ol {
+  padding-left: 1.25rem;
+}
+
+.course-schedule li {
+  margin-bottom: 0.85rem;
+}
+
+.week-note {
+  color: var(--plsc-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 991px) {
+  .quarto-title-block .title {
+    font-size: 1.65rem;
+  }
+}

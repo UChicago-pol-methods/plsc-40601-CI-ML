@@ -1,5 +1,5 @@
 % !Rnw weave = Sweave
-\documentclass[xcolor={table}]{beamer}
+\documentclass[xcolor={table}, handout]{beamer}
 
 % Allow compilation from repo root or from /slides.
 \newcommand{\plscassetpath}{../assets}
@@ -26,7 +26,7 @@
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
 \subtitle{Week 3: Trees and forests.}
-\date{Spring 2024}
+\date{Spring 2026}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
 

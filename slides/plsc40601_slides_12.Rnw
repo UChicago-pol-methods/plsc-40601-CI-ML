@@ -26,7 +26,7 @@
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
 \subtitle{Week 1: Course orientation, potential outcomes framework.}
-\date{Spring 2024}
+\date{Spring 2026}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
 
