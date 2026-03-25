@@ -1,5 +1,5 @@
 % !Rnw weave = Sweave
-\documentclass[xcolor={dvipsnames}, handout]{beamer}
+\documentclass[xcolor={dvipsnames},handout]{beamer}
 
 
 \RequirePackage{../assets/pres-template_MOW}
@@ -120,7 +120,7 @@
 \item If unit $i$ is assigned $W_i = 1$, $Y_i = Y_i(1)$. \pause
 \item In econometrics, this is often expressed in terms of the ``switching'' equation.
 \[
-Y_i = \mathbbm{1}\{W_i = 1 \}Y_i(1) + \left(1- \mathbbm{1}\{W_i = 1 \}\right) Y_i(0) + 
+Y_i = \mathbbm{1}\{W_i = 1 \}Y_i(1) + \left(1- \mathbbm{1}\{W_i = 1 \}\right) Y_i(0)  
 \]\pause
 \item But once we impose that $Y_i(W_i)$ is well defined, this is largely already implied. 
 \end{wideitemize}
@@ -254,6 +254,29 @@ $N$       & $0$     & $0$         & ?        & $0$      & $0$
 \begin{figure}
 \centering
 \includegraphics[width = 0.6\textwidth]{../assets/arthur-samuel-according-to-bing.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{wideitemize}
+\item xxxx
+\end{wideitemize}
+
+}
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{What is machine learning?}
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.4\textwidth]{../assets/arthur-samuel-according-to-chatgpt.png}
 \end{figure}
 
 \end{frame}
@@ -499,7 +522,7 @@ e(x) & = \E[W_i | \X_i = x]
 \begin{align*}
       & = \E\left[ \frac{\left(Y_i - \mu(1,\X_i)\right)  W_i}{e(\X_i)} - \frac{\left(Y_i - \mu(0,\X_i)\right) (1-W_i) }{1 - e(\X_i)}\right] \\
      & \qquad \qquad  + \E\left[\mu(1,\X_i) - \mu(0,\X_i) \right]
-\end{align*}\pause
+\end{align*}
 \pause
 \item We may want to estimate $\mu(w,x)$ and $e(x)$ to get better estimates of $\hat \tau$, but we don't necessarily care about how ``good'' our estimates of these parameters are. \pause
 \begin{itemize}
