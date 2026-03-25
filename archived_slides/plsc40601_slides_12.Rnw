@@ -35,7 +35,9 @@
 \begin{wideitemize}
 \item Sign up for papers/discussion\pause
 \item Fork and create a PR for the repo\pause
-\item \url{https://economics.uchicago.edu/content/econometrics-workshop} \pause
+\item \url{https://economics.uchicago.edu/events/workshops/econometrics-workshop} 
+\item \url{https://voices.uchicago.edu/psquant/}
+\item \url{https://www.chicagobooth.edu/faculty/research-workshops/econometrics-and-statistics}\pause
 \item \url{https://bookdown.org/halflearned/ml-ci-tutorial/}
 \end{wideitemize}
 
@@ -551,7 +553,7 @@ e(x) & = \E[W_i | \X_i = x]
 \item Cross-validation (many variants), cross-fitting \pause
 \item Bootstrapping, bagging, sample splitting \pause (we'll get to these next week)\pause
 \item Boosting \pause
-\item We'll talk about some methods/tools: penalized regression, trees/forests, policy learning, reinforcement learning\pause, but there are a lot of approaches we won't get into (neural nets, support vector machines, many tools for classification problems, language tools) \pause and we will talk about some high-level approaches that can combine/be applied with multiple machine learning estimating techniques (doubly robust estimation, conformal inference). 
+\item We'll talk about some methods/tools: penalized regression, trees/forests, policy learning, reinforcement learning\pause, but there are a lot of approaches we won't get into (neural nets, support vector machines, many tools for classification problems, language tools) \pause and we will talk about some high-level approaches that can combine/be applied with multiple machine learning estimating techniques (doubly robust estimation, [conformal] inference). 
 \end{wideitemize}
 
 \end{frame}
