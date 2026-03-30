@@ -39,6 +39,7 @@
 \item \url{https://voices.uchicago.edu/psquant/}
 \item \url{https://www.chicagobooth.edu/faculty/research-workshops/econometrics-and-statistics}\pause
 \item \url{https://bookdown.org/halflearned/ml-ci-tutorial/}
+\item \url{https://www.gsb.stanford.edu/faculty-research/labs-initiatives/sil/research/methods/ai-machine-learning/short-course}
 \end{wideitemize}
 
 \end{frame}

@@ -1,0 +1,525 @@
+% !Rnw weave = Sweave
+\documentclass[xcolor={table}, handout]{beamer}
+
+% Allow compilation from repo root or from /slides.
+\newcommand{\plscassetpath}{../assets}
+\IfFileExists{../assets/pres-template_MOW.sty}{}{%
+  \renewcommand{\plscassetpath}{assets}%
+}
+\newcommand{\plscbibpath}{../assets/PLSC40601}
+\IfFileExists{../assets/PLSC40601.bib}{}{%
+  \renewcommand{\plscbibpath}{assets/PLSC40601}%
+}
+
+\RequirePackage{\plscassetpath/pres-template_MOW}
+\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\usepackage{colortbl}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+
+
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{PLSC 40601}
+\subtitle{Week 2: Sample-splitting, shrinkage, cross-validation.}
+\date{Spring 2026}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+<<echo = FALSE>>=
+asset_dir <- if (dir.exists("assets")) "assets" else "../assets"
+@
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Housekeeping}
+
+\begin{wideitemize}
+\item ?
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{wideitemize}
+\item xxxx
+\end{wideitemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{transitionframe}
+\centering
+
+\LARGE \textcolor{white}{Sample splitting}
+
+\end{transitionframe}
+%-------------------------------------------------------------------------------%
+\begin{frame}{What is our goal in fitting a model?}
+
+\pause
+\begin{wideitemize}
+\item Given some data $(Y_1, \X_1), \dots, (Y_N, \X_N)$, we fit a model, $\hat{f}(X)$.\pause
+\item Suppose our goal is prediction for the next observation. \pause
+\item Given $X_{N+1}$, we want to minimize
+\[
+L\left(Y_{N+1}, \hat{f}(X_{N+1})\right) = \left(Y_{N+1} - \hat{f}(X_{N+1})\right)^2
+\]\pause
+\item We may be interested not just in how our method performs on one specific observation, but how it performs in expectation
+\[
+\textrm{Err} = \E \left[ L(Y, \hat{f}(X))\right]
+\]\pause
+\item What should the expectation be taken over? \pause Can/should we hold the data we used for fitting the model fixed?
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{What is our goal in fitting a model?}
+
+\begin{wideitemize}
+\item Difference between conditional error and expected test error\pause
+\begin{wideitemize}
+\item Conditional test error:
+\[
+\textrm{Err}_{\mathcal{T}} = \E \left[ L(Y, \hat{f}(X)) \rvert \mathcal{T}\right]
+\]
+Training set $\mathcal{T}$ is fixed. \pause
+
+\item Expected test error:
+\[
+\textrm{Err} = \E \left[ L(Y, \hat{f}(X))\right] =\E \left[  \E \left[ L(Y, \hat{f}(X)) \rvert \mathcal{T}\right] \right]
+\]
+\end{wideitemize}\pause
+\item We may care about $\textrm{Err}_{\mathcal{T}}$ for the model fit on our realized sample, but most practical methods estimate $\textrm{Err}$, the average test error over repeated samples. 
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{What is our goal in fitting a model?}
+
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.8\textwidth]{tibshirani7-1.png}
+\end{figure}
+\hfill \cite{hastie2009elements}
+
+\textcolor{blue}{Blue} is in-sample error, \textcolor{red}{red} is out-of-sample error.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{What is our goal in fitting a model?}
+
+\begin{wideitemize}
+\item We may want to use expected test error to \textbf{select among models}, or versions of models.\pause
+\item And, once we have selected a version of a model, we may want to \textbf{assess} how a selected model performs. 
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{transitionframe}
+\centering
+
+\LARGE \textcolor{white}{Shrinkage.}
+
+\end{transitionframe}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Why shrinkage?}
+
+\begin{wideitemize}
+\item With many covariates, interactions, or basis expansions, least squares can chase noise. \pause
+\item Shrinkage deliberately adds some bias to reduce variance and improve out-of-sample prediction. \pause
+\item This is especially attractive when many predictors are weak, or strongly correlated.
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item High-level motivation only: this is a prediction argument, not a causal identification argument.
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Ridge and lasso}
+
+\[
+\hat \beta(\lambda) = \argmin_{\beta_0, \beta} \sum_{i=1}^N \left(y_i - \beta_0 - x_i^T\beta\right)^2 + \lambda P(\beta)
+\]
+\pause
+
+\begin{wideitemize}
+\item Ridge: $P(\beta) = \sum_{j=1}^p \beta_j^2$. \pause
+\item Lasso: $P(\beta) = \sum_{j=1}^p |\beta_j|$. \pause
+\item Larger $\lambda$ means more shrinkage. Ridge keeps all coefficients; lasso can set some exactly to zero.
+\end{wideitemize}
+\hfill \cite{hastie2009elements}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item ESL emphasizes that lasso acts like continuous subset selection.
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Why lasso for adjustment?}
+
+\begin{wideitemize}
+\item In the Bloniarz reading, treatment assignment is already randomized. \pause
+\item Lasso is not identifying the treatment effect. \pause
+\item It is used to improve precision by shrinking or selecting among many candidate adjustment variables. \pause
+\item So the tuning target is predictive performance of the adjustment model.
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item Distinguish the prediction problem for nuisance adjustment from the causal estimand.
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{What is our goal in fitting a model?}
+
+\begin{wideitemize}
+\item We can't measure expected test error directly. 
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{What is our goal in fitting a model?}
+
+\begin{wideitemize}
+\item A procedure that allows us to estimate it:
+\begin{itemize}
+\item Split data into three parts
+\begin{table}[]
+\arrayrulecolor{white}  
+\renewcommand{\arraystretch}{2.5}
+\begin{tabular}{>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm} }
+\cellcolor{Contrast1l} \textcolor{white}{Training} & \cellcolor{Contrast4l} \textcolor{white}{Validation} & \cellcolor{Contrast6l} \textcolor{white}{Test} 
+\end{tabular}
+\end{table}
+\pause
+\item Fit candidate models, or candidate penalty levels, to the training set. \pause
+\item Estimate prediction error of each candidate in the validation set. \pause
+\item Select the model or penalty with minimum validation error.\pause
+\item Then get generalization error of just that model on test set. \pause
+\end{itemize}
+\item Choosing $\lambda$ is part of training, so the test set should be used only after tuning is finished. \pause Still a version of winner's curse. 
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{transitionframe}
+\centering
+
+\LARGE \textcolor{white}{Cross-validation.}
+
+\end{transitionframe}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Cross-validation.}
+
+\begin{wideitemize}
+\item We can potentially get more out of our data by cross-validating. \pause
+\item For each candidate penalty $\lambda$, fit on one fold and validate on the held-out fold.
+\end{wideitemize}
+
+\begin{table}[]
+\arrayrulecolor{white}  
+\renewcommand{\arraystretch}{2.5}
+\begin{tabular}{l >{\centering\arraybackslash}p{4cm}|>{\centering\arraybackslash}p{4cm} }
+Version 1 & \cellcolor{Contrast1l} \textcolor{white}{Training} & \cellcolor{Contrast4l} \textcolor{white}{Validation} \\
+\hline
+Version 2 & \cellcolor{Contrast4l} \textcolor{white}{Validation} & \cellcolor{Contrast1l} \textcolor{white}{Training} \\
+\end{tabular}
+\end{table}
+\pause
+
+\[
+\widehat{\textrm{Err}}_{CV}(\lambda) = \frac{1}{N}\sum_{i = 1}^N L\left(y_i, \hat{f}^{-k(i)}_{\lambda}(x_i) \right)
+\]
+$\hat{f}^{-k(i)}_{\lambda}$ is the fit from the training folds using penalty $\lambda$. \pause
+\[
+\hat{\lambda} = \argmin_{\lambda} \widehat{\textrm{Err}}_{CV}(\lambda)
+\]
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{K-fold cross validation.}
+
+\begin{wideitemize}
+  \scriptsize
+\item Repeat the train/validate cycle across all $K$ folds, average validation loss for each candidate $\lambda$.
+\end{wideitemize}
+
+\begin{table}[]
+\renewcommand{\arraystretch}{2.5}
+\arrayrulecolor{white}  
+\begin{tabular}{l >{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm} }
+Version 1 & \cellcolor{Contrast1l} \textcolor{white}{Training} & \cellcolor{Contrast1l} \textcolor{white}{Training} & \cellcolor{Contrast1l} \textcolor{white}{Training} & \cellcolor{Contrast1l} \textcolor{white}{Training} & \cellcolor{Contrast4l} \textcolor{white}{Validation} \\
+\hline
+Version 2 & \cellcolor{Contrast1l} \textcolor{white}{Training}& \cellcolor{Contrast1l} \textcolor{white}{Training}& \cellcolor{Contrast1l} \textcolor{white}{Training} & \cellcolor{Contrast4l} \textcolor{white}{Validation} & \cellcolor{Contrast1l} \textcolor{white}{Training} \\
+\hline
+Version 3 &  \cellcolor{Contrast1l} \textcolor{white}{Training} & \cellcolor{Contrast1l} \textcolor{white}{Training}&\cellcolor{Contrast4l} \textcolor{white}{Validation}& \cellcolor{Contrast1l} \textcolor{white}{Training} & \cellcolor{Contrast1l} \textcolor{white}{Training} \\
+\hline
+Version 4 & \cellcolor{Contrast1l} \textcolor{white}{Training}& \cellcolor{Contrast4l} \textcolor{white}{Validation}& \cellcolor{Contrast1l} \textcolor{white}{Training}& \cellcolor{Contrast1l} \textcolor{white}{Training}  & \cellcolor{Contrast1l} \textcolor{white}{Training} \\
+\hline
+Version 5 & \cellcolor{Contrast4l} \textcolor{white}{Validation}& \cellcolor{Contrast1l} \textcolor{white}{Training}& \cellcolor{Contrast1l} \textcolor{white}{Training}& \cellcolor{Contrast1l} \textcolor{white}{Training}  & \cellcolor{Contrast1l} \textcolor{white}{Training} \\
+\hline
+\end{tabular}
+\end{table}
+
+\[
+\widehat{\textrm{Err}}_{CV}(\lambda) = \frac{1}{N}\sum_{i = 1}^N L\left(y_i, \hat{f}^{-k(i)}_{\lambda}(x_i) \right)
+\]
+$\hat{f}^{-k(i)}_{\lambda}$ are the fits from the folds $k$ that do not contain $i$, using penalty $\lambda$. 
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Cross-validation for lasso}
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.76\textwidth]{week2_lasso_cv.png}
+\end{figure}
+
+\scriptsize
+
+\begin{wideitemize}
+\item \texttt{cv.glmnet} reports \texttt{lambda.min} and \texttt{lambda.1se}; The one-standard-error rule picks the simplest model whose estimated CV error is within one standard error of the minimum estimated CV error.
+\[
+\hat{\lambda}_{1se} = \max \left\{ \lambda : \widehat{\textrm{Err}}_{CV}(\lambda) \leq \widehat{\textrm{Err}}_{CV}(\hat{\lambda}_{\min}) + \widehat{\textrm{SE}}\left(\widehat{\textrm{Err}}_{CV}(\hat{\lambda}_{\min})\right) \right\}
+\]
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item This is the ESL rule: use CV on the training sample, then optionally take the more conservative penalty.
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Lasso coefficient path}
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.76\textwidth]{week2_lasso_path.png}
+\end{figure}
+
+\begin{wideitemize}
+\item As $\lambda$ falls, more coefficients enter the model. \pause
+\item Cross-validation chooses a point along this path.
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item Simulated example; use it to explain the distinction between path-following and penalty selection.
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Cross-validation.}
+
+\begin{wideitemize}
+\item How do we pick $K$?\pause
+\item $K = N$? \pause Low bias, possibly high variance (our prediction sets are very similar). \pause
+\item $K = 5$? \pause Lower variance, possibly higher bias. \pause How much does the prediction change as we change the size of the data set?\pause
+\begin{figure}
+\centering
+\includegraphics[width = 0.6\textwidth]{tibshirani7-8.png}
+\end{figure}
+\hfill \cite{hastie2009elements}
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Cross-validation.}
+
+\begin{wideitemize}
+\item Rule of thumb is often 5 or 10 folds. \pause
+\item For lasso, the other practical choice is whether to report \texttt{lambda.min} or the more conservative \texttt{lambda.1se}.
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+    \bibliographystyle{apalike}
+    \bibliography{\plscbibpath}
+\end{frame}
+%-------------------------------------------------------------------------------%
+\backupend
+\end{document}
