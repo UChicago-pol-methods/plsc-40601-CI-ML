@@ -39,6 +39,47 @@ asset_dir <- if (dir.exists("assets")) "assets" else "../assets"
 library(ggplot2)
 library(grf)
 set.seed(60637)
+
+save_grviz_plot <- function(widget, stem, asset_dir, width = 900, height = 620) {
+  svg_path <- file.path(asset_dir, paste0(stem, ".svg"))
+  png_path <- file.path(asset_dir, paste0(stem, ".png"))
+  html_path <- file.path(tempdir(), paste0(stem, ".html"))
+  dep_path <- file.path(tempdir(), paste0(stem, "_files"))
+  chrome_candidates <- c(
+    Sys.which("google-chrome"),
+    Sys.which("chromium"),
+    Sys.which("chromium-browser"),
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+  )
+  chrome_path <- chrome_candidates[nzchar(chrome_candidates) & file.exists(chrome_candidates)][1]
+
+  if (length(chrome_path) == 0 || is.na(chrome_path)) {
+    stop("Could not find a Chrome/Chromium binary for headless tree-plot screenshots.")
+  }
+
+  svg_text <- DiagrammeRsvg::export_svg(widget)
+  writeLines(svg_text, svg_path, useBytes = TRUE)
+
+  htmlwidgets::saveWidget(widget, html_path, selfcontained = FALSE, title = stem)
+  on.exit(unlink(c(html_path, dep_path), recursive = TRUE, force = TRUE), add = TRUE)
+
+  system2(
+    chrome_path,
+    args = c(
+      "--headless",
+      "--disable-gpu",
+      "--no-sandbox",
+      "--allow-file-access-from-files",
+      paste0("--screenshot=", normalizePath(png_path, mustWork = FALSE)),
+      paste0("--window-size=", width, ",", height),
+      paste0("file://", normalizePath(html_path, mustWork = TRUE))
+    ),
+    stdout = TRUE,
+    stderr = TRUE
+  )
+
+  invisible(list(svg = svg_path, png = png_path))
+}
 @
 
 
@@ -315,14 +356,13 @@ X <- matrix(rnorm(n * p), n, p)
 W <- rbinom(n, 1, 0.5)
 Y <- pmax(X[, 1], 0) * W + X[, 2] +
   pmin(X[, 3], 0) + rnorm(n)
-c.forest <- causal_forest(X, Y, W)
-tree <- get_tree(c.forest, 1)
-leaf.nodes <- get_leaf_node(tree, X[1:5, ])
+r.forest <- regression_forest(X, Y)
+reg_tree <- get_tree(r.forest, 1)
+reg_leaf.nodes <- get_leaf_node(reg_tree, X[1:5, ])
 @
-<<echo=FALSE, eval = FALSE>>=
-# Saving a plot in .svg can be done with the `DiagrammeRsvg` package.
-tree.plot = plot(tree)
-cat(DiagrammeRsvg::export_svg(tree.plot), file = file.path(asset_dir, 'tree_plot.svg'))
+<<echo=FALSE, eval = TRUE>>=
+reg_tree_plot <- plot(reg_tree)
+save_grviz_plot(reg_tree_plot, "regression_tree_plot", asset_dir, width = 1500, height = 720)
 @
 
 
@@ -344,7 +384,7 @@ cat(DiagrammeRsvg::export_svg(tree.plot), file = file.path(asset_dir, 'tree_plot
 \begin{frame}[fragile]{Elements of trees}
 \small
 <<eval = TRUE>>=
-tree
+reg_tree
 @
 
 
@@ -366,7 +406,7 @@ tree
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
+\includegraphics[width = 1.5\textwidth]{regression_tree_plot.png}
 \end{figure}
 \hfill
 \end{frame}
@@ -719,7 +759,7 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 
 \begin{wideitemize}
 \item Returning to (causal) inference\dots \pause we might like to use these methods to get valid inference, potentially on causal targets.\pause
-\item As we think about causal quantities, we'll move the target. 
+\item As we move from pure prediction to causal targets, adaptive tree fitting becomes part of the inferential problem.
 \end{wideitemize}
 
 \end{frame}
@@ -761,13 +801,61 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 \end{wideitemize}
 
 }
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Causal trees}
+
+<<eval = TRUE>>=
+c.forest <- causal_forest(X, Y, W)
+causal_tree <- get_tree(c.forest, 1)
+causal_leaf.nodes <- get_leaf_node(causal_tree, X[1:5, ])
+@
+<<echo=FALSE, eval = TRUE>>=
+causal_tree_plot <- plot(causal_tree)
+save_grviz_plot(causal_tree_plot, "causal_tree_plot", asset_dir)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{wideitemize}
+\item xxxx
+\end{wideitemize}
+
+}
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{A tree}
+
+\begin{frame}{Honesty in practice}
+
+\begin{wideitemize}
+\item One subsample chooses the structure of the tree; another subsample estimates what happens within the leaves. \pause
+\item The tradeoff is straightforward: less adaptive bias, but smaller effective sample size at each stage. \pause
+\item That tradeoff is what lets tree-based methods become useful for causal inference rather than only prediction.
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{wideitemize}
+\item xxxx
+\end{wideitemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{An honest tree}
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
+\includegraphics[width = 0.8\textwidth]{causal_tree_plot.png}
 \end{figure}
 \hfill
 \end{frame}

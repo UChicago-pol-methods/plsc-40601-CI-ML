@@ -66,7 +66,7 @@ asset_dir <- if (dir.exists("assets")) "assets" else "../assets"
 \begin{transitionframe}
 \centering
 
-\LARGE \textcolor{white}{Sample splitting}
+\LARGE \textcolor{white}{Sample splitting.}
 
 \end{transitionframe}
 %-------------------------------------------------------------------------------%

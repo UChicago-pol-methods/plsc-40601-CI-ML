@@ -269,9 +269,9 @@ R_1(j,s) = \{ X|X_j \le s\} \textrm{ and } R_1(j,s) = \{ X|X_j > s\}
 > W <- rbinom(n, 1, 0.5)
 > Y <- pmax(X[, 1], 0) * W + X[, 2] +
 +   pmin(X[, 3], 0) + rnorm(n)
-> c.forest <- causal_forest(X, Y, W)
-> tree <- get_tree(c.forest, 1)
-> leaf.nodes <- get_leaf_node(tree, X[1:5, ])
+> r.forest <- regression_forest(X, Y)
+> reg_tree <- get_tree(r.forest, 1)
+> reg_leaf.nodes <- get_leaf_node(reg_tree, X[1:5, ])
 \end{Sinput}
 \end{Schunk}
 
@@ -295,29 +295,79 @@ R_1(j,s) = \{ X|X_j \le s\} \textrm{ and } R_1(j,s) = \{ X|X_j > s\}
 \small
 \begin{Schunk}
 \begin{Sinput}
-> tree
+> reg_tree
 \end{Sinput}
 \begin{Soutput}
 GRF tree object 
 Number of training samples: 250 
 Variable splits: 
-(1) split_variable: X.1  split_value: 0.0766393 
-  (2) split_variable: X.1  split_value: -0.132755 
-    (4) split_variable: X.3  split_value: 0.144256 
-      (8) split_variable: X.8  split_value: -0.417199 
-        (14) * num_samples: 7  avg_Y: -0.88 avg_W: 0.29 
-        (15) * num_samples: 25  avg_Y: -1.14 avg_W: 0.44 
-      (9) * num_samples: 23  avg_Y: -0.21 avg_W: 0.39 
-    (5) * num_samples: 16  avg_Y: -0.81 avg_W: 0.44 
-  (3) split_variable: X.4  split_value: -0.3755 
-    (6) split_variable: X.7  split_value: 0.0975646 
-      (10) * num_samples: 10  avg_Y: -0.15 avg_W: 0.6 
-      (11) * num_samples: 6  avg_Y: 0.12 avg_W: 0.5 
-    (7) split_variable: X.1  split_value: 1.16291 
-      (12) split_variable: X.5  split_value: -0.0522993 
-        (16) * num_samples: 12  avg_Y: -0.62 avg_W: 0.33 
-        (17) * num_samples: 20  avg_Y: -0.17 avg_W: 0.45 
-      (13) * num_samples: 6  avg_Y: 0.49 avg_W: 0.5 
+(1) split_variable: X.2  split_value: 0.263598 
+  (2) split_variable: X.3  split_value: -0.0998462 
+    (4) split_variable: X.2  split_value: -0.995643 
+      (8) split_variable: X.8  split_value: 0.704826 
+        (16) split_variable: X.10  split_value: -0.865958 
+          (28) * num_samples: 1  avg_Y: -4.49 
+          (29) split_variable: X.2  split_value: -2.11734 
+            (42) * num_samples: 2  avg_Y: -4.46 
+            (43) split_variable: X.3  split_value: -1.6706 
+              (54) * num_samples: 1  avg_Y: -1.7 
+              (55) * num_samples: 4  avg_Y: -2.05 
+        (17) * num_samples: 1  avg_Y: -2.32 
+      (9) split_variable: X.1  split_value: -1.15717 
+        (18) * num_samples: 6  avg_Y: -1.46 
+        (19) split_variable: X.9  split_value: -1.13103 
+          (30) * num_samples: 2  avg_Y: -1.38 
+          (31) split_variable: X.1  split_value: 0.379772 
+            (44) split_variable: X.4  split_value: -0.967701 
+              (56) * num_samples: 3  avg_Y: 0.1 
+              (57) split_variable: X.2  split_value: -0.165652 
+                (64) split_variable: X.5  split_value: 0.394174 
+                  (66) * num_samples: 5  avg_Y: -1.8 
+                  (67) * num_samples: 1  avg_Y: -2.35 
+                (65) * num_samples: 6  avg_Y: -1.65 
+            (45) * num_samples: 13  avg_Y: -0.98 
+    (5) split_variable: X.8  split_value: -0.129133 
+      (10) split_variable: X.2  split_value: -1.35369 
+        (20) * num_samples: 2  avg_Y: -1.92 
+        (21) split_variable: X.6  split_value: 0.547592 
+          (32) split_variable: X.1  split_value: 0.565799 
+            (46) split_variable: X.7  split_value: -0.328408 
+              (58) * num_samples: 2  avg_Y: -2.78 
+              (59) * num_samples: 7  avg_Y: -0.41 
+            (47) * num_samples: 1  avg_Y: -0.27 
+          (33) * num_samples: 4  avg_Y: 0.2 
+      (11) split_variable: X.8  split_value: 1.0055 
+        (22) split_variable: X.8  split_value: 0.624881 
+          (34) split_variable: X.3  split_value: 0.850986 
+            (48) split_variable: X.4  split_value: -0.0629522 
+              (60) * num_samples: 2  avg_Y: -1.83 
+              (61) * num_samples: 4  avg_Y: 0.13 
+            (49) * num_samples: 4  avg_Y: -0.22 
+          (35) * num_samples: 5  avg_Y: -0.86 
+        (23) * num_samples: 6  avg_Y: -0.51 
+  (3) split_variable: X.3  split_value: -0.776971 
+    (6) split_variable: X.8  split_value: -0.153866 
+      (12) * num_samples: 3  avg_Y: -0.13 
+      (13) * num_samples: 7  avg_Y: 0.44 
+    (7) split_variable: X.1  split_value: 0.797433 
+      (14) split_variable: X.6  split_value: -0.183836 
+        (24) split_variable: X.7  split_value: 1.09963 
+          (36) split_variable: X.10  split_value: -0.332678 
+            (50) * num_samples: 2  avg_Y: 1.68 
+            (51) split_variable: X.7  split_value: 0.0456 
+              (62) * num_samples: 2  avg_Y: 1.5 
+              (63) * num_samples: 4  avg_Y: 0.61 
+          (37) * num_samples: 3  avg_Y: 0.04 
+        (25) split_variable: X.2  split_value: 0.954018 
+          (38) * num_samples: 8  avg_Y: 0.15 
+          (39) split_variable: X.2  split_value: 1.55038 
+            (52) * num_samples: 5  avg_Y: 1.31 
+            (53) * num_samples: 2  avg_Y: 2.13 
+      (15) split_variable: X.3  split_value: 0.0345568 
+        (26) * num_samples: 2  avg_Y: 1.04 
+        (27) split_variable: X.1  split_value: 1.22138 
+          (40) * num_samples: 3  avg_Y: 0.78 
+          (41) * num_samples: 2  avg_Y: 2.29 
 \end{Soutput}
 \end{Schunk}
 
@@ -340,7 +390,7 @@ Variable splits:
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
+\includegraphics[width = 1.5\textwidth]{regression_tree_plot.png}
 \end{figure}
 \hfill
 \end{frame}
@@ -693,7 +743,7 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 
 \begin{wideitemize}
 \item Returning to (causal) inference\dots \pause we might like to use these methods to get valid inference, potentially on causal targets.\pause
-\item As we think about causal quantities, we'll move the target. 
+\item As we move from pure prediction to causal targets, adaptive tree fitting becomes part of the inferential problem.
 \end{wideitemize}
 
 \end{frame}
@@ -735,13 +785,59 @@ $C^{-i}$ is the set of bootstrap samples that do not contain $i$, $\lvert C^{-i}
 \end{wideitemize}
 
 }
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Causal trees}
+
+\begin{Schunk}
+\begin{Sinput}
+> c.forest <- causal_forest(X, Y, W)
+> causal_tree <- get_tree(c.forest, 1)
+> causal_leaf.nodes <- get_leaf_node(causal_tree, X[1:5, ])
+\end{Sinput}
+\end{Schunk}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{wideitemize}
+\item xxxx
+\end{wideitemize}
+
+}
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{A tree}
+
+\begin{frame}{Honesty in practice}
+
+\begin{wideitemize}
+\item One subsample chooses the structure of the tree; another subsample estimates what happens within the leaves. \pause
+\item The tradeoff is straightforward: less adaptive bias, but smaller effective sample size at each stage. \pause
+\item That tradeoff is what lets tree-based methods become useful for causal inference rather than only prediction.
+\end{wideitemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{wideitemize}
+\item xxxx
+\end{wideitemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{An honest tree}
 
 \begin{figure}
 \centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
+\includegraphics[width = 0.8\textwidth]{causal_tree_plot.png}
 \end{figure}
 \hfill
 \end{frame}

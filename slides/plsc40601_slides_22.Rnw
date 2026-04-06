@@ -25,7 +25,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\tabcolsep}{1.3pt}
 \title{PLSC 40601}
-\subtitle{Week 2: Bootstrapping, bagging, honesty.}
+\subtitle{Week 2: Bootstrapping and bagging.}
 \date{Spring 2026}
 \author{Molly Offer-Westort}
 \institute{Department of Political Science, \\University of Chicago}
@@ -303,121 +303,6 @@ where $\overline{\textrm{err}}$ is the training error. \pause
 \end{itemize}
 
 }
-
-%-------------------------------------------------------------------------------%
-\begin{transitionframe}
-\centering
-
-\LARGE \textcolor{white}{Honesty.}
-
-\end{transitionframe}
-%-------------------------------------------------------------------------------%
-\begin{frame}{Honesty}
-
-\begin{wideitemize}
-\item Returning to (causal) inference\dots \pause we might like to use these methods to get valid inference, potentially on causal targets.
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{itemize}
-\item xxxx
-\end{itemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{An honest tree algorithm}
-
-\begin{enumerate}
-\item Split the sample into two folds. \pause
-\item Use the first fold to learn splits of the tree. \pause
-\item Estimate response within leaves using the second fold. \pause
-\end{enumerate}
-
-\begin{wideitemize}
-\item This can result in some leaves being empty. \pause Prune them? \pause
-\item This procedure reduces bias relative to those proposed by \cite{breiman2001random}.
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{itemize}
-\item xxxx
-\end{itemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-\begin{frame}[fragile]{An honest tree algorithm}
-
-<<eval = FALSE>>=
-library(grf)
-set.seed(60637)
-
-
-n <- 500
-p <- 10
-X <- matrix(rnorm(n * p), n, p)
-W <- rbinom(n, 1, 0.5)
-Y <- pmax(X[, 1], 0) * W + X[, 2] +
-  pmin(X[, 3], 0) + rnorm(n)
-c.forest <- causal_forest(X, Y, W)
-@
-<<echo=FALSE, eval = FALSE>>=
-# Saving a plot in .svg can be done with the `DiagrammeRsvg` package.
-tree.plot = plot(tree)
-cat(DiagrammeRsvg::export_svg(tree.plot), file = file.path(asset_dir, 'tree_plot.svg'))
-@
-
-
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{itemize}
-\item xxxx
-\end{itemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-\begin{frame}{An honest tree}
-
-\begin{figure}
-\centering
-\includegraphics[width = 0.8\textwidth]{tree-plot.png}
-\end{figure}
-\hfill
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{itemize}
-\item xxxx
-\end{itemize}
-
-}
-
-%-------------------------------------------------------------------------------%
-
 
 \backupbegin
 %-------------------------------------------------------------------------------%
