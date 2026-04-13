@@ -88,26 +88,6 @@ save_grviz_plot <- function(widget, stem, asset_dir, width = 900, height = 620) 
 \thispagestyle{empty}
 }
 %-------------------------------------------------------------------------------%
-\begin{frame}{Housekeeping}
-
-\begin{wideitemize}
-\item ?
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%
 \begin{transitionframe}
 \centering
 
@@ -115,7 +95,7 @@ save_grviz_plot <- function(widget, stem, asset_dir, width = 900, height = 620) 
 
 \end{transitionframe}
 %-------------------------------------------------------------------------------%
-\begin{frame}{Regression Trees}
+\begin{frame}{Regression trees}
 
 \begin{wideitemize}
 \item Suppose we have joint data, $(Y,X_1, X_2)$.\pause
@@ -144,7 +124,7 @@ save_grviz_plot <- function(widget, stem, asset_dir, width = 900, height = 620) 
 
 %-------------------------------------------------------------------------------%
 
-\begin{frame}{Regression Trees}
+\begin{frame}{Regression trees}
 
 \begin{wideitemize}
 \item Our model is
@@ -177,7 +157,7 @@ f(\X) = \sum_{m = 1}^M c_m \mathbbm{1}\{\X\in R_m\}
 
 %-------------------------------------------------------------------------------%
 
-\begin{frame}{Regression Trees}
+\begin{frame}{Regression trees}
 
 \begin{wideitemize}
 \item How do we pick partitions?\pause
@@ -216,7 +196,7 @@ R_1(j,s) = \{ X|X_j \le s\} \textrm{ and } R_1(j,s) = \{ X|X_j > s\}
 
 %-------------------------------------------------------------------------------%
 
-\begin{frame}{Regression Trees}
+\begin{frame}{Regression trees}
 
 \begin{wideitemize}
 \item For just one variable:
@@ -325,7 +305,7 @@ ggplot(, aes(x = x, y = y)) +
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{Regression Trees}
+\begin{frame}{Regression trees}
 
 \begin{itemize}
 \item Now suppose we have joint data, $(Y,X_1, \dots, X_k)$.\pause
@@ -883,35 +863,3 @@ save_grviz_plot(causal_tree_plot, "causal_tree_plot", asset_dir)
 %-------------------------------------------------------------------------------%
 \backupend
 \end{document}
-%
-%-------------------------------------------------------------------------------%
-%%% [[TEMPLATE]] %%%
-\begin{transitionframe}
-\centering
-
-\LARGE \textcolor{white}{Statement.}
-
-\end{transitionframe}
-%-------------------------------------------------------------------------------%
-
-%%% [[TEMPLATE]] %%%
-\begin{frame}{Frametitle}
-
-\begin{wideitemize}
-\item xxx
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%

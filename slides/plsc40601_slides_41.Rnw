@@ -1,0 +1,816 @@
+% !Rnw weave = Sweave
+\documentclass[xcolor={table}, handout]{beamer}
+
+% Allow compilation from repo root or from /slides.
+\newcommand{\plscassetpath}{../assets}
+\IfFileExists{../assets/pres-template_MOW.sty}{}{%
+  \renewcommand{\plscassetpath}{assets}%
+}
+\newcommand{\plscbibpath}{../assets/PLSC40601}
+\IfFileExists{../assets/PLSC40601.bib}{}{%
+  \renewcommand{\plscbibpath}{assets/PLSC40601}%
+}
+
+\RequirePackage{\plscassetpath/pres-template_MOW}
+\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\usepackage{colortbl}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+
+
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{PLSC 40601}
+\subtitle{Week 4: Representation learning for causal inference.}
+\date{Spring 2026}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+<<echo = FALSE>>=
+asset_dir <- if (dir.exists("assets")) "assets" else "../assets"
+library(ggplot2)
+@
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{transitionframe}
+\centering
+
+\LARGE \textcolor{white}{Representations.}
+
+\end{transitionframe}
+%-------------------------------------------------------------------------------%
+\begin{frame}{From prediction to causal prediction}
+
+\begin{wideitemize}
+\item In ordinary supervised learning, we observe an input vector $X$ with $p$ components and a target $Y$. 
+We fit $\hat f(X)$ to predict $Y$.\pause
+
+\item In causal inference, we often want
+\[
+\mu_1(X) = \E[Y(1) \mid X], \qquad \mu_0(X) = E[Y(0) \mid X]
+\]
+and
+\[
+\tau(X) = \mu_1(X) - \mu_0(X).
+\]\pause
+\item For each unit, one counterfactual outcome is always missing.\pause
+\item This is a \textit{transfer learning} problem: we want to infer something about the missing potential outcome from the observed data.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Why not stay linear?}
+
+\begin{wideitemize}
+\item If treatment effects vary in complicated ways, linear main-effects models can be too rigid.\pause
+\item We can add interactions or basis expansions, but hand-crafting them gets expensive quickly.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Additive models}
+
+\begin{wideitemize}
+\item An additive model writes the regression function as a sum of one-variable components:
+\[
+f(X) = \sum_{j=1}^p h_j(X_j).
+\]\pause
+\item Each covariate enters flexibly through its own function $h_j(\cdot)$ rather than through a single linear coefficient.\pause
+\item Example:
+\[
+\E[Y \mid X] = h_1(\text{age}) + h_2(\text{income}) + h_3(\text{prior turnout}).
+\]\pause
+\item This is more flexible than linear regression, but it still does not include interactions unless we add them explicitly.
+\end{wideitemize}
+\hfill \cite{hastie2009elements,bishop2006pattern}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Basis expansions}
+
+\begin{wideitemize}
+\item A standard way to allow nonlinear regression is to replace raw inputs with transformed features $h_1(X), \ldots, h_M(X)$.\pause
+\item Then fit
+\[
+f(X) = \sum_{m=1}^M \beta_m h_m(X).
+\]\pause
+\item If the basis functions are fixed in advance, we estimate $\beta$ just as in linear regression by minimizing
+\[
+\mathrm{RSS}(\beta) = \sum_{i=1}^N \left(y_i - f(X_i)\right)^2.
+\]\pause
+\item Examples include polynomial terms, spline bases, and localized functions such as sigmoids or radial basis functions.
+% \item For a scalar input $x$, one sigmoid basis function is
+% \[
+% h_m(x) = \frac{1}{1 + \exp\{-s_m(x - \mu_m)\}}.
+% \]
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{A sigmoid basis function}
+
+\[
+h_m(x) = \frac{1}{1 + \exp\{-s_m(x - \mu_m)\}}
+\]
+
+\scriptsize
+<<echo = TRUE>>=
+x <- seq(-4, 4, length.out = 200)
+mu_m <- 0
+s_m <- 2
+h_m <- 1 / (1 + exp(-s_m * (x - mu_m)))
+@
+
+
+<<fig = TRUE, width = 4, height = 2.5, echo = FALSE>>=
+ggplot(data.frame(x = x, h_m = h_m), aes(x = x, y = h_m)) +
+  geom_smooth(method = "loess", se = FALSE, linewidth = 1.0, color = "#8C1515") + 
+  theme_minimal(base_size = 12) +
+  geom_vline(xintercept = mu_m, linetype = "dashed", color = "gray60")
+
+@
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Basis expansion example}
+
+\begin{center}
+\includegraphics[width=0.92\textwidth,height=0.78\textheight,keepaspectratio]{week4_basis.png}
+\end{center}
+\hfill \cite{hastie2009elements}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{transitionframe}
+\centering
+
+\LARGE \textcolor{white}{Project pursuit regression.}
+
+\end{transitionframe}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Projection pursuit regression}
+
+\begin{wideitemize}
+\item Let $\omega_m$, for $m = 1, 2, \ldots, M$, be unit $p$-vectors of unknown parameters, and define derived features
+\[
+V_m = \omega_m^\top X.
+\]\pause
+\item The projection pursuit regression model is
+\[
+f(X) = \sum_{m=1}^M g_m(\omega_m^\top X).
+\]\pause
+\item Given training data $\{(x_i, y_i)\}_{i=1}^N$, we seek parameters
+\[
+\theta = \{\omega_m, g_m\}_{m=1}^M
+\]
+by minimizing the criterion function
+\[
+\sum_{i=1}^N \left[y_i - \sum_{m=1}^M g_m(\omega_m^\top x_i)\right]^2.
+\]
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Projection pursuit regression}
+
+\begin{wideitemize}
+\item The projection pursuit regression model is
+\[
+f(X) = \sum_{m=1}^M g_m(\omega_m^\top X).
+\]
+\item This is an additive model, but in learned projections rather than the original inputs.\pause
+\item Unlike fixed basis expansions, both the projections $\omega_m$ and the functions $g_m$ are learned from the data.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Fitting one ridge term}
+
+\begin{wideitemize}
+\item Start with the simplest case, $M = 1$, so
+\[
+f(X) = g(\omega^\top X).
+\]\pause
+\item For any fixed direction $\omega$, form the projected feature
+\[
+z_i = \omega^\top x_i.
+\]\pause
+\item Then estimate $g$ by a one-dimensional smoother or regression of $y_i$ on $z_i$.\pause
+\item Next search over $\omega$ to reduce residual sum of squares.\pause
+\item So even in the one-term case, PPR alternates between \textbf{projecting} the data and \textbf{smoothing} along that projection.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Toy example: what a direction does}
+
+\begin{wideitemize}
+\item Suppose $X = (X_1, X_2)$ and choose $\omega = (1,1)/\sqrt{2}$.\pause
+\begin{itemize}
+\item Why? If you want the direction that gives equal weight to $X_1$ and $X_2$, the natural vector is $(1,1)$. But in PPR and related models we usually normalize direction vectors to have length 1, so we divide by its norm:
+\[
+\|(1,1)\| = \sqrt{1^2 + 1^2} = \sqrt{2},
+\]
+which gives
+\[
+\omega = \frac{(1,1)}{\sqrt{2}}.
+\]
+\item  That does two things:
+\begin{itemize}
+\item It makes $\omega$ a unit vector, so it encodes direction only.
+\item Avoids ambiguity: $(1,1)$, $(2,2)$, and $(10,10)$ all point the same way but would give different projection magnitudes unless you normalize.
+\end{itemize}
+\end{itemize}
+\item Then $\omega^\top X = (X_1 + X_2)/\sqrt{2}$, so the ridge term looks at the diagonal combination of the two covariates.\pause
+\item The points $(2,0)$, $(1,1)$, and $(0,2)$ all have $\omega^\top X = \sqrt{2}$.\pause
+\item So $g(\omega^\top X)$ gives those points the same contribution. 
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Toy example: what a direction does}
+\centering
+{
+<<fig = TRUE, width = 4.5, height = 3.1, echo = FALSE>>=
+toy_df <- data.frame(
+  x1 = c(2, 1, 0),
+  x2 = c(0, 1, 2),
+  label = c("(2, 0)", "(1, 1)", "(0, 2)"),
+  proj_x = 1,
+  proj_y = 1
+)
+
+ggplot(toy_df, aes(x = x1, y = x2)) +
+  geom_abline(
+    slope = 1, intercept = 0,
+    linewidth = 0.8, linetype = "dashed", color = "#155F83"
+  ) +
+  geom_segment(
+    aes(xend = proj_x, yend = proj_y),
+    linewidth = 0.6, color = "gray60"
+  ) +
+  geom_point(size = 2.6, color = "#8C1515") +
+  geom_point(
+    data = data.frame(x1 = 1, x2 = 1),
+    size = 3.2, shape = 21, stroke = 0.8,
+    fill = "#155F83", color = "white"
+  ) +
+  geom_text(aes(label = label), nudge_y = 0.16, size = 3.3) +
+  annotate("text", x = 1.25, y = 1.95, label = "direction  x1 = x2", color = "#155F83", size = 3.3) +
+  annotate("text", x = 1.05, y = 0.5, label = "same projection", color = "#155F83", size = 3.2) +
+  coord_equal(xlim = c(-0.2, 2.3), ylim = c(-0.2, 2.3)) +
+  theme_bw(base_size = 12) +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank()
+  ) +
+  labs(x = expression(X[1]), y = expression(X[2]))
+@
+}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Toy example: estimate $g$ from $z_i$}
+
+\begin{wideitemize}
+\item Keep the same direction $\omega = (1,1)/\sqrt{2}$.\pause
+\item For each observation, compute the scalar projection
+\[
+z_i = \omega^\top x_i.
+\]\pause
+\item The three points on the previous slide only showed what it means to share the same projection.\pause
+\item To estimate the ridge function $g$, we need several observations with different values of $z_i$.\pause
+\item Then we can fit a one-dimensional smoother or regression of $y_i$ on $z_i$.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Toy example: estimate $g$ from $z_i$}
+\centering
+{
+<<fig = TRUE, width = 4.8, height = 3.2, echo = FALSE>>=
+library(ggplot2)
+
+toy_fit_df <- data.frame(
+  x1 = c(0.0, 0.3, 0.7, 1.0, 1.4, 1.8, 2.1, 2.5),
+  x2 = c(0.1, 0.4, 0.6, 1.1, 1.3, 1.6, 2.0, 2.2),
+  y = c(0.20, 0.35, 0.65, 1.05, 1.55, 1.85, 1.75, 1.30)
+)
+toy_fit_df$z <- with(toy_fit_df, (x1 + x2) / sqrt(2))
+
+ggplot(toy_fit_df, aes(x = z, y = y)) +
+  geom_point(size = 2.4, color = "#8C1515") +
+  geom_smooth(method = "loess", se = FALSE, linewidth = 1.0, color = "#155F83") +
+  theme_bw(base_size = 12) +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank()
+  ) +
+  labs(
+    x = expression(z[i] == omega^T * x[i]),
+    y = expression(y[i]),
+    title = "Projected data and a smooth fit"
+  )
+@
+}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Toy example: search over $\omega$}
+
+\begin{wideitemize}
+\item Now try several candidate directions $\omega$.\pause
+\item For each one, compute
+\[
+z_i = \omega^\top x_i,
+\]
+fit a one-dimensional regression of $y_i$ on $z_i$, and record the residual sum of squares.\pause
+\item The best direction is the one with the smallest RSS.\pause
+\item In this toy data, the diagonal direction does best because $y$ depends mostly on $x_1 + x_2$.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Toy example: search over $\omega$}
+\centering
+{
+<<fig = TRUE, width = 5.0, height = 3.35, echo = FALSE>>=
+library(ggplot2)
+
+search_base <- data.frame(
+  x1 = c(0, 1, 0, 1, 2, 1, 2, 3),
+  x2 = c(0, 0, 1, 1, 0, 2, 1, 0),
+  y = c(0.1, 1.0, 1.1, 2.0, 2.1, 3.0, 3.1, 3.2)
+)
+
+direction_defs <- list(
+  "omega = (1, 0)" = c(1, 0),
+  "omega = (0, 1)" = c(0, 1),
+  "omega = (1, 1)/sqrt(2)" = c(1, 1) / sqrt(2)
+)
+
+plot_list <- lapply(names(direction_defs), function(lbl) {
+  w <- direction_defs[[lbl]]
+  z <- as.numeric(as.matrix(search_base[, c("x1", "x2")]) %*% w)
+  fit <- lm(search_base$y ~ z)
+  data.frame(
+    direction = lbl,
+    z = z,
+    y = search_base$y,
+    rss = sum(resid(fit)^2)
+  )
+})
+
+search_plot_df <- do.call(rbind, plot_list)
+
+rss_labels <- unique(search_plot_df[, c("direction", "rss")])
+rss_labels$label <- paste0("RSS = ", format(round(rss_labels$rss, 2), nsmall = 2))
+rss_labels$x <- ave(search_plot_df$z, search_plot_df$direction, FUN = max)[match(rss_labels$direction, search_plot_df$direction)]
+rss_labels$y <- ave(search_plot_df$y, search_plot_df$direction, FUN = max)[match(rss_labels$direction, search_plot_df$direction)] - 0.15
+
+ggplot(search_plot_df, aes(x = z, y = y)) +
+  geom_point(size = 2.2, color = "#8C1515") +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.9, color = "#155F83") +
+  geom_text(
+    data = rss_labels,
+    aes(x = x, y = y, label = label),
+    inherit.aes = FALSE, hjust = 1, size = 3.1, color = "#155F83"
+  ) +
+  facet_wrap(~direction, scales = "free_x") +
+  theme_bw(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    strip.background = element_rect(fill = "grey96"),
+    strip.text = element_text(size = 9)
+  ) +
+  labs(x = expression(z[i]), y = expression(y[i]))
+@
+}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Backfitting when $M>1$}
+
+\begin{wideitemize}
+\item With several ridge terms, hold all terms except $m$ fixed and update one component at a time.\pause
+\item Define the partial residual for term $m$ as
+\[
+r_i^{(m)} = y_i - \sum_{k \neq m} \hat g_k(\omega_k^\top x_i).
+\]\pause
+\item Then update $(g_m, \omega_m)$ by solving
+\[
+\min_{g_m,\omega_m} \sum_{i=1}^N \left[r_i^{(m)} - g_m(\omega_m^\top x_i)\right]^2.
+\]\pause
+\item Equivalently, we replace the old $m$th ridge function with a new one while treating the others as fixed.\pause
+\item Cycling through $m = 1, \ldots, M$ gives a Gauss-Seidel or \textbf{backfitting} algorithm.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+% \begin{frame}{Gauss-Seidel in linear algebra}
+% 
+% \begin{wideitemize}
+% \item For a linear system
+% \[
+% A\beta = b,
+% \]
+% write
+% \[
+% A = D + L + U,
+% \]
+% where $D$ is diagonal, $L$ is strictly lower triangular, and $U$ is strictly upper triangular.\pause
+% \item The Gauss-Seidel update is
+% \[
+% \beta^{(t+1)} = -(D+L)^{-1}U\beta^{(t)} + (D+L)^{-1}b.
+% \]\pause
+% \item Coordinate-by-coordinate, this means
+% \[
+% \beta_m^{(t+1)}
+% = \frac{1}{a_{mm}}
+% \left(
+% b_m
+% - \sum_{k<m} a_{mk}\beta_k^{(t+1)}
+% - \sum_{k>m} a_{mk}\beta_k^{(t)}
+% \right).
+% \]\pause
+% \item So each coordinate uses the newest available updates for earlier components and the old values for later ones.\pause
+% \item Backfitting in PPR follows the same logic at the level of \textbf{blocks}: update one ridge term while holding the others fixed, then cycle through the terms.
+% \end{wideitemize}
+% 
+% \end{frame}
+% %-------------------------------------------------------------------------------%
+\begin{frame}{Practical fitting of PPR}
+
+\begin{wideitemize}
+\item In practice, the algorithm alternates through the $M$ terms repeatedly until the fit stops improving much.\pause
+\item A common implementation is \textbf{forward stagewise}: add one new ridge term at a time, then refine the existing terms.\pause
+\item The number of terms $M$ is usually chosen by validation or cross-validation rather than estimated in one joint optimization step.\pause
+\item This is computationally heavier, and often less stable, than fitting ordinary linear or additive models.\pause
+\item That computational burden is one reason neural networks largely displaced PPR in many applications.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Interpreting PPR}
+
+\begin{wideitemize}
+\item A single term $g_m(\omega_m^\top X)$ is called a \textbf{ridge function}.\pause
+\item The projection
+\[
+V_m = \omega_m^\top X
+\]
+gives the view of the covariates in the direction defined by $\omega_m$.\pause
+\item Then $g_m$ is just a one-dimensional smooth function of that projected feature.\pause
+\item Geometrically, $g_m(\omega_m^\top X)$ is constant on hyperplanes orthogonal to $\omega_m$.\pause
+\item So PPR searches for useful directions in covariate space and then fits flexible univariate functions along those directions.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{PPR is very flexible}
+
+\begin{wideitemize}
+\item If $M$ is sufficiently large, the PPR model can approximate any continuous function on $\mathbb{R}^p$ arbitrarily well: it is a \textbf{universal approximator}.\pause
+\item But: once several projection terms are combined, interpretation becomes difficult; covariates can enter the fit through multiple projections, and the projections themselves are not necessarily easy to understand.\pause
+\item So PPR is usually better viewed as a flexible predictive model than as a simple, transparent description of the data-generating process.\pause
+\item One important exception is the case $M=1$, sometimes called the \textbf{single-index model} in econometrics.\pause
+\item That model is more general than linear regression, while still being relatively interpretable.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{transitionframe}
+\centering
+
+\LARGE \textcolor{white}{Neural nets.}
+
+\end{transitionframe}
+%-------------------------------------------------------------------------------%
+\begin{frame}{A simple feedforward network}
+
+\begin{wideitemize}
+\item A one-hidden-layer feedforward network maps an input vector
+\[
+X=(X_1,\ldots,X_p)^\top
+\]
+to a prediction.\pause
+\item Between the inputs and the prediction sits a layer of $M$ hidden units.\pause
+\item In a fully connected network, each hidden unit depends on all input coordinates, and the output depends on all hidden units.\pause
+\item Information flows only forward: inputs $\rightarrow$ hidden layer $\rightarrow$ output.\pause
+\item We focus first on the one-output regression case; classification mainly changes the last layer.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{One hidden layer, schematically}
+
+\centering
+\begin{tikzpicture}[
+    x=1.35cm, y=1cm, >=stealth,
+    input/.style={circle, draw=Maroon, thick, minimum size=0.75cm},
+    hidden/.style={circle, draw=Contrast6d, thick, fill=Contrast6l!25, minimum size=0.75cm},
+    output/.style={rectangle, rounded corners, draw=Contrast4d, thick, fill=Contrast4l!25, minimum width=1.8cm, minimum height=0.9cm},
+    lab/.style={font=\small}
+]
+\node[input] (x1) at (0,2.2) {$X_1$};
+\node[input] (x2) at (0,1.1) {$X_2$};
+\node[input] (x3) at (0,0.0) {$X_3$};
+\node[input] (xp) at (0,-1.1) {$\cdots$};
+\node[input] (x4) at (0,-2.2) {$X_p$};
+
+\node[hidden] (h1) at (2.6,1.6) {$h_1$};
+\node[hidden] (h2) at (2.6,0.0) {$h_2$};
+\node[hidden] (h3) at (2.6,-1.6) {$h_M$};
+
+\node[output] (f) at (5.3,0) {$\hat y(X)$};
+
+\foreach \i in {x1,x2,x3,xp,x4}{
+  \foreach \j in {h1,h2,h3}{
+    \draw[->, gray!70] (\i) -- (\j);
+  }
+}
+\foreach \j in {h1,h2,h3}{
+  \draw[->, gray!70] (\j) -- (f);
+}
+
+\node[lab] at (0,-3.0) {observed covariates};
+\node[lab] at (2.6,-3.0) {learned hidden features};
+\node[lab] at (5.3,-3.0) {prediction};
+\end{tikzpicture}
+
+\vspace{0.2cm}
+
+\small The hidden layer provides learned features that are then combined into a prediction.
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{One hidden layer in notation}
+
+\begin{wideitemize}
+\item For hidden unit $m$, form the pre-activation
+\[
+z_m(X) = \alpha_{0m} + \alpha_m^\top X, \qquad m = 1, \ldots, M,
+\]\pause
+\item Then apply the hidden-unit activation
+\[
+h_m(X) = \sigma(z_m(X)).
+\]\pause
+\item In the one-output regression case, the prediction is
+\[
+\hat y(X) = \beta_0 + \sum_{m=1}^M \beta_m h_m(X).
+\]\pause
+\item We will use $z_m$ for hidden pre-activations, $h_m$ for hidden-unit outputs, and $\hat y$ for the prediction. 
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Activation functions}
+
+\begin{wideitemize}
+\item The key nonlinear ingredient is the hidden-unit activation $\sigma(\cdot)$.\pause
+\item A classic choice is the sigmoid function
+\[
+\sigma(v) = \frac{1}{1 + e^{-v}}.
+\]\pause
+\item What if $\sigma(\cdot)$ were linear?\pause
+\item In a regression neural net, we usually do not apply any extra nonlinear transformation at the end, so the prediction is the weighted sum of hidden units.\pause
+\item In multi-class classification, we can replace the scalar output with logits $t_k(X)$ and softmax probabilities
+\[
+\hat p_k(X) = \frac{e^{t_k(X)}}{\sum_{\ell=1}^K e^{t_\ell(X)}}.
+\]
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Hidden units as learned basis functions}
+
+\begin{wideitemize}
+\item In the one-output regression case, the network has the form
+\[
+h_m(X) = \sigma(\alpha_{0m} + \alpha_m^\top X), \qquad
+\hat y(X) = \beta_0 + \sum_{m=1}^M \beta_m h_m(X).
+\]\pause
+\item This has the same outer form as a basis expansion: a linear combination of transformed features.\pause
+\item The difference is that the features $h_m(X)$ are not fixed in advance.\pause
+\item The data determine both the directions $\alpha_m$ and the nonlinear transformations through the fitted weights.\pause
+\item So hidden units are best viewed as \textbf{learned basis functions} or \textbf{learned features}.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{One hidden layer as constrained PPR}
+
+\begin{wideitemize}
+\item We can rewrite the network as:
+\[
+\hat y(X) = \beta_0 + \sum_{m=1}^M \beta_m \sigma(\alpha_{0m} + \alpha_m^\top X).
+\]\pause
+\item This has the same overall ridge-function structure as PPR:
+\[
+f(X) = \sum_{m=1}^M g_m(\omega_m^\top X).
+\]\pause
+\item We can identify $\quad \omega_m = \alpha_m, \qquad g_m(v) = \beta_m \sigma(\alpha_{0m} + v)$.\pause
+\item PPR estimates a general smooth ridge function $g_m$, while the neural net restricts each ridge term to the activation family $\sigma(\cdot)$.\pause
+\item Because that family is more constrained, neural nets may need more hidden units $M$ than PPR would need ridge terms.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Fitting a neural network}
+
+\begin{wideitemize}
+\item Collect all unknown weights and intercepts into a parameter vector $\theta$.\pause
+\item With $p$ inputs and $M$ hidden units, the one-output model has
+\[
+(p+1)M + (M+1) = (p+2)M + 1
+\]
+parameters.\pause
+\item For training data $(x_i,y_i)_{i=1}^N$, we choose $\theta$ by minimizing a loss function.\pause
+\item In the regression case, a standard choice is squared error loss:
+\[
+L(\theta) = \sum_{i=1}^N \left[y_i - \hat y(x_i)\right]^2.
+\]\pause
+\item For classification, the analogous choice is cross-entropy loss.\pause
+\item Find a high-dimensional parameter vector that makes the fitted function match the training data well.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Optimization and backpropagation}
+
+\begin{wideitemize}
+\item Unlike PPR backfitting, neural-network training updates all weights jointly.\pause
+\item The loss is generally nonconvex, so we rely on gradient-based optimization rather than a closed-form solution.\pause
+\item A forward pass computes the hidden pre-activations $z_m(x_i)$, hidden outputs $h_m(x_i)$, and predictions $\hat y(x_i)$.\pause
+\item A backward pass applies the chain rule to compute how each weight affects the loss.\pause
+\item That backward recursion is \textbf{backpropagation}.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Backpropagation for squared error}
+
+\begin{wideitemize}
+\item For one observation $i$, write the contribution to the loss as
+\[
+\ell_i(\theta) = \left[y_i - \hat y(x_i)\right]^2.
+\]\pause
+\item Define
+\[
+z_{im} = \alpha_{0m} + \alpha_m^\top x_i, \qquad
+h_{im} = \sigma(z_{im}), \qquad
+\hat y_i = \beta_0 + \sum_{m=1}^M \beta_m h_{im}.
+\]\pause
+\item Then the output-layer gradient is
+\[
+\frac{\partial \ell_i}{\partial \beta_m}
+= -2\left(y_i - \hat y_i\right) h_{im}.
+\]\pause
+\item And the input-to-hidden gradient is
+\[
+\frac{\partial \ell_i}{\partial \alpha_{jm}}
+= -2\left(y_i - \hat y_i\right)\beta_m \sigma'(z_{im}) x_{ij}.
+\]
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Error signals and gradient updates}
+
+\begin{wideitemize}
+\item Define the output error signal
+\[
+\delta_i = -2\left(y_i - \hat y_i\right).
+\]\pause
+\item Define the hidden-unit error signal
+\[
+\eta_{im} = \delta_i \beta_m \sigma'(z_{im}).
+\]
+\pause
+\item Then the gradients factor as
+\[
+\frac{\partial \ell_i}{\partial \beta_m} = \delta_i h_{im},
+\qquad
+\frac{\partial \ell_i}{\partial \alpha_{jm}} = \eta_{im} x_{ij}.
+\]\pause
+\item A batch gradient update takes the form
+\[
+\beta_m^{(r+1)} = \beta_m^{(r)} - \gamma_r \sum_{i=1}^N \frac{\partial \ell_i}{\partial \beta_m},
+\qquad
+\alpha_{jm}^{(r+1)} = \alpha_{jm}^{(r)} - \gamma_r \sum_{i=1}^N \frac{\partial \ell_i}{\partial \alpha_{jm}}.
+\]
+\pause
+\item With more outputs or more layers, the same logic repeats: compute prediction errors, move them backward through the network, then update the weights.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{transitionframe}
+\centering
+
+\LARGE \textcolor{white}{Putting it together for representation learning.}
+
+\end{transitionframe}
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{Representation learning}
+
+\begin{wideitemize}
+\item Write $\phi(X)$ for a learned representation of the covariates.\pause
+\item Then predict outcomes using $\phi(X)$ rather than raw $X$.\pause
+\item Intuition: a good representation keeps the signal that matters for outcomes and drops noise that does not.
+\item Bridging to \cite{johansson2016learning,shalit2017estimating}
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Shared trunk, separate heads}
+
+\begin{wideitemize}
+\item One natural architecture is
+\[
+\hat\mu_0(X) = h_0(\phi(X)), \qquad \hat\mu_1(X) = h_1(\phi(X)).
+\]\pause
+\item The shared representation $\phi(X)$ pools structure across treatment arms.\pause
+\item The separate heads let treated and control response surfaces differ.\pause
+\item Core idea of TARNet-style models (Treatment-Agnostic Representation Network).
+\end{wideitemize}
+
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Shared representation, separate heads}
+
+\centering
+\begin{tikzpicture}[
+    x=1.2cm, y=1cm, >=stealth, scale=0.92, transform shape,
+    box/.style={rectangle, rounded corners, draw=Maroon, thick, fill=white, minimum width=1.5cm, minimum height=0.85cm},
+    rep/.style={rectangle, rounded corners, draw=Contrast6d, thick, fill=Contrast6l!25, minimum width=2.1cm, minimum height=1cm},
+    head/.style={rectangle, rounded corners, draw=Contrast4d, thick, fill=Contrast4l!25, minimum width=1.9cm, minimum height=0.85cm},
+    tau/.style={rectangle, rounded corners, draw=Contrast3d, thick, fill=Contrast1l!25, minimum width=1.9cm, minimum height=0.85cm},
+    lab/.style={font=\scriptsize}
+]
+\node[box] (x) at (0,0) {$X$};
+\node[rep] (phi) at (2.5,0) {$\phi(X)$};
+\node[head] (mu0) at (5.0,1.1) {$\hat\mu_0(X)$};
+\node[head] (mu1) at (5.0,-1.1) {$\hat\mu_1(X)$};
+\node[tau] (tau) at (7.4,0) {$\hat\tau(X)$};
+
+\draw[->] (x) -- (phi);
+\draw[->] (phi) -- (mu0);
+\draw[->] (phi) -- (mu1);
+\draw[->] (mu0) -- (tau);
+\draw[->] (mu1) -- (tau);
+
+\node[lab] at (2.5,-2.1) {shared\\representation};
+\node[lab] at (5.0,-2.1) {treatment-specific\\heads};
+\node[lab] at (7.4,-2.1) {estimated\\effect};
+\end{tikzpicture}
+
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Why this is attractive for causal heterogeneity}
+
+\begin{wideitemize}
+\item Many covariates may matter, but not all in the same way for treated and control units.\pause
+\item Sharing lower-level features can stabilize estimation when each arm is limited.\pause
+\item The target is heterogeneity.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{What neural nets do not solve}
+
+\begin{wideitemize}
+\item A flexible architecture does not identify causal effects by itself.\pause
+\item The papers still rely on unconfoundedness and adequate overlap.\pause
+\item If treated and control units live in different regions of covariate space, the model is still being asked to extrapolate.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+    \bibliographystyle{apalike}
+    \bibliography{\plscbibpath}
+\end{frame}
+%-------------------------------------------------------------------------------%
+\backupend
+\end{document}

@@ -1,8 +1,18 @@
 % !Rnw weave = Sweave
-\documentclass[xcolor={dvipsnames},handout]{beamer}
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
 
+% Allow compilation from repo root or from /slides.
+\newcommand{\plscassetpath}{../assets}
+\IfFileExists{../assets/pres-template_MOW.sty}{}{%
+  \renewcommand{\plscassetpath}{assets}%
+}
+\newcommand{\plscbibpath}{../assets/PLSC40601}
+\IfFileExists{../assets/PLSC40601.bib}{}{%
+  \renewcommand{\plscbibpath}{assets/PLSC40601}%
+}
 
-\RequirePackage{../assets/pres-template_MOW}
+\RequirePackage{\plscassetpath/pres-template_MOW}
+\graphicspath{{./}{slides/}{assets/}{../assets/}}
 
 
 %--------------------------------------------------------------------------
@@ -599,32 +609,8 @@ e(x) & = \E[W_i | \X_i = x]
 
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{apalike}
-    \bibliography{../assets/PLSC40601}
+    \bibliography{\plscbibpath}
 \end{frame}
 %-------------------------------------------------------------------------------%
 \backupend
 \end{document}
-%
-%-------------------------------------------------------------------------------%
-
-%%% [[TEMPLATE]] %%%
-\begin{frame}{Frametitle}
-
-\begin{wideitemize}
-\item xxx
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%

@@ -261,7 +261,7 @@ References for notation:\pause
 \end{transitionframe}
 %-------------------------------------------------------------------------------%
 
-\begin{frame}{Statistical setup.}
+\begin{frame}{Statistical setup}
 
 \begin{wideitemize}
 \item Population. \pause
@@ -289,7 +289,7 @@ References for notation:\pause
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{Statistical setup.}
+\begin{frame}{Statistical setup}
 
 \begin{wideitemize}
 \item Potential outcomes framework: $Y_i(w)$ represents the potential outcome for respondent $i$ under treatment $w$. \pause $\Y_i = (Y_i(0), \dots, Y_i(K))$.\pause
@@ -317,7 +317,7 @@ References for notation:\pause
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{(Some) Causal estimands}
+\begin{frame}{(Some) causal estimands}
 \vskip 1 ex
 \pause
 What is an estimand? \pause What makes an estimand \textit{causal}? \pause Counterfactual comparison.  
@@ -346,7 +346,7 @@ What is an estimand? \pause What makes an estimand \textit{causal}? \pause Count
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{(Some) Causal estimands}
+\begin{frame}{(Some) causal estimands}
 
 \begin{wideitemize}
 \item Average treatment effect on the treated (ATT): \[\tau_{ATT} = \E[\tau_i | W_i = 1]\] \pause
@@ -464,27 +464,3 @@ e(x)=\Pr[W_i=1 \mid X_i=x].
 %-------------------------------------------------------------------------------%
 \backupend
 \end{document}
-%
-%-------------------------------------------------------------------------------%
-
-%%% [[TEMPLATE]] %%%
-\begin{frame}{Frametitle}
-
-\begin{wideitemize}
-\item xxx
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%

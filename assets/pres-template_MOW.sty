@@ -69,13 +69,12 @@ linkcolor=Contrast1
 % --- Beamer templates -------------------------------------------------------
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{footline}{%
-\hfill\usebeamertemplate***{navigation symbols}
-\hspace{1cm}\insertframenumber{}}
+\hfill{\usebeamercolor[fg]{structure}\insertframenumber{}}\hspace{0.8cm}}
 \setbeamertemplate{itemize items}{-}
-%\setbeamercolor{frametitle}{fg=Maroon}
-%\setbeamercolor{title}{fg=Maroon}
-%\setbeamercolor{itemize item}{fg=Maroon}
-%\setbeamercolor{itemize subitem}{fg=Maroon}
+\setbeamercolor{frametitle}{fg=Maroon}
+\setbeamercolor{title}{fg=Maroon}
+\setbeamercolor{itemize item}{fg=Maroon}
+\setbeamercolor{itemize subitem}{fg=Maroon}
 %\setbeamercolor{enumerate item}{fg=Maroon}
 %\setbeamercolor{enumerate subitem}{fg=Maroon}
 %\setbeamercolor{button}{bg=MyBackground,fg=Maroon,}
@@ -119,7 +118,6 @@ linkcolor=Contrast1
 \RequirePackage{graphicx}
 \RequirePackage[normalem]{ulem}
 \RequirePackage{siunitx}
-\RequirePackage{graphicx}
 \RequirePackage{epsfig}
 \RequirePackage{psfrag}
 \RequirePackage{wrapfig}

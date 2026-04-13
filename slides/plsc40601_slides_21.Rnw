@@ -43,26 +43,6 @@ asset_dir <- if (dir.exists("assets")) "assets" else "../assets"
 \thispagestyle{empty}
 }
 %-------------------------------------------------------------------------------%
-\begin{frame}{Housekeeping}
-
-\begin{wideitemize}
-\item ?
-\end{wideitemize}
-
-\end{frame}
-
-
-%%%%%NOTE%%%%%
-\note{
-\scriptsize \singlespacing
-
-\begin{wideitemize}
-\item xxxx
-\end{wideitemize}
-
-}
-
-%-------------------------------------------------------------------------------%
 \begin{transitionframe}
 \centering
 
@@ -325,7 +305,7 @@ Training set $\mathcal{T}$ is fixed. \pause
 
 \end{transitionframe}
 %-------------------------------------------------------------------------------%
-\begin{frame}{Cross-validation.}
+\begin{frame}{Cross-validation}
 
 \begin{wideitemize}
 \item We can potentially get more out of our data by cross-validating. \pause
@@ -366,7 +346,7 @@ $\hat{f}^{-k(i)}_{\lambda}$ is the fit from the training folds using penalty $\l
 
 %-------------------------------------------------------------------------------%
 
-\begin{frame}{K-fold cross validation.}
+\begin{frame}{K-fold cross-validation}
 
 \begin{wideitemize}
   \scriptsize
@@ -466,7 +446,7 @@ $\hat{f}^{-k(i)}_{\lambda}$ are the fits from the folds $k$ that do not contain 
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{Cross-validation.}
+\begin{frame}{Cross-validation}
 
 \begin{wideitemize}
 \item How do we pick $K$?\pause
@@ -493,7 +473,7 @@ $\hat{f}^{-k(i)}_{\lambda}$ are the fits from the folds $k$ that do not contain 
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{Cross-validation.}
+\begin{frame}{Cross-validation}
 
 \begin{wideitemize}
 \item Rule of thumb is often 5 or 10 folds. \pause
