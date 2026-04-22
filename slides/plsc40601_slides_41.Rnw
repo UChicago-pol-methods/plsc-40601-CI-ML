@@ -633,18 +633,18 @@ f(X) = \sum_{m=1}^M g_m(\omega_m^\top X).
 
 \begin{wideitemize}
 \item Collect all unknown weights and intercepts into a parameter vector $\theta$.\pause
-\item With $p$ inputs and $M$ hidden units, the one-output model has
+With $p$ inputs and $M$ hidden units, the one-output model has
 \[
 (p+1)M + (M+1) = (p+2)M + 1
 \]
 parameters.\pause
-\item For training data $(x_i,y_i)_{i=1}^N$, we choose $\theta$ by minimizing a loss function.\pause
+\item For training data $(x_i,y_i)_{i=1}^N$, we choose $\theta$ by minimizing a loss function.\pause Find a high-dimensional parameter vector that makes the fitted function match the training data well.
+
 \item In the regression case, a standard choice is squared error loss:
 \[
 L(\theta) = \sum_{i=1}^N \left[y_i - \hat y(x_i)\right]^2.
 \]\pause
 \item For classification, the analogous choice is cross-entropy loss.\pause
-\item Find a high-dimensional parameter vector that makes the fitted function match the training data well.
 \end{wideitemize}
 
 \end{frame}
