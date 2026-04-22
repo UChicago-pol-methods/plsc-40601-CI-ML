@@ -1,0 +1,274 @@
+% !Rnw weave = Sweave
+\documentclass[xcolor={table}, handout]{beamer}
+
+% Allow compilation from repo root or from /slides.
+\newcommand{\plscassetpath}{../assets}
+\IfFileExists{../assets/pres-template_MOW.sty}{}{%
+  \renewcommand{\plscassetpath}{assets}%
+}
+\newcommand{\plscbibpath}{../assets/PLSC40601}
+\IfFileExists{../assets/PLSC40601.bib}{}{%
+  \renewcommand{\plscbibpath}{assets/PLSC40601}%
+}
+
+\RequirePackage{\plscassetpath/pres-template_MOW}
+\graphicspath{{./}{slides/}{assets/}{../assets/}}
+\usepackage{colortbl}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+
+
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{PLSC 40601}
+\subtitle{Week 5: Deep IV, proximal inference, and causal inverse problems.}
+\date{Spring 2026}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+
+% \begin{frame}{Notation for the session}
+
+% \begin{wideitemize}
+% \item $A$ is treatment, $Y$ is outcome, $X$ is observed covariates, and $U$ is an unobserved confounder.\pause
+% \item $Z$ is the instrument in the IV and Deep IV discussion.\pause
+% \item $V$ and $W$ are treatment-inducing and outcome-inducing proxies in the proximal discussion.\pause
+% \item I will keep $\E[\cdot]$, $\Pr[\cdot]$, and $\Supp(\cdot)$ notation consistent across both parts of the lecture.
+% \end{wideitemize}
+
+% \end{frame}
+% %-------------------------------------------------------------------------------%
+\begin{frame}{Why IV? What problem is it solving?}
+
+\begin{wideitemize}
+\item In many settings, treatment receipt $A_i$ is not randomized.\pause
+\item Some units select into treatment based on unobservables, so comparisons by $A_i$ mix causation with selection.\pause
+\item IV uses a variable $Z_i$ that shifts $A_i$ for some units \emph{as good as randomly}.\pause
+\item The target is causal variation in treatment induced by $Z$, not all observed variation in treatment.
+\end{wideitemize}
+\hfill \cite{angrist2009,hernan2010causal}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Canonical IV DAG}
+
+\begin{columns}
+\begin{column}{0.46\textwidth}
+\begin{wideitemize}
+\item $U$: unobserved confounder of $A$ and $Y$.\pause
+\item $Z$: instrument / encouragement.\pause
+\item Relevance: $Z \to A$.\pause
+\item Exclusion: no direct arrow $Z \to Y$.\pause
+\item Independence: $Z \indep U$.
+\end{wideitemize}
+\end{column}
+\begin{column}{0.54\textwidth}
+\centering
+\begin{tikzpicture}[x=2.2cm,y=1.5cm,>=stealth, thick]
+\node (Z) at (0,0) {$Z$};
+\node (A) at (1.25,0) {$A$};
+\node (Y) at (2.5,0) {$Y$};
+\node (U) at (1.25,1.0) {\textcolor{gray}{$U$}\\[-0.05cm]\scriptsize\textcolor{gray}{(unobserved)}};
+\draw[->] (Z) -- (A);
+\draw[->] (A) -- (Y);
+\draw[->, gray] (U) -- (A);
+\draw[->, gray] (U) -- (Y);
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Core IV assumptions}
+
+\begin{wideitemize}
+\item \textbf{Relevance:}
+\[
+\E[A\mid Z=1, X] \neq \E[A\mid Z=0, X].
+\]
+\pause
+\item \textbf{Exclusion:} the instrument affects outcome only through treatment, so
+\[
+Y(a,z)=Y(a).
+\]
+\pause
+\item \textbf{Instrument independence:}
+\[
+Z \indep \{Y(0),Y(1),A(0),A(1)\}\mid X.
+\]
+\pause
+\item \textbf{Monotonicity for LATE:}
+\[
+A(1)\ge A(0)\ \text{for all units}.
+\]
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{What IV identifies: the Wald estimand}
+
+\begin{wideitemize}
+\item With a binary instrument, the canonical IV estimand is the Wald ratio:
+\[
+\tau_{Wald}
+=
+\frac{\E[Y\mid Z=1]-\E[Y\mid Z=0]}{\E[A\mid Z=1]-\E[A\mid Z=0]}.
+\]
+\pause
+\item Numerator: the reduced-form effect of $Z$ on $Y$.\pause
+\item Denominator: the first-stage effect of $Z$ on $A$.\pause
+\item So IV rescales the reduced form by the amount the instrument shifts treatment.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{What IV identifies: the LATE interpretation}
+
+\begin{wideitemize}
+\item Under relevance, exclusion, instrument independence, and monotonicity,
+\[
+\tau_{Wald}
+=
+\E[Y(1)-Y(0)\mid A(1)-A(0)=1].
+\]
+\pause
+\item Interpretation: IV identifies the average treatment effect for the subpopulation whose treatment status is shifted by the instrument.\pause
+\item So IV learns from the \textbf{instrument-induced} variation in treatment, not from all treatment variation.
+\end{wideitemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{2SLS as one solution, and why we might outgrow it}
+
+\begin{wideitemize}
+\item First stage:
+\[
+A_i = \pi_0 + \pi_1 Z_i + X_i^\top \pi_2 + \nu_i.
+\]
+\pause
+\item Second stage:
+\[
+Y_i = \beta_0 + \tau \hat A_i + X_i^\top \beta_1 + \epsilon_i.
+\]
+\pause
+\item The IV assumptions are about identification; 2SLS is only one estimator.\pause
+\item Motivation for Deep IV: classical 2SLS usually assumes linear first stages and linear or homogeneous effects.
+\end{wideitemize}
+\hfill \cite{pmlr-v70-hartford17a}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{transitionframe}
+\centering
+
+\LARGE \textcolor{white}{Deep IV as flexible IV.}
+
+\end{transitionframe}
+%-------------------------------------------------------------------------------%
+\begin{frame}{IV as an inverse problem}
+
+\begin{wideitemize}
+\item Structural setup:
+\[
+y=g(a,x)+e,
+\qquad
+h(a,x)=g(a,x)+\E[e\mid X=x].
+\]
+\pause
+\item Observable implication:
+\[
+\E[Y\mid X,Z]=\int h(a,x)\,dF(a\mid x,z).
+\]
+\pause
+\item We observe the left-hand side and the treatment distribution, but want to recover the latent structural function $h$.
+\end{wideitemize}
+\hfill \cite{pmlr-v70-hartford17a}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{transitionframe}
+\centering
+
+\LARGE \textcolor{white}{From instruments to proxies.}
+
+\end{transitionframe}
+%-------------------------------------------------------------------------------%
+\begin{frame}{The g-formula as the baseline benchmark}
+
+\begin{wideitemize}
+\item Standard benchmark when exchangeability holds:
+\[
+\beta(a)=\int \E[Y\mid A=a, X=x]\, dF_X(x).
+\]
+\pause
+\item This is the easy case: measured covariates suffice for adjustment.\pause
+\item The proximal move can be taught as what the g-formula becomes when measured covariates are only proxies for the true confounding mechanism.
+\end{wideitemize}
+\hfill \cite{hernan2010causal,tchetgen2024proximal}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Proximal inference as a different identification strategy}
+
+\begin{wideitemize}
+\item Define latent $U$, treatment-inducing proxy $V$, outcome-inducing proxy $W$, and ordinary covariates $X$.\pause
+\item Contrast with IV: proximal inference does not require a valid instrument.\pause
+\item Instead, it requires proxy structure plus completeness or rank conditions.
+\end{wideitemize}
+\hfill \cite{tchetgen2024proximal,miao2018identifying}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Bridge functions and the proximal g-formula}
+
+\begin{wideitemize}
+\item Core bridge equation:
+\[
+\E[Y\mid a,v,x]=\int h(a,x,w)\,dF(w\mid a,v,x).
+\]
+\pause
+\item Proximal g-formula :
+\[
+\beta(a)=\int h(a,x,w)\,dF(w,x).
+\]
+\pause
+\item Proximal learning does not recover $U$. It recovers a bridge function $h$ that is sufficient to identify the causal effect as if $U$ had been observed.
+\end{wideitemize}
+\hfill \cite{tchetgen2024proximal}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}{One language: inverse problems and regularization}
+
+\begin{wideitemize}
+\item Deep IV and proximal inference are both causal inverse problems.\pause
+\item They differ in what source of structure identifies the inverse problem: exogenous treatment variation versus proxy structure.\pause
+\item Practical estimation in both cases depends on regularization, modeling choices, and numerical stability.
+\end{wideitemize}
+\hfill \cite{pmlr-v70-hartford17a,tchetgen2024proximal,miao2018identifying}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+    \bibliographystyle{apalike}
+    \bibliography{\plscbibpath}
+\end{frame}
+%-------------------------------------------------------------------------------%
+\backupend
+\end{document}
