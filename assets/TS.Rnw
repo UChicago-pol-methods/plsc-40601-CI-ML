@@ -1,0 +1,138 @@
+\documentclass[xcolor={dvipsnames}]{beamer}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\scriptsize
+<<>>=
+set.seed(40601)
+
+# true parameter values
+thetas <- c(0.45, 0.47, 0.48, 0.5)
+
+# simple random assignment 
+(n <- table(factor(sample(1:4, 10, replace = TRUE), levels = 1:4)))
+
+# successes, based on thetas
+(successes <- mapply(rbinom, 1, size = n, prob = thetas))
+
+# respective posterior distributions, based on # successes, failures
+(shapes <- rbind(successes = successes, failures = n-successes))
+
+# sample from posteriors
+outmat <- mapply(rbeta, 1000, 
+                 shape1 = 1 + shapes[1,], 
+                 shape2 = 1 + shapes[2,])
+
+# proportion of times posterior samples in each group were highest
+(probs <- prop.table(table(apply(outmat, 1, which.max))))
+@
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+
+\scriptsize
+<<>>=
+n <- table(sample(1:4, 100, replace = TRUE))
+successes <- mapply(rbinom, 1, size = n, prob = thetas)
+outmat <- mapply(rbeta, 10000, 
+                 shape1 = 1 + successes, 
+                 shape2 = 1 + n-successes)
+probs <- prop.table(table(factor(apply(outmat, 1, which.max), levels = 1:4)))
+
+
+nmat <- xmat <- pmat <- matrix(NA, nrow = 15, ncol = length(thetas))
+nmat[1,] <- n
+xmat[1,] <- successes
+pmat[1,] <- probs
+
+for(i in 2:15){
+  nmat[i,] <- table(sample(factor(1:4), 100, replace = TRUE, 
+                           prob = pmat[(i-1),]))
+  xmat[i,] <- mapply(rbinom, 1, size = nmat[i,], prob = thetas)
+  
+  outmat <- mapply(rbeta, 10000, 
+                   shape1 = 1 + colSums(xmat[1:i,]), 
+                   shape2 = 1 + colSums(nmat[1:i,])-colSums(xmat[1:i,]))
+  pmat[i,] <- prop.table(table(factor(apply(outmat, 1, which.max), 
+                                      levels = 1:4)))
+}
+@
+
+\end{frame}
+
+%-------------------------------------------------------------------------------%
+
+
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{!}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+library(ggplot2)
+newmat <- data.frame(`Cumulative assignment` = matrix(apply(nmat, 2, cumsum),ncol = 1),
+                     Batch = rep(1:15, times = 4),
+                     Arm = factor(rep(1:4, each = 15)),
+                     check.names = FALSE)
+
+ggplot(newmat, aes(x = Batch, y = `Cumulative assignment`, color = Arm)) +
+  geom_line() + 
+  scale_colour_viridis_d(labels = c(bquote(theta[A] == .(0.45)), 
+                                    bquote(theta[B] == .(0.47)),
+                                    bquote(theta[C] == .(0.48)),
+                                    bquote(theta[D] == .(0.5)))) + 
+  scale_x_continuous(breaks = 1:15) + 
+  theme_bw()
+
+ggsave('toyTS.pdf', width = 6, height = 4)
+@
+}
+\end{figure}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\scriptsize
+<<>>=
+set.seed(53706)
+
+# true parameter values
+thetas <- c(0.5, 0.8)
+
+# first batch equal assignment
+(n <- c(1,1))
+
+# successes, based on thetas
+(successes <- mapply(rbinom, 1, size = n, prob = thetas))
+
+# respective posterior distributions, based on # successes, failures
+(shapes <- rbind(successes = successes, 
+                 failures = n-successes))
+
+# sample from posteriors
+outmat <- mapply(rbeta, 10000, 
+                 shape1 = 1 + shapes[1,], 
+                 shape2 = 1 + shapes[2,])
+
+# proportion of times posterior samples in each group were highest
+(probs <- prop.table(table(apply(outmat, 1, which.max))))
+@
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------%
+
+
+
+\end{document}
