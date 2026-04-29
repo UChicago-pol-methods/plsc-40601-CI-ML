@@ -20,7 +20,7 @@
 \RequirePackage{mathtools}
 \RequirePackage{tabularray}
 \NewColumnType{M}[1]{Q[m,c,#1]}  
-\def\figpath{~/Dropbox/Conferences-Workshops/figures-tables/}
+\newcommand{\figpath}[1]{\plscassetpath/#1}
 
 
 \makeatletter
@@ -79,7 +79,7 @@
 \begin{frame}{Why we experiment}
 
 \begin{figure}[htbp]
-   \includegraphics[width = \textwidth]{\figpath biden_ads}
+   \includegraphics[width = \textwidth]{\figpath{biden_ads}}
    \label{fig:bidenads}
 \end{figure}
 
@@ -98,7 +98,7 @@
 \begin{frame}{Why we experiment}
 
 \begin{figure}[htbp]
-   \includegraphics[width = \textwidth]{\figpath biden_ads_yesno2.png}
+   \includegraphics[width = \textwidth]{\figpath{biden_ads_yesno2.png}}
    \label{fig:bidenads}
 \end{figure}
 
@@ -170,10 +170,10 @@ To achieve this goal, the experimenter faces three tasks. \\ \ \\ \pause
       stretch = 3
       }
       \SetCell[c=2]{} Advertisements &&  {(Unknown) \\ mean response}  \\
-	 \includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf A & $\theta_A$ \\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf B &$\theta_B$\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf C & $\theta_C$\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf D & $\theta_D$ \\ \vspace*{-30em} \ \\
+	 \includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf A & $\theta_A$ \\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf B &$\theta_B$\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf C & $\theta_C$\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf D & $\theta_D$ \\ \vspace*{-30em} \ \\
     \end{tblr}
  };
 %\onslide<2>{\node at(a.center)[draw, red,line width=3pt,ellipse, minimum width=80pt, minimum height=50pt,rotate=0pt,yshift=-60pt, xshift = 80pt]{};}
@@ -209,10 +209,10 @@ To achieve this goal, the experimenter faces three tasks. \\ \ \\ \pause
       stretch = 3
       }
       \SetCell[c=2]{} Advertisements &&  {(Unknown) \\ mean response}  \\
-	 \includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf A & 0.44 \\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf B & 0.44 \\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf C & 0.45\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf D & 0.50 \\ \vspace*{-30em} \ \\
+	 \includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf A & 0.44 \\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf B & 0.44 \\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf C & 0.45\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf D & 0.50 \\ \vspace*{-30em} \ \\
     \end{tblr}
  };
 %\onslide<2>{\node at(a.center)[draw, red,line width=3pt,ellipse, minimum width=80pt, minimum height=50pt,rotate=0pt,yshift=-60pt, xshift = 80pt]{};}
@@ -246,10 +246,10 @@ To achieve this goal, the experimenter faces three tasks. \\ \ \\ \pause
       stretch = 3
       }
       \SetCell[c=2]{} Advertisements &&  {Estimated \\ mean response}  \\
-	 \includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth]{../assets/static_estimate4.png} \\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf B &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf C &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf D &\\ \vspace*{-30em} \ \\
+	 \includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth]{\figpath{static_estimate4.png}} \\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf B &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf C &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf D &\\ \vspace*{-30em} \ \\
     \end{tblr}
  };
 \onslide<2>{\node at(a.center)[draw, red,line width=3pt,ellipse, minimum width=80pt, minimum height=50pt,rotate=0pt,yshift=-60pt, xshift = 43pt]{};}
@@ -317,7 +317,7 @@ To achieve this goal, the experimenter faces three tasks. \\ \ \\ \pause
 %\end{wideitemize}
 }
 %-------------------------------------------------------------------------------%
-\begin{frame}{Evaluation metric}
+\begin{frame}{Selection metric}
 
 Best arm:
 \begin{equation*}
@@ -346,11 +346,11 @@ Evaluate:
 %\end{wideitemize}
 }
 %-------------------------------------------------------------------------------%
-\begin{frame}{Evaluation metric}
+\begin{frame}{Selection metric}
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=\textwidth] {../assets/static_correct4.png} 
+   \includegraphics[width=\textwidth] {\figpath{static_correct4.png}} 
 \end{figure}
 
 \end{frame}
@@ -378,10 +378,10 @@ Things to note:
       stretch = 3
       }
       \SetCell[c=2]{} Advertisements &&  {Estimated \\ mean response}  \\
-	 \includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth] {../assets/static_estimate4.png} \\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf B &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf C &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf D &\\ \vspace*{-30em} \ \\
+	 \includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth] {\figpath{static_estimate4.png}} \\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf B &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf C &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf D &\\ \vspace*{-30em} \ \\
     \end{tblr}
  };
 %\onslide<2>{\node at(a.center)[draw, red,line width=3pt,ellipse, minimum width=80pt, minimum height=50pt,rotate=0pt,yshift=-60pt, xshift = 80pt]{};}
@@ -406,7 +406,7 @@ Things to note:
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=.8\textwidth]{toyTTTS.pdf} 
+   \includegraphics[width=.8\textwidth]{\figpath{toyTTTS.pdf}} 
 \end{figure}
 
 \end{frame}
@@ -434,10 +434,10 @@ Things to note:
       stretch = 3
       }
       \SetCell[c=2]{} Advertisements &&  {Estimated \\ mean response}  \\
-	 \includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth] {../assets/ttts_estimate4.png} \\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf B &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf C &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf D &\\ \vspace*{-30em} \ \\
+	 \includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth] {\figpath{ttts_estimate4.png}} \\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf B &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf C &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf D &\\ \vspace*{-30em} \ \\
     \end{tblr}
  };
 %\onslide<2>{\node at(a.center)[draw, red,line width=3pt,ellipse, minimum width=80pt, minimum height=50pt,rotate=0pt,yshift=-60pt, xshift = 80pt]{};}
@@ -603,7 +603,7 @@ $\rightarrow$ explain algorithm
 \begin{frame}
 
 \vspace*{-1pt}
-\makebox[\linewidth]{\includegraphics[page=1,width=\paperwidth]{TS.pdf}}
+\makebox[\linewidth]{\includegraphics[page=1,width=\paperwidth]{\figpath{TS.pdf}}}
 
 \end{frame}
 
@@ -1008,11 +1008,11 @@ Repeat actions from batch 2. \\
 %\end{wideitemize}
 }
 %-------------------------------------------------------------------------------%
-\begin{frame}{Evaluation metric}
+\begin{frame}{Selection metric}
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=\textwidth]{../assets/joint_correct4.png} 
+   \includegraphics[width=\textwidth]{\figpath{joint_correct4.png}} 
 \end{figure}
 
 \end{frame}
@@ -1032,7 +1032,7 @@ Things to note:
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width = 0.7\textwidth]{../assets/ttts_bias4.png} %
+   \includegraphics[width = 0.7\textwidth]{\figpath{ttts_bias4.png}} %
    \label{fig:example}
 \end{figure}
 \vskip -2 em
@@ -1119,7 +1119,7 @@ Things to note:
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=\textwidth] {../assets/static_hjmax_500.png} 
+   \includegraphics[width=\textwidth] {\figpath{static_hjmax_500.png}} 
 \end{figure}
 
 \end{frame}
@@ -1139,7 +1139,7 @@ Things to note:
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=\textwidth] {../assets/ttts_hjmax_500.png} 
+   \includegraphics[width=\textwidth] {\figpath{ttts_hjmax_500.png}} 
 \end{figure}
 
 \end{frame}
@@ -1177,11 +1177,11 @@ Things to note:
 }
 
 %-------------------------------------------------------------------------------%
-\begin{frame}{Evaluation metric}
+\begin{frame}{Selection metric}
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=\textwidth]{joint_correct4_lines.png} 
+   \includegraphics[width=\textwidth]{\figpath{joint_correct4_lines.png}} 
 \end{figure}
 
 \end{frame}
@@ -1203,7 +1203,7 @@ Even for non data-driven hypotheses, with adaptively collected data, we get non-
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width = 0.75\textwidth]{\figpath skewed_dist.png} %
+   \includegraphics[width = 0.75\textwidth]{\figpath{skewed_dist.png}} %
    \label{fig:example}
 \end{figure}
 
@@ -1224,7 +1224,7 @@ Even for non data-driven hypotheses, with adaptively collected data, we get non-
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=\textwidth] {../assets/ttts_hjmax_1000.png} 
+   \includegraphics[width=\textwidth] {\figpath{ttts_hjmax_1000.png}} 
 \end{figure}
 
 \end{frame}
@@ -1305,10 +1305,10 @@ Some solutions:
       stretch = 3
       }
       \SetCell[c=2]{} Advertisements &&  {Estimated \\ mean response}  \\
-	 \includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth] {../assets/ttts_estimate4.png} \\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf B &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf C &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf D &\\ \vspace*{-30em} \ \\
+	 \includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth] {\figpath{ttts_estimate4.png}} \\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf B &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf C &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf D &\\ \vspace*{-30em} \ \\
     \end{tblr}
  };
 %\onslide<2>{\node at(a.center)[draw, red,line width=3pt,ellipse, minimum width=80pt, minimum height=50pt,rotate=0pt,yshift=-60pt, xshift = 80pt]{};}
@@ -1341,10 +1341,10 @@ Some solutions:
       stretch = 3
       }
       \SetCell[c=2]{} Advertisements &&  {Adjusted estimated \\ mean response}  \\
-	 \includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth] {../assets/ttts_estimate_adjusted4.png} \\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf B &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf C &\\
-	\includegraphics[width = 1cm]{\figpath tv-ad.png} & \textbf D &\\ \vspace*{-30em} \ \\
+	 \includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf A & \SetCell[r=5]{c} \vspace*{-6em} \includegraphics[width = 0.52\textwidth] {\figpath{ttts_estimate_adjusted4.png}} \\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf B &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf C &\\
+	\includegraphics[width = 1cm]{\figpath{tv-ad.png}} & \textbf D &\\ \vspace*{-30em} \ \\
     \end{tblr}
  };
 %\onslide<2>{\node at(a.center)[draw, red,line width=3pt,ellipse, minimum width=80pt, minimum height=50pt,rotate=0pt,yshift=-60pt, xshift = 80pt]{};}
@@ -1403,7 +1403,7 @@ Some solutions:
 \begin{frame}{Why we experiment}
 
 \begin{figure}[htbp]
-   \includegraphics[width = \textwidth]{\figpath biden_ads_yesno.png}
+   \includegraphics[width = \textwidth]{\figpath{biden_ads_yesno.png}}
    \label{fig:bidenads}
 \end{figure}
 
@@ -1516,7 +1516,7 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=\textwidth]{cum_benefit_joint.png} 
+   \includegraphics[width=\textwidth]{\figpath{cum_benefit_joint.png}} 
 \end{figure}
 
 \end{frame}
@@ -1536,7 +1536,7 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=\textwidth]{cum_benefit_joint_pval.png} 
+   \includegraphics[width=\textwidth]{\figpath{cum_benefit_joint_pval.png}} 
 \end{figure}
 
 \end{frame}
@@ -1555,7 +1555,7 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 \begin{frame}{Targeted subgroups}
 
 \begin{figure}[htbp]
-   \includegraphics[width = \textwidth]{\figpath biden_ads_groups.png}
+   \includegraphics[width = \textwidth]{\figpath{biden_ads_groups.png}}
    \label{fig:bidenads}
 \end{figure}
 
@@ -1614,7 +1614,7 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 
 {
       \centering
-      \includegraphics[width=\textwidth]{ \figpath joint_concerns_figure-1.png}
+      \includegraphics[width=\textwidth]{\figpath{joint_concerns_figure-1.png}}
       }
 \vskip -2 em
 \hyperlink{vcf}{\beamerbutton{Application I: Vaccine hesitancy}}
@@ -1750,7 +1750,7 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 
 {
       \centering
-      \includegraphics[width=\textwidth]{ tree_dist.png}
+      \includegraphics[width=\textwidth]{\figpath{tree_dist.png}}
       }
 
 \end{frame}
@@ -1769,7 +1769,7 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 
 {
       \centering
-      \includegraphics[width=0.95\textwidth]{banditsCIcontextual.png}
+      \includegraphics[width=0.95\textwidth]{\figpath{banditsCIcontextual.png}}
       }
 
 \end{frame}
@@ -1788,7 +1788,7 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 
 {
       \centering
-      \includegraphics[width=0.95\textwidth]{banditsCIcontextual-sep.png}
+      \includegraphics[width=0.95\textwidth]{\figpath{banditsCIcontextual-sep.png}}
       }
 
 \end{frame}
@@ -1807,11 +1807,6 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 
 \begin{wideitemize}
 \item \texttt{banditsCI} \url{https://doi.org/10.5281/zenodo.10516416}
-\item Applications
-\begin{itemize}
-\item \hyperlink{vcf}{\beamerbutton{Application I: Vaccine hesitancy}}
-\item \hyperlink{misinfo}{\beamerbutton{Application II: Online misinformation}}
-\end{itemize}
 \item Methods
 \begin{itemize}
 \item \hyperlink{ts}{\beamerbutton{Algorithms}}
@@ -2060,17 +2055,17 @@ $\rightarrow$ explain algorithm
     \begin{column}{0.48\textwidth}
 Under the potential outcomes framework: 
 \begin{align*}
-\E\left[ \hat{\theta}_w^{HT} \right]  %& = \E\left[ Y_i(w)\right]
-& =\frac 1 N \sum_{i = 1}^N Y_i (w). 
+\E\left[ \hat{\theta}_w^{HT} \right]  %& = \E\left[ Y_t(w)\right]
+& =\frac 1 T \sum_{t = 1}^T Y_t (w). 
 \end{align*}
-We require only independence of potential outcomes and treatment conditional on history, $Y_i(w) \independent W_i | S_i$, which is given by the experimental design.  
+We require only independence of potential outcomes and treatment conditional on history, $Y_t(w) \independent W_t | H_t$, which is given by the experimental design.  
 \begin{align*}
-\E\left[ \hat{\theta}_w^{HT} \right] & = \E\left[ \frac 1 N \sum_{i=1}^N Y_{i} \frac{ \mathbbm{1} \{W_i = w \}  }{ e_{i}(w;S_i) }\right]\\
-& = \frac 1 N \sum_{i=1}^N \E\left[  Y_{i} \frac{ \mathbbm{1} \{W_i = w \}  }{ e_{i}(w;S_i) }\right].
-\intertext{Considering the $i$\textsuperscript{th} unit, by the Law of Iterated Expectations,}
-\E\left[  Y_{i} \frac{ \mathbbm{1} \{W_i = w \}  }{ e_{i}(w;S_i) } \right]  & = \E\left[ \E\left[ Y_{i} \frac{ \mathbbm{1} \{W_i = w \}  }{ e_{i}(w;S_i) } \biggr\rvert S_i\right] \right] 
+\E\left[ \hat{\theta}_w^{HT} \right] & = \E\left[ \frac 1 T \sum_{t=1}^T Y_{t} \frac{ \mathbbm{1} \{W_t = w \}  }{ e_{t}(w;H_t) }\right]\\
+& = \frac 1 T \sum_{t=1}^T \E\left[  Y_{t} \frac{ \mathbbm{1} \{W_t = w \}  }{ e_{t}(w;H_t) }\right].
+\intertext{Considering period $t$, by the Law of Iterated Expectations,}
+\E\left[  Y_{t} \frac{ \mathbbm{1} \{W_t = w \}  }{ e_{t}(w;H_t) } \right]  & = \E\left[ \E\left[ Y_{t} \frac{ \mathbbm{1} \{W_t = w \}  }{ e_{t}(w;H_t) } \biggr\rvert H_t\right] \right] 
 \end{align*}
-Taking the interior term, $ \E\left[ Y_{i} \frac{ \mathbbm{1} \{W_i = w \}  }{ e_{i}(w;S_i) } \biggr\rvert S_i\right]$, 
+Taking the interior term, $ \E\left[ Y_{t} \frac{ \mathbbm{1} \{W_t = w \}  }{ e_{t}(w;H_t) } \biggr\rvert H_t\right]$, 
 by definition, 
 \vskip 1 cm
 \normalsize
@@ -2081,16 +2076,16 @@ by definition,
     \begin{column}{0.48\textwidth}
 \tiny
 \begin{align*}
-&  = \E\left[  \frac{ Y_{i} \mathbbm{1} \{W_i = w \}  }{\Pr[ W_i = w | S_i]  } \biggr\rvert S_i \right]
+&  = \E\left[  \frac{ Y_{t} \mathbbm{1} \{W_t = w \}  }{\Pr[ W_t = w | H_t]  } \biggr\rvert H_t \right]
 \intertext{By the potential outcomes model,}
-&  = \E\left[ Y_{i}(w) \times \frac{ \mathbbm{1} \{W_i = w \}  }{\Pr[ W_i = w | S_i]  } \biggr\rvert S_i \right]
-\intertext{And because $Y_i \independent W_i | S_i$, }
-&  = \E\left[   Y_{i}(w) | S_i\right] \times \E\left[ \frac{\mathbbm{1} \{W_i = w \}  }{\Pr[ W_i = w | S_i]  } \biggr\rvert S_i \right]\\
-&  = \E\left[   Y_{i}(w) | S_i\right] \times  \frac{ \E\left[ \mathbbm{1} \{W_i = w \} | S_i\right] }{\Pr[ W_i = w | S_i]  } \\
-&  = \E\left[   Y_{i}(w) | S_i\right] \times  \frac{ \Pr[ W_i = w | S_i] }{\Pr[ W_i = w | S_i]  } \\
-&  = \E\left[   Y_{i}(w) | S_i\right]. 
+&  = \E\left[ Y_{t}(w) \times \frac{ \mathbbm{1} \{W_t = w \}  }{\Pr[ W_t = w | H_t]  } \biggr\rvert H_t \right]
+\intertext{And because $Y_t \independent W_t | H_t$, }
+&  = \E\left[   Y_{t}(w) | H_t\right] \times \E\left[ \frac{\mathbbm{1} \{W_t = w \}  }{\Pr[ W_t = w | H_t]  } \biggr\rvert H_t \right]\\
+&  = \E\left[   Y_{t}(w) | H_t\right] \times  \frac{ \E\left[ \mathbbm{1} \{W_t = w \} | H_t\right] }{\Pr[ W_t = w | H_t]  } \\
+&  = \E\left[   Y_{t}(w) | H_t\right] \times  \frac{ \Pr[ W_t = w | H_t] }{\Pr[ W_t = w | H_t]  } \\
+&  = \E\left[   Y_{t}(w) | H_t\right]. 
 \intertext{Then returning to the Law of Iterated Expectations from above,}
- \E\left[  Y_{i} \frac{ \mathbbm{1} \{W_i = w \}  }{ e_{i}(w;S_i) } \right] &   = \E\left[ \E\left[ Y_i(w) | S_i\right] \right]  = \E\left[ Y_i(w)\right]. 
+ \E\left[  Y_{t} \frac{ \mathbbm{1} \{W_t = w \}  }{ e_{t}(w;H_t) } \right] &   = \E\left[ \E\left[ Y_t(w) | H_t\right] \right]  = \E\left[ Y_t(w)\right]. 
 \end{align*}
 \end{column}
 \end{columns}
@@ -2156,8 +2151,8 @@ by definition,
 \centering
 \begin{tabular}{l | C{1cm}C{1cm} }
 Treatments
-& \includegraphics[width = 1cm]{\figpath tv-ad.png} & 
-\includegraphics[width = 1cm]{\figpath tv-ad.png}  \\ 
+& \includegraphics[width = 1cm]{\figpath{tv-ad.png}} & 
+\includegraphics[width = 1cm]{\figpath{tv-ad.png}}  \\ 
 &  \large \textbf A & \large \textbf B \\
 \begin{tabular}{@{}c@{}}(Unknown) \\ mean response\end{tabular} %& $\theta_A$ & $\theta_B$\\
 & 0.5 & 0.5  \end{tabular}
@@ -2190,8 +2185,8 @@ Treatments
 \centering
 \begin{tabular}{l | C{2cm}C{2cm} }
 Treatments
-& \includegraphics[width = 1cm]{\figpath tv-ad.png} & 
-\includegraphics[width = 1cm]{\figpath tv-ad.png}  \\ 
+& \includegraphics[width = 1cm]{\figpath{tv-ad.png}} & 
+\includegraphics[width = 1cm]{\figpath{tv-ad.png}}  \\ 
 \vspace{4pt} &  \large \textbf A & \large \textbf B \\ \pause
 \textbf{Period 1} & & \\
 - sample & A & B\\ \pause
@@ -2230,24 +2225,24 @@ Treatments
 \uncover<7->{After observing three outcomes, bias is negative. }
 
 \vspace{15 pt}
-\input{\figpath toy-example.tex}\\
+\input{\figpath{toy-example.tex}}\\
 
 \vspace{-15pt}
 \begin{overlayarea}{\textwidth}{0.25\textheight}
 
 \only<7>{ \small
 \begin{align*}
-\phantom{\E\left[ \hat{\theta}_w \right] \& = \sum_{ s } \hat{\theta}_w | s  \cdot P\left( s \right)}  \\
+\phantom{\E\left[ \hat{\theta}_w \right] \& = \sum_{ h } \hat{\theta}_w | h  \cdot P\left( h \right)}  \\
 \phantom{\& \approx 0.458}
 \end{align*} 
 }
 
 \only<8-9>{ \small
 \begin{align*}
-\E\left[ \hat{\theta}_w \right] & = \sum_{ s } \hat{\theta}_w | s  \cdot \Pr [s]  \\
+\E\left[ \hat{\theta}_w \right] & = \sum_{ h } \hat{\theta}_w | h  \cdot \Pr [h]  \\
 & \approx 0.458
 \end{align*} }
-\uncover<9>{ ($S_i$ is a state, defined by the history of treatment and outcomes.) }
+\uncover<9>{ ($H_t$ is the history of treatment and outcomes up to time $t$.) }
 
 \only<10>{Why? Lower probability of sampling from an arm if it performs poorly in the first period. }
 
@@ -2267,7 +2262,7 @@ Treatments
 \begin{wideitemize}
 \item \textcolor{Cyan}{keep pushing motivation}
 \item These are all of the ways that our experiment could possible have played out
-\item Pr[s] is the probability that we ended up in that state of the world--note that it's not equal! This is because of the unequal sampling probability, conditional on observed response
+\item Pr[h] is the probability that we ended up in that history--note that it's not equal! This is because of the unequal sampling probability, conditional on observed response
 \end{wideitemize}
 }
 
@@ -2292,15 +2287,15 @@ Winner's curse:
 Inverse Probability Weighting estimation \citep{horvitz1952}\\
 \vspace{10pt}
 \hspace{5pt}
-%For treatment $W_i$, define $e_i(w;S_i) =  \Pr[W_i = w|S_i].$\pause
+%For treatment $W_t$, define $e_t(w;H_t) =  \Pr[W_t = w|H_t].$\pause
 \begin{align*}
- \hat{\theta}_w^{HT} & =\frac 1 N \sum_{i=1}^N Y_{i} \frac{ \mathbbm{1} \{W_i = w \}  }{e_{i}(w;S_i) }
+ \hat{\theta}_w^{HT} & =\frac 1 T \sum_{t=1}^T Y_{t} \frac{ \mathbbm{1} \{W_t = w \}  }{e_{t}(w;H_t) }
 \end{align*}
 \hspace{5pt} \pause
 \vspace{10pt}
 \begin{wideitemize}
-\item (Conditional on algorithm) $e_i(w;S_i) > 0,\forall  i, w$.\\ \pause
-\item Finite-n unbiased \citep{bowden2017unbiased} \hyperlink{htbias}{\beamerbutton{Finite-n unbiasedness}}\pause
+\item (Conditional on algorithm) $e_t(w;H_t) > 0,\forall  t, w$.\\ \pause
+\item Finite-sample unbiased \citep{bowden2017unbiased} \hyperlink{htbias}{\beamerbutton{Finite-sample unbiasedness}}\pause
 \item Drawback: if there is low overlap between policy you want to evaluate, and the assigned policy, high variance. One of the tradeoffs we face with adaptively collected data. \hypertarget<3>{htestimator}{}
 \end{wideitemize}
 
@@ -2327,13 +2322,13 @@ there exists no uniformly consistent estimator of $\theta_w$ for all $k$
 \begin{frame}[label= ht_example]{Estimation with Inverse Probability Weighting}
 
 \begin{align*}
- \hat{\theta}_w^{HT} & =\frac 1 N \sum_{i=1}^N Y_{i} \frac{ \mathbbm{1} \{W_i = w \}  }{e_{i}(w;S_i) }
+ \hat{\theta}_w^{HT} & =\frac 1 T \sum_{t=1}^T Y_{t} \frac{ \mathbbm{1} \{W_t = w \}  }{e_{t}(w;H_t) }
 \end{align*}
 \pause
 
 In our example\dots
 \begin{align*}
- \hat{\theta}_A^{HT} & =\frac 1 3 \left[  1 \times \frac{ \mathbbm{1} \{W_i = A \}  }{1/2 } + 0 \times \frac{ \mathbbm{1} \{W_i = A \}  }{5/6 } \right]\\
+ \hat{\theta}_A^{HT} & =\frac 1 3 \left[  1 \times \frac{ \mathbbm{1} \{W_t = A \}  }{1/2 } + 0 \times \frac{ \mathbbm{1} \{W_t = A \}  }{5/6 } \right]\\
  & = \frac 2 3
 \end{align*}
 
@@ -2359,14 +2354,14 @@ In our example\dots
 %\textcolor{white}{After observing three outcomes, bias is negative. }
 
 \vspace{15 pt}
-\input{\figpath toy-example-debiased.tex}
+\input{\figpath{toy-example-debiased.tex}}
 
 \onslide<3->
 \begin{align*}
-\textcolor{Contrast2}{\E\left[ \hat{\theta}^{HT}_w \right]} & \textcolor{Contrast2}{ = \sum_{ s } \hat{\theta}^{HT}_w | s  \cdot \Pr[ s ]}  \\
+\textcolor{Contrast2}{\E\left[ \hat{\theta}^{HT}_w \right]} & \textcolor{Contrast2}{ = \sum_{ h } \hat{\theta}^{HT}_w | h  \cdot \Pr[ h ]}  \\
 & \textcolor{Contrast2}{= 0.5}
 \end{align*}
-%($S_i$ is a state, defined by the history of treatment and outcomes.) \\
+%($H_t$ is the history of treatment and outcomes up to time $t$.) \\
 \vfill
 
 \hyperlink{htbias}{\beamerbutton{HT unbiased}} \hypertarget<3>{debiasend}{}
@@ -2389,7 +2384,7 @@ In our example\dots
 We can also consider inverse probability weighting augmented by covariate adjustment. 
 \begin{overprint}
 \[
-    \hat{\theta}_w^{DR} =\frac 1 N  \sum_{i=1}^N \only<2>{\textcolor{Contrast1}}{\underbrace{\hat{\E}[Y_i | W_i = w, X_i]}_\text{estimated outcome model}}+\frac{1}{N} \sum_{i=1}^N  \underbrace{\frac{ \mathbbm{1} \{W_i = w \} \left( Y_i - \only<2>{\textcolor{Contrast1}}{\hat{\E}[Y_i | W_i = w, X_i]} \right) }{ \only<3>{\textcolor{Contrast2}}{ e_i(w;s)} }}_\text{residual bias correction}
+    \hat{\theta}_w^{DR} =\frac 1 T  \sum_{t=1}^T \only<2>{\textcolor{Contrast1}}{\underbrace{\hat{\E}[Y_t | W_t = w, X_t]}_\text{estimated outcome model}}+\frac{1}{T} \sum_{t=1}^T  \underbrace{\frac{ \mathbbm{1} \{W_t = w \} \left( Y_t - \only<2>{\textcolor{Contrast1}}{\hat{\E}[Y_t | W_t = w, X_t]} \right) }{ \only<3>{\textcolor{Contrast2}}{ e_t(w;H_t)} }}_\text{residual bias correction}
 \]
 
 \begin{overlayarea}{\textwidth}{0.25\textheight}
@@ -2421,10 +2416,33 @@ two models is correct (and one need not know which of the two models is correct)
 \item This is the simple model of AIPTW estimator, but could use anything with the DR property, e.g., TMLE
 \item Conditional means model (any well-behaved prediction will do), improves efficiency;  could be something like a regression estimate, a regularized model with interactions between treatment and covariates, random forest, etc. 
 \item even if exposure is known, we can estimate it to capture chance imbalances in covariate distribution among groups \textcolor{Contrast2}{[Hirano-Imbens-Ridder result]}. 
-%\item \texttt{lim[n] n*Var[Q-hat[w]] = lim[n] 1/n sum[i to n] (1/e[i][w] - 1) * (mu-hat[i] - Q[w])\^2 + 1/e[i][w] * Var(Y[w])}\\
-\item \textcolor{Contrast2}{So as long as your \texttt{mu-hat[i]} model is sensible, you can decrease the first term in the asymptotic variance.}
+%\item \texttt{lim[T] T*Var[Q-hat[w]] = lim[T] 1/T sum[t to T] (1/e[t][w] - 1) * (mu-hat[t] - Q[w])\^2 + 1/e[t][w] * Var(Y[w])}\\
+\item \textcolor{Contrast2}{So as long as your \texttt{mu-hat[t]} model is sensible, you can decrease the first term in the asymptotic variance.}
 \end{wideitemize}
 }
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{Off-policy evaluation}
+\small
+
+The doubly robust (DR) estimator considered here takes the form
+\[
+    \hat Q_T^{DR}(\pi)
+    := \frac{1}{T}\sum_{t=1}^T \hat\Gamma_t(X_t,\pi),
+\]
+where the objects being averaged are doubly robust scores,
+\[
+    \hat\Gamma_t(X_t,\pi)
+    := \sum_{w \in \mathcal{W}} \pi(X_t,w)
+    \left[
+        \hat\mu_t(X_t,w)
+        + \frac{\mathbbm{1}\{W_t = w\}}{e_t(w;H_t)}
+          \left(Y_t - \hat\mu_t(X_t,w)\right)
+    \right].
+\]
+
+\end{frame}
 
 
 %-------------------------------------------------------------------------------%

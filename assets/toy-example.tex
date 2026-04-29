@@ -1,0 +1,249 @@
+\resizebox{ \textwidth}{!}{ \begin{tikzpicture}[>=latex',node distance = 1.1cm] %\hspace{-14pt}
+\uncover<5->{
+\node[anchor = west] (x2_0) at (0,0) { {\LARGE \ - outcome} };
+\node [draw, rounded corners, right = 1.1cm of x2_0] (x2_1) {\begin{tabular}{ c c }
+1 & - 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_1] (x2_2) {\begin{tabular}{ c c }
+0 & - 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_2] (x2_3) {\begin{tabular}{ c c }
+- & 1 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_3] (x2_4) {\begin{tabular}{ c c }
+- & 0 
+\end{tabular} };
+\node [draw, rounded corners, right = 1cm of x2_4] (x2_5) {\begin{tabular}{ c c }
+1 & - 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_5, Contrast4] (x2_6) {\begin{tabular}{ c c }
+0 & - 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_6] (x2_7) {\begin{tabular}{ c c }
+- & 1 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_7] (x2_8) {\begin{tabular}{ c c }
+- & 0 
+\end{tabular} };
+\node [draw, rounded corners, right = 1cm of x2_8] (x2_9) {\begin{tabular}{ c c }
+1 & - 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_9] (x2_10) {\begin{tabular}{ c c }
+0 & - 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_10] (x2_11) {\begin{tabular}{ c c }
+- & 1 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_11] (x2_12) {\begin{tabular}{ c c }
+- & 0 
+\end{tabular} };
+\node [draw, rounded corners, right = 1cm of x2_12] (x2_13) {\begin{tabular}{ c c }
+1 & - 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_13] (x2_14) {\begin{tabular}{ c c }
+0 & - 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_14] (x2_15) {\begin{tabular}{ c c }
+- & 1 
+\end{tabular} };
+\node [draw, rounded corners, right of = x2_15] (x2_16) {\begin{tabular}{ c c }
+- & 0 
+\end{tabular} };
+}
+%
+%
+\uncover<6->{
+\node [below = 1.5 cm of x2_0.west, anchor=west] (mu_0) { {\LARGE \textbf{Sample mean} } };
+{\large
+\setlength{\tabcolsep}{0pt}
+\node [below = .65 cm of x2_1 ] (mu_1) {\begin{tabular}{ c c }
+\textbf{1,} & \textbf{1}\\ \hline 
+\end{tabular} };
+\node [below = .65 cm of x2_2] (mu_2) {\begin{tabular}{ c c }
+\textbf{0.5,} & \textbf{1}\\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_3] (mu_3) {\begin{tabular}{ c c }
+\textbf{1,} & \textbf{1}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_4] (mu_4) {\begin{tabular}{ c c }
+\textbf{1,} & \textbf{0.5}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_5] (mu_5) {\begin{tabular}{ c c }
+\textbf{1,} & \textbf{0}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_6, Contrast4] (mu_6) {\begin{tabular}{ c c }
+\textbf{0.5,} & \textbf{0}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_7] (mu_7) {\begin{tabular}{ c c }
+\textbf{1,} & \textbf{0.5}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_8] (mu_8) {\begin{tabular}{ c c }
+\textbf{1,} & \textbf{0}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_9] (mu_9) {\begin{tabular}{ c c }
+\textbf{0.5,} & \textbf{1}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_10] (mu_10) {\begin{tabular}{ c c }
+\textbf{0,} & \textbf{1}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_11] (mu_11) {\begin{tabular}{ c c }
+\textbf{0,} & \textbf{1}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_12] (mu_12) {\begin{tabular}{ c c }
+\textbf{0,} & \textbf{0.5}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_13] (mu_13) {\begin{tabular}{ c c }
+\textbf{0.5,} & \textbf{0}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_14] (mu_14) {\begin{tabular}{ c c }
+\textbf{0,} & \textbf{0}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_15] (mu_15) {\begin{tabular}{ c c }
+\textbf{0,} & \textbf{0.5}  \\  \hline
+\end{tabular} };
+\node [below = .65 cm of x2_16] (mu_16) {\begin{tabular}{ c c }
+\textbf{0,} & \textbf{0}  \\  \hline
+\end{tabular} };}
+}
+%
+%
+\uncover<8->{
+\node [below = of mu_0.west, anchor=west] (s_0) { {\LARGE \textbf{ $\Pr[s]$} } };
+{\large
+\node [below of = mu_1 ] (s_1) { 1/16};
+\node [below of = mu_2] (s_2) { 1/16};
+\node [below of = mu_3] (s_3) {1/16 };
+\node [below of = mu_4] (s_4) { 1/16};
+\node [below of = mu_5] (s_5) { 5/48};
+\node [below of = mu_6] (s_6) {5/48 };
+\node [below of = mu_7] (s_7) { 1/48};
+\node [below of = mu_8] (s_8) { 1/48};
+\node [below of = mu_9] (s_9) { 1/48};
+\node [below of = mu_10] (s_10) { 1/48};
+\node [below of = mu_11] (s_11) { 5/48};
+\node [below of = mu_12] (s_12) { 5/48};
+\node [below of = mu_13] (s_13) { 1/16};
+\node [below of = mu_14] (s_14) { 1/16};
+\node [below of = mu_15] (s_15) {1/16 };
+\node [below of = mu_16] (s_16) { 1/16};
+}}
+%
+%
+\uncover<4->{
+\node [above = of x2_0.west,anchor=west] (n2_0) { {\LARGE\ - sample } };
+\path (x2_1) -- (x2_2) coordinate[midway] (x2_1.2);
+\node [draw, rounded corners, above of = x2_1.2] (n2_1) {\begin{tabular}{ c c }
+A & -
+\end{tabular} };
+\path (x2_3) -- (x2_4) coordinate[midway] (x2_3.4);
+\node [draw, rounded corners, above of = x2_3.4] (n2_2) {\begin{tabular}{ c c }
+- & B 
+\end{tabular} };
+\path (x2_5) -- (x2_6) coordinate[midway] (x2_5.6);
+\node [draw, rounded corners, above of = x2_5.6, Contrast4] (n2_3) {\begin{tabular}{ c c }
+A & -
+\end{tabular} };
+\path (x2_7) -- (x2_8) coordinate[midway] (x2_7.8);
+\node [draw, rounded corners, above of = x2_7.8] (n2_4) {\begin{tabular}{ c c }
+- & B 
+\end{tabular} };
+
+\path (x2_9) -- (x2_10) coordinate[midway] (x2_9.10);
+\node [draw, rounded corners, above of = x2_9.10] (n2_5) {\begin{tabular}{ c c }
+A & -
+\end{tabular} };
+\path (x2_11) -- (x2_12) coordinate[midway] (x2_11.12);
+\node [draw, rounded corners, above of = x2_11.12] (n2_6) {\begin{tabular}{ c c }
+- & B 
+\end{tabular} };
+
+\path (x2_13) -- (x2_14) coordinate[midway] (x2_13.14);
+\node [draw, rounded corners, above of = x2_13.14] (n2_7) {\begin{tabular}{ c c }
+A & -
+\end{tabular} };
+\path (x2_15) -- (x2_16) coordinate[midway] (x2_15.16);
+\node [draw, rounded corners, above of = x2_15.16] (n2_8) {\begin{tabular}{ c c }
+- & B 
+\end{tabular} };
+%
+%
+\node [above = of n2_0.west, anchor = west] (p2_0) { {\LARGE\textbf{Period 2} } };
+}
+%
+\uncover<3->{
+\node [above = of p2_0.west, anchor = west] (x1_0) { {\LARGE\ - outcome } };
+\path (n2_1) -- (n2_2) coordinate[midway] (x1_1.2);
+\node [above of = x1_1.2] (x1_1.2a) {};
+\node [draw, rounded corners, above of = x1_1.2a] (x1_1) {\begin{tabular}{ c c }
+1 & 1
+\end{tabular} };
+\path (n2_3) -- (n2_4) coordinate[midway] (x1_3.4);
+\node [above of = x1_3.4] (x1_3.4a) {};
+\node [draw, rounded corners, above of = x1_3.4a, Contrast4] (x1_2) {\begin{tabular}{ c c }
+1 & 0
+\end{tabular} };
+\path (n2_5) -- (n2_6) coordinate[midway] (x1_5.6);
+\node [above of = x1_5.6] (x1_5.6a) {};
+\node [draw, rounded corners, above of = x1_5.6a] (x1_3) {\begin{tabular}{ c c }
+0 & 1
+\end{tabular} };
+\path (n2_7) -- (n2_8) coordinate[midway] (x1_7.8);
+\node [above of = x1_7.8] (x1_7.8a) {};
+\node [draw, rounded corners, above of = x1_7.8a] (x1_4) {\begin{tabular}{ c c }
+0 & 0
+\end{tabular} };
+}
+%
+\uncover<2->{
+\node [above = of x1_0.west, anchor = west] (n1_0) { {\LARGE\ - sample } };
+\path (x1_2) -- (x1_3) coordinate[midway] (n1_2.3);
+\node [draw, rounded corners, above of = n1_2.3, Contrast4] (n1_1) {\begin{tabular}{ c c }
+A & B
+\end{tabular} };
+}
+%
+\uncover<2->{\node [above = of n1_0.west, anchor = west] (p1_0) { {\LARGE\textbf{Period 1} } };}
+%
+%
+\node [above = .3cm of n1_1] (t.0) {\begin{tabular}{ C{1.2cm}C{1.2cm} }
+ \includegraphics[width = 1.2cm]{\figpath{vote.png}} & 
+\includegraphics[width = 1.2cm]{\figpath{vote.png}}  \\ 
+  \large \textbf A & \large \textbf B
+\end{tabular} };
+
+\uncover<3->{
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n1_1) to [bend right = 5] (x1_1.north east);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}, Contrast4] (n1_1) to [bend right = 10] (x1_2.north east);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n1_1) to [bend left = 10] (x1_3.north west);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n1_1) to [bend left = 5] (x1_4.north west);}
+%
+\uncover<4->{
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x1_1) to [bend right = 5] node[left] {\LARGE\textcolor{Contrast1}{ 1/2 }} (n2_1);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x1_1) to [bend left = 5] node[right] {\LARGE\textcolor{Contrast1}{1/2}} (n2_2);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}, Contrast4] (x1_2) to [bend right = 5] node[left] {\LARGE\textcolor{Contrast4}{5/6}} (n2_3);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x1_2) to [bend left = 5] node[right] {\LARGE\textcolor{Contrast1}{1/6}} (n2_4);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x1_3) to [bend right = 5] node[left] {\LARGE\textcolor{Contrast1}{1/6}} (n2_5);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x1_3) to [bend left = 5] node[right] {\LARGE\textcolor{Contrast1}{5/6}} (n2_6);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x1_4) to [bend right = 5] node[left] {\LARGE\textcolor{Contrast1}{1/2}} (n2_7);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x1_4) to [bend left = 5] node[right] {\LARGE\textcolor{Contrast1}{1/2}} (n2_8);
+}
+%
+\uncover<5->{
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_1) to [bend right = 5] (x2_1);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_1) to [bend left = 5] (x2_2);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_2) to [bend right = 5] (x2_3);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_2) to [bend left = 5] (x2_4);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_3) to [bend right = 5] (x2_5);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}, Contrast4] (n2_3) to [bend left = 5] (x2_6);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_4) to [bend right = 5] (x2_7);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_4) to [bend left = 5] (x2_8);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_5) to [bend right = 5] (x2_9);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_5) to [bend left = 5] (x2_10);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_6) to [bend right = 5] (x2_11);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_6) to [bend left = 5] (x2_12);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_7) to [bend right = 5] (x2_13);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_7) to [bend left = 5] (x2_14);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_8) to [bend right = 5] (x2_15);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2_8) to [bend left = 5] (x2_16);
+}
+\end{tikzpicture} }

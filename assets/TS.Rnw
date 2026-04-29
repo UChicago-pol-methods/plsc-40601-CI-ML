@@ -11,7 +11,7 @@
 set.seed(40601)
 
 # true parameter values
-thetas <- c(0.45, 0.47, 0.48, 0.5)
+thetas <- c(0.44, 0.44, 0.45, 0.5)
 
 # simple random assignment 
 (n <- table(factor(sample(1:4, 10, replace = TRUE), levels = 1:4)))
