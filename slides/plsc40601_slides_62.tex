@@ -297,12 +297,12 @@ To achieve this goal, the experimenter faces three tasks. \\ \ \\ \pause
 \begin{frame}{Framework}
 
 \begin{wideitemize}
-\item Individuals indexed $i = 1, \dots, n$\pause
-\item Treatments $W_i \in \ww$, where $|\ww| = k$\pause
-\item Potential outcome $Y_i = Y_i(W_i) \in \RR$; \\ 
-        vector of potential outcomes  $\Y_i = (Y_i(1), \dots, Y_i(k))$%\pause
-%\item Covariates $\X_i \in \RR^p$ \pause (Also: ``context'')
-\item i.i.d. $\Y_i$
+\item Individuals indexed $t = 1, \dots, T$\pause
+\item Treatments $W_t \in \ww$, where $|\ww| = k$\pause
+\item Potential outcome $Y_t = Y_t(W_t) \in \RR$; \\ 
+        vector of potential outcomes  $\Y_t = (Y_t(1), \dots, Y_t(k))$%\pause
+%\item Covariates $\X_t \in \RR^p$ \pause (Also: ``context'')
+\item i.i.d. $\Y_t$
 \end{wideitemize}
 
 \end{frame}
@@ -321,7 +321,7 @@ To achieve this goal, the experimenter faces three tasks. \\ \ \\ \pause
 
 Best arm:
 \begin{equation*}
-w^* \coloneqq \underset{w}{\argmax}\  \E[Y_i(w)].
+w^* \coloneqq \underset{w}{\argmax}\  \E[Y_t(w)].
 \label{eq:best_arm}
 \end{equation*}
 \pause
@@ -461,12 +461,12 @@ Things to note:
 %\begin{frame}{Framework}
 %
 %\begin{wideitemize}
-%\item Individuals indexed $i = 1, \dots, n$
-%\item Treatments $W_i \in \ww$, where $|\ww| = k$
-%\item Potential outcome $Y_i = Y_i(W_i) \in \RR$; \\ 
-%        vector of potential outcomes  $\Y_i \coloneqq (Y_i(1), \dots, Y_i(k))$
-%\item \textcolor{lightgray}{Covariates $\X_i \in \RR^p$  (Also: ``context'')} 
-%\item i.i.d. $(\Y_i, \textcolor{lightgray}{\X_i} )$
+%\item Individuals indexed $t = 1, \dots, T$
+%\item Treatments $W_t \in \ww$, where $|\ww| = k$
+%\item Potential outcome $Y_t = Y_t(W_t) \in \RR$; \\ 
+%        vector of potential outcomes  $\Y_t \coloneqq (Y_t(1), \dots, Y_t(k))$
+%\item \textcolor{lightgray}{Covariates $\X_t \in \RR^p$  (Also: ``context'')} 
+%\item i.i.d. $(\Y_t, \textcolor{lightgray}{\X_t} )$
 %\end{wideitemize}
 %
 %\end{frame}
@@ -484,15 +484,15 @@ Things to note:
 \begin{frame}{Framework}
 
 \begin{wideitemize}
-\item Account for some \textbf{history} at time we see individual $i$: 
+\item Account for some \textbf{history} at time we see individual $t$: 
 \[
-\HB_i=
+\HB_t=
   \begin{bmatrix}
     Y_1 & W_1 & \textcolor{lightgray}{X_{[1]1}} & \textcolor{lightgray}{\hdots} & \textcolor{lightgray}{X_{[1]p}} \\
     Y_2 & W_2 &  \textcolor{lightgray}{X_{[2]1}} & \textcolor{lightgray}{\hdots} & \textcolor{lightgray}{X_{[2]p}} \\
     \textcolor{lightgray}{\vdots} & & & & \textcolor{lightgray}{\vdots} \\
-    Y_{i-1} & W_{i-1}&  \textcolor{lightgray}{X_{[i-1]1}} & \textcolor{lightgray}{\hdots} &  \textcolor{lightgray}{X_{[i-1]p}} \\
-%    \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & X_{[i]1}& \hdots & X_{[i]p} \\
+    Y_{t-1} & W_{t-1}&  \textcolor{lightgray}{X_{[t-1]1}} & \textcolor{lightgray}{\hdots} &  \textcolor{lightgray}{X_{[t-1]p}} \\
+%    \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & X_{[t]1}& \hdots & X_{[t]p} \\
     \textcolor{lightgray}{\vdots} & & & & \textcolor{lightgray}{\vdots} \\
     \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{\hdots} & \textcolor{lightgray}{?} 
   \end{bmatrix}
@@ -519,9 +519,9 @@ Things to note:
 \item Treatment assignment probability
 \begin{equation*}
 \begin{split}
-e_i(w)\coloneqq  \Pr\left[{W_i = w \textcolor{lightgray}{|\X_i = x}}\right]\\
+e_t(w)\coloneqq  \Pr\left[{W_t = w \textcolor{lightgray}{|\X_t = x}}\right]\\
 \e \coloneqq (e(1), \dots, e(k))
-%\sum_{w}e_i(w) = 1
+%\sum_{w}e_t(w) = 1
 \end{split}
 \end{equation*}\pause
 \item \textbf{Policy}
@@ -629,8 +629,8 @@ Response-adaptive allocation
 \only<1>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} \\
 2 & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} \\
@@ -646,8 +646,8 @@ Response-adaptive allocation
 \only<2>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} & \textcolor{lightgray}{?} & D & \textcolor{lightgray}{?} \\
 2 & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} \\
@@ -662,8 +662,8 @@ Response-adaptive allocation
 \only<3>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} \\
@@ -704,8 +704,8 @@ Response-adaptive allocation
 \only<1>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?} & \textcolor{lightgray}{?}  \\
@@ -721,8 +721,8 @@ Response-adaptive allocation
 \only<2>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & \textcolor{lightgray}{?} & D & \textcolor{lightgray}{?}  \\
@@ -737,8 +737,8 @@ Response-adaptive allocation
 \only<3>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -753,8 +753,8 @@ Response-adaptive allocation
 \only<4>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -769,8 +769,8 @@ Response-adaptive allocation
 \only<5>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -786,8 +786,8 @@ Response-adaptive allocation
 \only<6>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -802,8 +802,8 @@ Response-adaptive allocation
 \only<7>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -818,8 +818,8 @@ Response-adaptive allocation
 \only<8>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -834,8 +834,8 @@ Response-adaptive allocation
 \only<9>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -851,8 +851,8 @@ Response-adaptive allocation
 \only<10>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -867,8 +867,8 @@ Response-adaptive allocation
 \only<11>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -883,8 +883,8 @@ Response-adaptive allocation
 \only<12>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -900,8 +900,8 @@ Response-adaptive allocation
 \only<13>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -916,8 +916,8 @@ Response-adaptive allocation
 \only<14>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -932,8 +932,8 @@ Response-adaptive allocation
 \only<15>{
 \begin{table}[]
 \begin{tabular}{c cccc | ccc}
- &  &  & & & \multicolumn{3}{c}{$\HB_i$} \\
- Unit & $e_i(A)$ & $e_i(B)$ & $e_i(C)$ & $e_i(D)$ &  {$Y_{i}$} & {$W_{i}$} & \textcolor{lightgray}{$X_{[i]1}$}  \\
+ &  &  & & & \multicolumn{3}{c}{$\HB_t$} \\
+ $t$ & $e_t(A)$ & $e_t(B)$ & $e_t(C)$ & $e_t(D)$ &  {$Y_{t}$} & {$W_{t}$} & \textcolor{lightgray}{$X_{[t]1}$}  \\
  \hline
 1 & \num{0.25} & \num{0.25} & \num{0.25} & \num{0.25} &0 & D & \textcolor{lightgray}{?} \\
 2 & \num{0.30} & \num{0.30} & \num{0.30} & \num{0.10} & 1 & D & \textcolor{lightgray}{?}  \\
@@ -1429,14 +1429,14 @@ For an assignment policy $\pi \in \Pi$\pause
 
 
 \begin{equation*}
-\pi^* = \argmax_{\pi \in \Pi} \E[\langle \Y_i,\pi(\X_i) \rangle]
+\pi^* = \argmax_{\pi \in \Pi} \E[\langle \Y_t,\pi(\X_t) \rangle]
 \label{eq:policy}
 \end{equation*}
 \pause
 
 \begin{align*}
-\textrm{H}_0 :  & \E\left[\langle \Y_i,\pi(\X_i) \rangle\right] = 0.45 \ \ \forall \pi \in \Pi \\  
-\textrm{H}_A:  & \exists \ \pi \in \Pi:  \E\left[\langle \Y_i,\pi(\X_i) \rangle\right] > 0.45 \\
+\textrm{H}_0 :  & \E\left[\langle \Y_t,\pi(\X_t) \rangle\right] = 0.45 \ \ \forall \pi \in \Pi \\  
+\textrm{H}_A:  & \exists \ \pi \in \Pi:  \E\left[\langle \Y_t,\pi(\X_t) \rangle\right] > 0.45 \\
 \end{align*}
 
 \end{frame}
@@ -1496,7 +1496,7 @@ For uniform policies:
 %-------------------------------------------------------------------------------%
 \begin{frame}{Cumulative regret}
 \begin{equation*}
-R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \rangle\right] - \E\left[\langle \Y_i,\tilde \pi(\HB_i) \rangle\right] \right)
+R_{cumulative}(\tilde\pi)  = \sum_{t = 1}^T \left(\E\left[\langle \Y_t,\pi^* \rangle\right] - \E\left[\langle \Y_t,\tilde \pi(\HB_t) \rangle\right] \right)
 \label{eq:regret}
 \end{equation*}
 
@@ -1660,7 +1660,7 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 \begin{frame}{Planner's goal}
 \onslide<1->
 \begin{equation*}
-\pi^* = \argmax_{\pi \in \Pi} \E[\langle \Y_i,\pi(\X_i) \rangle]
+\pi^* = \argmax_{\pi \in \Pi} \E[\langle \Y_t,\pi(\X_t) \rangle]
 \label{eq:policy}
 \end{equation*}
 \pause
@@ -1674,7 +1674,7 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 %
 %\onslide<5->{
 %\begin{equation*}
-%R_{simple}(\hat\pi)  = \E\left[\langle \Y_i,\pi^*(\X_i) \rangle\right] -\E\left[ \langle \Y_i,\hat \pi(\X_i) \rangle\right]
+%R_{simple}(\hat\pi)  = \E\left[\langle \Y_t,\pi^*(\X_t) \rangle\right] -\E\left[ \langle \Y_t,\hat \pi(\X_t) \rangle\right]
 %\label{eq:regret}
 %\end{equation*}
 %}
@@ -1703,11 +1703,11 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
     	\State$\Xi \leftarrow$ empty matrix; $\X \leftarrow$ empty matrix; $\y \leftarrow$ empty vector. %for $w \in \ww$. 
 	\Comment{Initialize weight matrix, treatment-augmented covariate matrix, and reward vector.  
 	}
-    	\For{$i = 1, \dots, n$}
-		\If{$i \in \mathcal{I}_1$}
-			\State Select  $w_i \sim \textrm{Uniform}(\ww)$\Comment{In first batch, assign treatment uniformly at random.}
+    	\For{$t = 1, \dots, T$}
+		\If{$t \in \mathcal{I}_1$}
+			\State Select  $w_t \sim \textrm{Uniform}(\ww)$\Comment{In first batch, assign treatment uniformly at random.}
 		\Else
-			\If{$i$ is the first observation in $\mathcal{I}_b$} \Comment{Update estimates of coefficient vector and variance matrix, using ridge regression with determined penalization.}
+			\If{$t$ is the first observation in $\mathcal{I}_b$} \Comment{Update estimates of coefficient vector and variance matrix, using ridge regression with determined penalization.}
 
 				\State $B \leftarrow \X^\top \Xi \X + \lambda^{CV} \mathbf{I}$  
 				\State $\hat\theta \leftarrow B^{-1} \X^\top \Xi y$
@@ -1716,18 +1716,18 @@ R_{cumulative}(\tilde\pi)  = \sum_{i = 1}^n \left(\E\left[\langle \Y_i,\pi^* \ra
 			\For{$m = 1, \dots, M$}
 				\State Sample $\tilde \theta^{(m)}  \sim \mathcal{N}\left(\hat\theta, \hat\V[\hat\theta] \right)$
 			 \EndFor
-				\State $q_w \leftarrow \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ x_{[1]i}^\top \tilde \theta ^{(m)}, \dots, x_{[|\ww|]i}^\top\tilde \theta^{(m)} \}  \right\}$ \Comment{ Compute TS probabilities based on observed context.}
+				\State $q_w \leftarrow \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ x_{[1]t}^\top \tilde \theta ^{(m)}, \dots, x_{[|\ww|]t}^\top\tilde \theta^{(m)} \}  \right\}$ \Comment{ Compute TS probabilities based on observed context.}
      			\State $\tilde{q}_w =\max\left\{q_w, p\right\}\ \ \forall w \in \ww$ \Comment{Impose probability floors,}
 			\State $u_{\textrm{total}} = \sum_w \tilde{q}_w - 1$ \Comment{ and rescale. }
 			\State $u_{w} = \tilde{q}_w - p \ \ \forall w \in \ww$
 			\State $ c = u_{\textrm{total}} / \left( \sum_w u_{w} \right)$
 			\State $e_w = \tilde{q}_w -c*u_{w} \ \ \forall w \in \ww$
 		\EndIf
-		\State Select $w_i \sim \textrm{Multinom}( \e )$ \Comment{Assign treatment.}
-		\State $\xi_i \leftarrow \frac{ 1 }{e_{w_i}}$ \Comment{Record inverse probability weights based on realized assignment.}
-		\State $\Xi \leftarrow \diag \left(\Xi, \xi_i\right)$ \Comment{Augment weight matrix.}
-		\State $\X \leftarrow [\X:x_{[w_i]i}^\top]$ \Comment{Augment covariate matrix.}
-		\State $\y \leftarrow  [\y: y_i]$ \Comment{Augment reward vector.}
+		\State Select $w_t \sim \textrm{Multinom}( \e )$ \Comment{Assign treatment.}
+		\State $\xi_t \leftarrow \frac{ 1 }{e_{w_t}}$ \Comment{Record inverse probability weights based on realized assignment.}
+		\State $\Xi \leftarrow \diag \left(\Xi, \xi_t\right)$ \Comment{Augment weight matrix.}
+		\State $\X \leftarrow [\X:x_{[w_t]t}^\top]$ \Comment{Augment covariate matrix.}
+		\State $\y \leftarrow  [\y: y_t]$ \Comment{Augment reward vector.}
 	\EndFor
     \end{algorithmic}
 \end{algorithm}
@@ -1900,14 +1900,14 @@ $\rightarrow$ explain algorithm
     \begin{algorithmic}[1] % The number tells where the line numbering should start
     	\State Set  $\alpha_{w} \leftarrow 1, \ \beta_{w} \leftarrow 1\ \forall w \in \ww$; some $\textrm{B}$ parameter in $(0,1)$. %\aB \leftarrow \y \leftarrow $ empty vector.  
 	\Comment{Initialize priors}%, assignment vector, and reward vector. }
-    	\For{$i = 1, \dots, T$:}
+    	\For{$t = 1, \dots, T$:}
 			\For{$w \in \ww$}
 		     \State Sample $\hat \theta_w  \sim \textrm{Beta}\left(\alpha_{w}, \beta_{w} \right)$ \Comment{Sample from posteriors. }
 			 \EndFor
 		\State $I \leftarrow \argmax_w \theta_2 $
 		\State Sample $B\sim \textrm{Bernoulli}(\textrm{B})$
 		\If{$B = 1$}
-			\State Assign treatment $w_i \leftarrow I$
+			\State Assign treatment $w_t \leftarrow I$
 		\Else
 			\Repeat
 				\For{$w \in \ww$}
@@ -1915,11 +1915,11 @@ $\rightarrow$ explain algorithm
 					\State $J \leftarrow \argmax_w \hat\theta_w$
 			 	\EndFor
 			\Until{$J \neq I$}
-			\State Assign treatment $w_i \leftarrow J$
+			\State Assign treatment $w_t \leftarrow J$
 		\EndIf
-%		\State $\aB \leftarrow [\aB : a_i]$ \Comment{Augment assignment vector.}
-%		\State $\y \leftarrow [\y : y_i]$ \Comment{Augment reward vector vector.}
-			\State $(\alpha_{w_i}, \beta_{w_i}) \leftarrow (\alpha_{w_i} + \mathbbm{1}\{ y_i = 1\} + 1,  \beta_{w_i} + \mathbbm{1}\{ y_i = 0\})$.  \Comment{Update posterior distribution parameters.}
+%		\State $\aB \leftarrow [\aB : a_t]$ \Comment{Augment assignment vector.}
+%		\State $\y \leftarrow [\y : y_t]$ \Comment{Augment reward vector vector.}
+			\State $(\alpha_{w_t}, \beta_{w_t}) \leftarrow (\alpha_{w_t} + \mathbbm{1}\{ y_t = 1\} + 1,  \beta_{w_t} + \mathbbm{1}\{ y_t = 0\})$.  \Comment{Update posterior distribution parameters.}
 	\EndFor
     \end{algorithmic}
 \end{algorithm}
@@ -2004,11 +2004,11 @@ $\rightarrow$ explain algorithm
     	\State$\Xi \leftarrow$ empty matrix; $\X \leftarrow$ empty matrix; $\y \leftarrow$ empty vector. %for $w \in \ww$. 
 	\Comment{Initialize weight matrix, treatment-augmented covariate matrix, and reward vector.  
 	}
-    	\For{$i = 1, \dots, N$}
-		\If{$i \in \mathcal{I}_1$}
+    	\For{$t = 1, \dots, T$}
+		\If{$t \in \mathcal{I}_1$}
 			 \State $e_{w} \leftarrow \frac{1 }{|\ww| } \ \ \forall w \in \ww $ \Comment{In first batch, assign treatment uniformly at random.}
-		\ElsIf{$i \in \mathcal{I}_b$ for $b = 2, \dots, B$}
-			\If{$i$ is the first observation in $\mathcal{I}_b$} \Comment{Update estimates of coefficient vector and variance matrix, using ridge regression with determined penalization.}
+		\ElsIf{$t \in \mathcal{I}_b$ for $b = 2, \dots, B$}
+			\If{$t$ is the first observation in $\mathcal{I}_b$} \Comment{Update estimates of coefficient vector and variance matrix, using ridge regression with determined penalization.}
 
 				\State $B \leftarrow \X^\top \Xi \X + \lambda^{CV} \mathbf{I}$  
 				\State $\hat\theta \leftarrow B^{-1} \X^\top \Xi y$
@@ -2017,18 +2017,18 @@ $\rightarrow$ explain algorithm
 			\For{$m = 1, \dots, M$}
 				\State Sample $\tilde \theta^{(m)}  \sim \mathcal{N}\left(\hat\theta, \hat\V[\hat\theta] \right)$
 			 \EndFor
-				\State $q_w \leftarrow \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ x_{[1]i}^\top \tilde \theta ^{(m)}, \dots, x_{[|\ww|]i}^\top\tilde \theta^{(m)} \}  \right\}$ \Comment{ Compute TS probabilities based on observed context.}
+				\State $q_w \leftarrow \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ x_{[1]t}^\top \tilde \theta ^{(m)}, \dots, x_{[|\ww|]t}^\top\tilde \theta^{(m)} \}  \right\}$ \Comment{ Compute TS probabilities based on observed context.}
      			\State $\tilde{q}_w =\max\left\{q_w, p\right\}\ \ \forall w \in \ww$ \Comment{Impose probability floors,}
 			\State $u_{\textrm{total}} = \sum_w \tilde{q}_w - 1$ \Comment{ and rescale. }
 			\State $u_{w} = \tilde{q}_w - p \ \ \forall w \in \ww$
 			\State $ c = u_{\textrm{total}} / \left( \sum_w u_{w} \right)$
 			\State $e_w = \tilde{q}_w -c*u_{w} \ \ \forall w \in \ww$
 		\EndIf
-		\State Assign $w_i \sim \textrm{Multinom}( e_{1}, \dots,  e_{|\ww|} )$ \Comment{Assign treatment.}
-		\State $\xi_i \leftarrow \frac{ 1 }{e_{w_i}}$ \Comment{Record inverse probability weights based on realized assignment.}
-		\State $\Xi \leftarrow \diag \left(\Xi, \xi_i\right)$ \Comment{Augment weight matrix.}
-		\State $\X \leftarrow [\X:x_{[w_i]i}^\top]$ \Comment{Augment covariate matrix.}
-		\State $\y \leftarrow  [\y: y_i]$ \Comment{Augment reward vector.}
+		\State Assign $w_t \sim \textrm{Multinom}( e_{1}, \dots,  e_{|\ww|} )$ \Comment{Assign treatment.}
+		\State $\xi_t \leftarrow \frac{ 1 }{e_{w_t}}$ \Comment{Record inverse probability weights based on realized assignment.}
+		\State $\Xi \leftarrow \diag \left(\Xi, \xi_t\right)$ \Comment{Augment weight matrix.}
+		\State $\X \leftarrow [\X:x_{[w_t]t}^\top]$ \Comment{Augment covariate matrix.}
+		\State $\y \leftarrow  [\y: y_t]$ \Comment{Augment reward vector.}
 	\EndFor
     \end{algorithmic}
 \end{algorithm}
