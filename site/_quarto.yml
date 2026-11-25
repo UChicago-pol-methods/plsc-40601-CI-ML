@@ -8,6 +8,7 @@ project:
     # Explicit publication list: never copy the full local review collection.
     - "projects/2026/index.html"
     - "projects/2026/andrew-doherty-munro/**"
+    - "projects/2026/shunyu-hao/**"
     - "projects/2026/jerry-zhang/**"
     - "projects/shared/**"
   pre-render:

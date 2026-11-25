@@ -85,11 +85,13 @@ local/
 /site/projects/2026/*
 !/site/projects/2026/index.html
 !/site/projects/2026/andrew-doherty-munro/
+!/site/projects/2026/shunyu-hao/
 !/site/projects/2026/jerry-zhang/
 /docs/projects/2026/*
 !/docs/projects/2026/index.html
 !/docs/projects/2026/manifest.json
 !/docs/projects/2026/andrew-doherty-munro/
+!/docs/projects/2026/shunyu-hao/
 !/docs/projects/2026/jerry-zhang/
 
 # Private preparation/review tools may contain unpublished student material.

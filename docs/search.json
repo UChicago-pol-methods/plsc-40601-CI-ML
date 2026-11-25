@@ -213,7 +213,7 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Student projects · 2026Tutorials on causal inference and machine learning, written by students in PLSC 40601 and shared with their permission.Deep IV: A Flexible Approach for Counterfactual PredictionAndrew Doherty Munro\nDouble/Debiased Machine Learning for Causal Inference: An Application to Public Support for Military AlliancesJerry Zhang",
+    "text": "Student projects · 2026Tutorials on causal inference and machine learning, written by students in PLSC 40601 and shared with their permission.Deep IV: A Flexible Approach for Counterfactual PredictionAndrew Doherty Munro\nAIPW and Double Machine Learning: From Theory to CodeShunyu Hao\nDouble/Debiased Machine Learning for Causal Inference: An Application to Public Support for Military AlliancesJerry Zhang",
     "crumbs": [
       "Projects"
     ]
@@ -497,6 +497,13 @@
     "title": "Deep IV: A Flexible Approach for Counterfactual Prediction",
     "section": "",
     "text": "Andrew Doherty Munro. Deep IV: A Flexible Approach for Counterfactual Prediction"
+  },
+  {
+    "objectID": "projects/2026/shunyu-hao/tutorial.html",
+    "href": "projects/2026/shunyu-hao/tutorial.html",
+    "title": "AIPW and Double Machine Learning: From Theory to Code",
+    "section": "",
+    "text": "Shunyu Hao. AIPW and Double Machine Learning: From Theory to Code"
   },
   {
     "objectID": "projects/2026/jerry-zhang/tutorial.html",

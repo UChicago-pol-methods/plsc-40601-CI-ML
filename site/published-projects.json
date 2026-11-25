@@ -8,6 +8,12 @@
       "publication_approved": true
     },
     {
+      "slug": "shunyu-hao",
+      "author": "Shunyu Hao",
+      "title": "AIPW and Double Machine Learning: From Theory to Code",
+      "publication_approved": true
+    },
+    {
       "slug": "jerry-zhang",
       "author": "Jerry Zhang",
       "title": "Double/Debiased Machine Learning for Causal Inference: An Application to Public Support for Military Alliances",
