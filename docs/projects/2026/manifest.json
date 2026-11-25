@@ -2,6 +2,13 @@
   "year": 2026,
   "projects": [
     {
+      "slug": "andrew-doherty-munro",
+      "author": "Andrew Doherty Munro",
+      "title": "Deep IV: A Flexible Approach for Counterfactual Prediction",
+      "has_source": false,
+      "has_pdf": false
+    },
+    {
       "slug": "jerry-zhang",
       "author": "Jerry Zhang",
       "title": "Double/Debiased Machine Learning for Causal Inference: An Application to Public Support for Military Alliances",

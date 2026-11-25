@@ -2,6 +2,8 @@
 
 Repository for the Spring 2026 syllabus and public course materials for `PLSC 40601` at the University of Chicago.
 
+[Course website](https://uchicago-pol-methods.github.io/plsc-40601-CI-ML/)
+
 Readings are distributed privately and are intentionally not stored in this public repository.
 
 ## Repository structure
@@ -35,7 +37,7 @@ The build works from a clean checkout without private student materials.
 
 ## Student publication permission
 
-Only Jerry Zhang has approved publication so far. The explicit public list is
+The explicit list of tutorials approved for publication is
 `site/published-projects.json`; every entry must have `publication_approved: true`.
 The gallery, search index, and generated project manifest use this list.
 `site/_quarto.yml` copies only the listed public tutorial directories and shared
