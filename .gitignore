@@ -9,6 +9,7 @@
 
 # Local tooling
 .claude/
+__pycache__/
 
 # LaTeX and Sweave
 *.aux
@@ -77,6 +78,32 @@ slides/*-[0-9][0-9][0-9].pdf
 # Local/private course material
 example/
 readings/
+local/
+
+# Student authoring files and the full review manifest stay local.
+/projects/
+/site/projects/2026/*
+!/site/projects/2026/index.html
+!/site/projects/2026/jerry-zhang/
+/docs/projects/2026/*
+!/docs/projects/2026/index.html
+!/docs/projects/2026/manifest.json
+!/docs/projects/2026/jerry-zhang/
+
+# Private preparation/review tools may contain unpublished student material.
+/scripts/audit-project-math.cjs
+/scripts/build-project.py
+/scripts/check-private-review.py
+/scripts/convert-project-notebooks.py
+/scripts/prepare-private-review.py
+/scripts/prepare-projects.py
+/scripts/preview-site.py
+/scripts/project_interactive.py
+/scripts/project_math.py
+/scripts/project_navigation.py
+/scripts/project_sources.py
+/scripts/standalone_review.py
+/scripts/vendor/
 
 # GitHub Pages / Jekyll
 docs/_site/
@@ -85,6 +112,7 @@ docs/_site/
 site/.quarto/
 #site/_freeze/
 site/_site/
+.site-build-*/
 # Quarto notebook intermediates
 **/*.quarto_ipynb
 

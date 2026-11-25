@@ -1,0 +1,20 @@
+---
+title: "Generalizability, transportability, and policy shift"
+subtitle: "Week 8 · May 11 and May 13"
+---
+
+## Monday
+
+### Required reading
+
+- Degtiar and Rose (2023), [*A review of generalizability and transportability*](https://arxiv.org/abs/2102.11904).
+
+### Optional / reference
+
+- Pearl and Bareinboim (2014), [*External validity: from Do-calculus to transportability across populations*](https://arxiv.org/abs/1503.01603).
+
+## Wednesday
+
+### Required reading
+
+- Athey, Bayati, Doudchenko, Imbens, and Khosravi (2021), [*Matrix completion methods for causal panel data models*](https://arxiv.org/abs/1710.10251).

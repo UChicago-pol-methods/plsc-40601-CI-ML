@@ -1,0 +1,24 @@
+---
+title: "Representation learning for causal inference"
+subtitle: "Week 4 · April 13 and April 15"
+---
+
+## Monday
+
+### Required reading
+
+- Johansson, Shalit, and Sontag (2016), [*Learning Representations for Counterfactual Inference*](https://arxiv.org/abs/1605.03661).
+
+## Wednesday
+
+### Required reading
+
+- Shalit, Johansson, and Sontag (2017), [*Estimating Individual Treatment Effect: Generalization Bounds and Algorithms*](https://arxiv.org/abs/1606.03976).
+
+### Optional / reference
+
+- Nie and Wager (2021), [*Quasi-oracle estimation of heterogeneous treatment effects*](https://arxiv.org/abs/1712.04912).
+
+## Notes
+
+Tutorial topic proposals are due Wednesday, April 15, 2026.

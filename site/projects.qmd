@@ -1,0 +1,5 @@
+---
+title: "Projects"
+---
+
+{{< include _project-gallery.qmd >}}

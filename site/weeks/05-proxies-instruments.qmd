@@ -1,0 +1,20 @@
+---
+title: "When ignorability fails: proxies and instruments"
+subtitle: "Week 5 · April 20 and April 22"
+---
+
+## Monday
+
+### Required reading
+
+- Tchetgen Tchetgen et al. (2024), [*An introduction to proximal causal inference*](https://arxiv.org/abs/2009.10982).
+
+### Optional / reference
+
+- Miao, Geng, and Tchetgen Tchetgen (2018), [*Identifying causal effects with proxy variables of an unmeasured confounder*](https://arxiv.org/abs/1609.08816).
+
+## Wednesday
+
+### Required reading
+
+- Hartford, Lewis, Leyton-Brown, and Taddy (2017), [*Deep IV: A flexible approach for counterfactual prediction*](https://proceedings.mlr.press/v70/hartford17a.html).

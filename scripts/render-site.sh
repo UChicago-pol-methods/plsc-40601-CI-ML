@@ -2,9 +2,5 @@
 
 set -euo pipefail
 
-quarto render site
-rm -rf docs
-mkdir docs
-cp -R site/_site/. docs/
-touch docs/.nojekyll
-find docs -name .DS_Store -delete
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+exec python3 "$SCRIPT_DIR/render-site.py" "$@"

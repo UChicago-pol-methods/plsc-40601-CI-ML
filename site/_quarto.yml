@@ -1,0 +1,64 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "weeks/*.qmd"
+  resources:
+    # Explicit publication list: never copy the full local review collection.
+    - "projects/2026/index.html"
+    - "projects/2026/jerry-zhang/**"
+    - "projects/shared/**"
+  pre-render:
+    - python3 ../scripts/project-gallery.py
+  post-render:
+    - python3 ../scripts/finalize-site.py
+
+website:
+  title: "PLSC 40601"
+  search:
+    location: sidebar
+    type: textbox
+  sidebar:
+    style: docked
+    collapse-level: 1
+    contents:
+      - href: index.qmd
+        text: Home
+      - href: projects.qmd
+        text: Projects
+      - href: logistics.qmd
+        text: Logistics
+      - href: resources.qmd
+        text: Resources
+      - section: Weeks
+        contents:
+          - href: weeks/01-course-orientation.qmd
+            text: "Week 1. Causal inference, identification, and course orientation"
+          - href: weeks/02-adjustment.qmd
+            text: "Week 2. Adjustment under selection on observables"
+          - href: weeks/03-heterogeneity.qmd
+            text: "Week 3. Heterogeneous treatment effects"
+          - href: weeks/04-representation-learning.qmd
+            text: "Week 4. Representation learning for causal inference"
+          - href: weeks/05-proxies-instruments.qmd
+            text: "Week 5. When ignorability fails: proxies and instruments"
+          - href: weeks/06-policy-learning.qmd
+            text: "Week 6. Policy learning and evaluation"
+          - href: weeks/07-efficient-estimation.qmd
+            text: "Week 7. Efficient estimation: DR, DML, and TMLE"
+          - href: weeks/08-transportability.qmd
+            text: "Week 8. Generalizability, transportability, and policy shift"
+          - href: weeks/09-ai-measurement.qmd
+            text: "Week 9. AI-assisted measurement and valid inference"
+
+format:
+  html:
+    theme: default
+    css: styles.css
+    toc: false
+    anchor-sections: false
+    lang: en
+
+execute:
+  enabled: false

@@ -1,0 +1,26 @@
+---
+title: "Causal inference, identification, and course orientation"
+subtitle: "Week 1 · March 23 and March 25"
+---
+
+## Monday
+
+*Lecture: discussion and workflow*
+
+### Required reading
+
+- Murphy (1997), [*How to read the statistical methods literature: a guide for students*](https://doi.org/10.2307/2685409).
+
+## Wednesday
+
+*Lecture: course scope*
+
+### Required reading
+
+- Athey and Imbens (2019), [*Machine learning methods that economists should know about*](https://arxiv.org/abs/1903.10075).
+- Breiman (2001), [*Statistical modeling: the two cultures*](https://www.jstor.org/stable/2676681). Comments and rejoinder are included with the same paper.
+
+## Public materials
+
+- [Monday slides](https://raw.githubusercontent.com/UChicago-pol-methods/plsc-40601-CI-ML/main/slides/plsc40601_slides_11.pdf)
+- [Wednesday slides](https://raw.githubusercontent.com/UChicago-pol-methods/plsc-40601-CI-ML/main/slides/plsc40601_slides_12.pdf)

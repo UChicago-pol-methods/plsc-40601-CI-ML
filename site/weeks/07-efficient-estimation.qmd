@@ -1,0 +1,35 @@
+---
+title: "Efficient estimation: DR, DML, and TMLE"
+subtitle: "Week 7 · May 4 and May 6"
+---
+
+## Monday
+
+### Required reading
+
+- Kennedy (2022), [*Semiparametric doubly robust targeted double machine learning: a review*](https://arxiv.org/abs/2203.06469). Parts 1 to 3.
+
+### Optional / reference
+
+- Edward Kennedy's slides from the ACIC conference in 2022: [*Machine learning & nonparametric efficiency in causal inference*](https://www.ehkennedy.com/uploads/5/8/4/5/58450265/tutorial.pdf). The slides present the same material as the paper, with some additional narrative and figures, and references throughout to relevant historical work. There are also some videos of Kennedy giving lectures on this topic on YouTube, for example [here](https://youtu.be/vZKdObmilQU).
+- Hampel (1974), [*The influence curve and its role in robust estimation*](https://www.jstor.org/stable/2285666).
+- Lehmann and Casella (1999), [*Elements of Large-Sample Theory*](https://link.springer.com/book/10.1007/b98855), especially Sections 1.1 to 1.4, 6.2 to 6.3, and 7.1 to 7.2.
+
+## Wednesday
+
+### Required reading
+
+- Chernozhukov et al. (2018), [*Double/debiased machine learning for treatment and structural parameters*](https://arxiv.org/abs/1608.00060).
+
+### Optional / reference
+
+- Core sections/excerpts to be assigned.
+
+## Notes
+
+Work-in-progress meetings should be completed by Wednesday, May 6, 2026.
+
+## Public materials
+
+- [DDML worked example](https://raw.githubusercontent.com/UChicago-pol-methods/plsc-40601-CI-ML/main/materials/DDML-plr.pdf)
+- [DDML R script](https://github.com/UChicago-pol-methods/plsc-40601-CI-ML/blob/main/materials/DDML-plr.R)

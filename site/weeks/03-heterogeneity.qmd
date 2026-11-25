@@ -1,0 +1,27 @@
+---
+title: "Heterogeneous treatment effects"
+subtitle: "Week 3 · April 6 and April 8"
+---
+
+## Monday
+
+*Methods: trees and forests*
+
+### Required reading
+
+- Wager and Athey (2018), [*Estimation and inference of heterogeneous treatment effects using random forests*](https://arxiv.org/abs/1510.04342).
+
+### Optional / reference
+
+- Athey and Imbens (2016), [*Recursive partitioning for heterogeneous causal effects*](https://arxiv.org/abs/1504.01132).
+- Athey, Tibshirani, and Wager (2019), [*Generalized random forests*](https://arxiv.org/abs/1610.01271).
+
+## Wednesday
+
+### Required reading
+
+- Künzel et al. (2019), [*Metalearners for estimating heterogeneous treatment effects using machine learning*](https://arxiv.org/abs/1706.03461).
+
+## Public materials
+
+- [Week 3 slides](https://raw.githubusercontent.com/UChicago-pol-methods/plsc-40601-CI-ML/main/slides/plsc40601_slides_31.pdf)

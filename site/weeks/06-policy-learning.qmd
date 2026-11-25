@@ -1,0 +1,20 @@
+---
+title: "Policy learning and evaluation"
+subtitle: "Week 6 · April 27 and April 29"
+---
+
+## Monday
+
+### Required reading
+
+- Athey and Wager (2021), [*Policy learning with observational data*](https://doi.org/10.3982/ECTA15732).
+
+### Optional / reference
+
+- Kitagawa and Tetenov (2018), [*Who should be treated? Empirical welfare maximization methods for treatment choice*](https://doi.org/10.3982/ECTA13288).
+
+## Wednesday
+
+### Required reading
+
+- Dudík, Erhan, Langford, and Li (2014), [*Doubly robust policy evaluation and optimization*](https://arxiv.org/abs/1503.02834).

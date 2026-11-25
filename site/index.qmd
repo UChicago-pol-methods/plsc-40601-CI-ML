@@ -1,0 +1,22 @@
+---
+title: "PLSC 40601"
+subtitle: "Advanced Topics in Causal Inference · University of Chicago · Spring 2026"
+---
+
+This is a graduate-level course considering modern advances in causal inference and experimental design. In particular, we will consider how machine learning methods can be leveraged to address causal questions. We will read a selection of papers introducing and implementing techniques and research designs, with applications to the social and health sciences and public policy.
+
+We will discuss what these new methods are able to offer, and where they may have limitations. The course will be oriented around class discussion and student presentations on the readings.
+
+An introductory course in probability and statistics is required; this prerequisite can be met by courses in statistics, biostatistics, economics, political science, sociology, or related fields. Coursework in causal inference is recommended but not required; additional reading references will be provided for students who have not had prior exposure to causal inference methodology.
+
+## Schedule
+
+1.  [Week 1. Causal inference, identification, and course orientation](./weeks/01-course-orientation.qmd) What changes once the causal question is already defined and machine learning is brought in as part of estimation, inference, and decision-making?
+2.  [Week 2. Adjustment under selection on observables](./weeks/02-adjustment.qmd) How should machine learning be used when identification rests on unconfoundedness and the core challenge is nuisance estimation under high-dimensional covariates?
+3.  [Week 3. Heterogeneous treatment effects](./weeks/03-heterogeneity.qmd) What kind of individualized causal object do you actually want to estimate: a CATE surface, a ranking over units, or an actionable rule?
+4.  [Week 4. Representation learning for causal inference](./weeks/04-representation-learning.qmd) When is it useful to learn a representation of the covariates rather than estimate effects directly in the observed feature space?
+5.  [Week 5. When ignorability fails: proxies and instruments](./weeks/05-proxies-instruments.qmd) What can you do once selection on observables is no longer plausible and you need either proxies for latent confounding or instruments for treatment variation?
+6.  [Week 6. Policy learning and evaluation](./weeks/06-policy-learning.qmd) Once you can estimate heterogeneity, how do you turn it into treatment decisions and evaluate those decisions with observational or logged data?
+7.  [Week 7. Efficient estimation: DR, DML, and TMLE](./weeks/07-efficient-estimation.qmd) How do influence functions, orthogonal scores, and cross-fitting organize the modern efficient-estimation toolbox?
+8.  [Week 8. Generalizability, transportability, and policy shift](./weeks/08-transportability.qmd) Why does an internally valid causal estimate or learned policy not automatically transport to a new population, site, or deployment regime?
+9.  [Week 9. AI-assisted measurement and valid inference](./weeks/09-ai-measurement.qmd) How can model-generated labels improve measurement without being mistaken for ground truth?

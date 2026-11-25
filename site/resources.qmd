@@ -1,0 +1,45 @@
+---
+title: "Resources"
+---
+
+This class will not follow a textbook, but some of the methods and approaches may be new to students. For reference for machine learning methods, I recommend:
+
+- Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. *The Elements of Statistical Learning: Data Mining, Inference, and Prediction*. 2nd ed. New York: Springer. A free pdf version of the book is available at the publisher's website: [link](https://link.springer.com/book/10.1007/978-0-387-84858-7).
+
+## Other Machine Learning References
+
+- Murphy, Kevin P. 2012. [*Machine Learning: A Probabilistic Perspective*](https://mitpress.mit.edu/9780262018029/machine-learning/). Cambridge, MA: MIT Press.
+- Bishop, Christopher M. 2006. [*Pattern Recognition and Machine Learning*](https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/). New York: Springer.
+
+## Older Machine Learning References
+
+Some older reference readings on core techniques in machine learning that are still relevant today. These are useful for students interested in the history and development of machine learning methods.
+
+- Breiman, Leo. 1996. ["Bagging Predictors."](https://doi.org/10.1007/BF00058655) *Machine Learning* 24: 123--140.
+- Efron, Bradley. 1979. ["Bootstrap Methods: Another Look at the Jackknife."](https://www.jstor.org/stable/2958830) *The Annals of Statistics* 7(1): 1--26.
+- Breiman, Leo. 2001. ["Random Forests."](https://link.springer.com/article/10.1023/A:1010933404324) *Machine Learning* 45: 5--32.
+
+## A Causal/ML Textbook
+
+- Chernozhukov, Victor, Christian Hansen, Nathan Kallus, Martin Spindler, and Vasilis Syrgkanis. 2024. *Applied Causal Inference Powered by ML and AI*. [arXiv](https://arxiv.org/abs/2403.02467).
+
+## Causal Inference Background
+
+Many of the papers we read in this course will use potential outcomes notation. Students who have not had recent coursework on causal inference should read the first few chapters of either:
+
+- Hernán, Miguel A., and James M. Robins. 2020. *Causal Inference: What If*. Boca Raton, FL: Chapman & Hall/CRC. A free pdf version of the book is available at the author's website: [link](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/).
+- Imbens, Guido W., and Donald B. Rubin. 2015. *Causal Inference in Statistics, Social, and Biomedical Sciences*. Cambridge: Cambridge University Press.
+
+Also relevant:
+
+- Ding, Peng. 2023. *A First Course in Causal Inference*. [arXiv](https://arxiv.org/abs/2305.18793).
+
+As well, the materials for PLSC 30600: Causal Inference are available at [this GitHub repository](https://github.com/UChicago-pol-methods/PLSC30600).
+
+## Statistical Theory
+
+- Lehmann, E. L. 1999. *Elements of Large-Sample Theory*. New York: Springer.
+
+## Econometrics
+
+- Angrist, Joshua D., and Jörn-Steffen Pischke. 2009. *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton, NJ: Princeton University Press.

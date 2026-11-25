@@ -105,6 +105,13 @@ ol {
   font-size: 0.95rem;
 }
 
+.project-intro { color: #4b5563; margin-bottom: 1.5rem; }
+.project-list { list-style: none; padding: 0; }
+.project-list li { padding: 1rem 0; border-top: 1px solid #e5e7eb; }
+.project-list .project-title { font-weight: 600; display: block; }
+.project-byline { display: block; color: #4b5563; font-size: .95rem; margin-top: .25rem; }
+.project-list a:focus-visible { outline: 2px solid; outline-offset: 3px; }
+
 @media (max-width: 991px) {
   .quarto-title-block .title {
     font-size: 1.65rem;

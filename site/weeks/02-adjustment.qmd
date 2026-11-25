@@ -1,0 +1,22 @@
+---
+title: "Adjustment under selection on observables"
+subtitle: "Week 2 · March 30 and April 1"
+---
+
+## Monday
+
+### Required reading
+
+- Bloniarz et al. (2016), [*Lasso adjustments of treatment effect estimates in randomized experiments*](https://arxiv.org/abs/1507.03652).
+
+### Optional / reference
+
+- Belloni, Chernozhukov, and Hansen (2014), [*Inference on treatment effects after selection among high-dimensional controls*](https://arxiv.org/abs/1201.0224).
+- Urminsky, Hansen, and Chernozhukov (2016), [*Using double-lasso regression for principled variable selection*](https://dx.doi.org/10.2139/ssrn.2733374).
+- Stone (1974), [*Cross-validatory choice and assessment of statistical predictions*](https://www.jstor.org/stable/2984809).
+
+## Wednesday
+
+### Required reading
+
+- Athey, Imbens, and Wager (2018), [*Approximate residual balancing: debiased inference of average treatment effects in high dimensions*](https://doi.org/10.1111/rssb.12268).

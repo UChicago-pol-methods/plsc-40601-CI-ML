@@ -1,0 +1,20 @@
+---
+title: "AI-assisted measurement and valid inference"
+subtitle: "Week 9 · May 18 and May 20"
+---
+
+## Monday
+
+### Required reading
+
+- Zrnic and Candès (2024), [*Cross-prediction-powered inference*](https://arxiv.org/abs/2309.16598).
+
+### Optional / reference
+
+- Angelopoulos, Bates, Fannjiang, Jordan, and Zrnic (2023), [*Prediction-powered inference*](https://arxiv.org/abs/2301.09633).
+
+## Wednesday
+
+### Required reading
+
+- Egami, Hinck, Stewart, and Wei (2023), [*Using imperfect surrogates for downstream inference: design-based supervised learning for social science applications of large language models*](https://arxiv.org/abs/2306.04746).
