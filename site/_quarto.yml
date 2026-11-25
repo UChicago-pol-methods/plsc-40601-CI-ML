@@ -9,6 +9,7 @@ project:
     - "projects/2026/index.html"
     - "projects/2026/andrew-doherty-munro/**"
     - "projects/2026/shunyu-hao/**"
+    - "projects/2026/yidong-yang/**"
     - "projects/2026/jerry-zhang/**"
     - "projects/shared/**"
   pre-render:

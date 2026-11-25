@@ -16,6 +16,13 @@
       "has_pdf": false
     },
     {
+      "slug": "yidong-yang",
+      "author": "Yidong Yang",
+      "title": "Filling in the Counterfactual: A Tutorial on Matrix Completion Methods for Causal Inference in Panel Data",
+      "has_source": false,
+      "has_pdf": false
+    },
+    {
       "slug": "jerry-zhang",
       "author": "Jerry Zhang",
       "title": "Double/Debiased Machine Learning for Causal Inference: An Application to Public Support for Military Alliances",
