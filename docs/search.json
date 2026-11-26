@@ -213,7 +213,7 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Student projects · 2026Tutorials on causal inference and machine learning, written by students in PLSC 40601 and shared with their permission.Deep IV: A Flexible Approach for Counterfactual PredictionAndrew Doherty Munro\nDebiasing LLM Surrogate Labels for Causal InferenceSylvia Dou\nAIPW and Double Machine Learning: From Theory to CodeShunyu Hao\nDesign-Based Supervised Learning: A TutorialEnhan Liu\nFilling in the Counterfactual: A Tutorial on Matrix Completion Methods for Causal Inference in Panel DataYidong Yang\nDouble/Debiased Machine Learning for Causal Inference: An Application to Public Support for Military AlliancesJerry Zhang",
+    "text": "Student projects · 2026Tutorials on causal inference and machine learning, written by students in PLSC 40601 and shared with their permission.A “Mathematical” Tutorial on Semi- and nonparametric Efficient Estimation TheoryKristoff Cao\nDeep IV: A Flexible Approach for Counterfactual PredictionAndrew Doherty Munro\nDebiasing LLM Surrogate Labels for Causal InferenceSylvia Dou\nAIPW and Double Machine Learning: From Theory to CodeShunyu Hao\nDesign-Based Supervised Learning: A TutorialEnhan Liu\nFilling in the Counterfactual: A Tutorial on Matrix Completion Methods for Causal Inference in Panel DataYidong Yang\nDouble/Debiased Machine Learning for Causal Inference: An Application to Public Support for Military AlliancesJerry Zhang",
     "crumbs": [
       "Projects"
     ]
@@ -490,6 +490,13 @@
       "Weeks",
       "Week 8. Generalizability, transportability, and policy shift"
     ]
+  },
+  {
+    "objectID": "projects/2026/kristoff-cao/tutorial.html",
+    "href": "projects/2026/kristoff-cao/tutorial.html",
+    "title": "A “Mathematical” Tutorial on Semi- and nonparametric Efficient Estimation Theory",
+    "section": "",
+    "text": "Kristoff Cao. A “Mathematical” Tutorial on Semi- and nonparametric Efficient Estimation Theory"
   },
   {
     "objectID": "projects/2026/andrew-doherty-munro/tutorial.html",

@@ -2,6 +2,12 @@
   "year": 2026,
   "projects": [
     {
+      "slug": "kristoff-cao",
+      "author": "Kristoff Cao",
+      "title": "A “Mathematical” Tutorial on Semi- and nonparametric Efficient Estimation Theory",
+      "publication_approved": true
+    },
+    {
       "slug": "andrew-doherty-munro",
       "author": "Andrew Doherty Munro",
       "title": "Deep IV: A Flexible Approach for Counterfactual Prediction",
