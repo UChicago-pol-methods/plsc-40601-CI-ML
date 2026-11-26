@@ -8,9 +8,21 @@
       "publication_approved": true
     },
     {
+      "slug": "sylvia-dou",
+      "author": "Sylvia Dou",
+      "title": "Debiasing LLM Surrogate Labels for Causal Inference",
+      "publication_approved": true
+    },
+    {
       "slug": "shunyu-hao",
       "author": "Shunyu Hao",
       "title": "AIPW and Double Machine Learning: From Theory to Code",
+      "publication_approved": true
+    },
+    {
+      "slug": "enhan-liu",
+      "author": "Enhan Liu",
+      "title": "Design-Based Supervised Learning: A Tutorial",
       "publication_approved": true
     },
     {
